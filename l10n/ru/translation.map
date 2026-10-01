@@ -715,6 +715,31 @@
     ]
   },
   {
+    "id": "5da345a47290ee22",
+    "found_in": [
+      {
+        "file": "sharedassets1.assets",
+        "path": "fsm.states[1].actionData.fsmStringParams[12].value",
+        "owner": "Fuel",
+        "script": {
+          "assembly": "PlayMaker.dll",
+          "fileId": 1384774831
+        },
+        "occurrence": 0
+      },
+      {
+        "file": "sharedassets1.assets",
+        "path": "fsm.states[1].actionData.fsmStringParams[12].value",
+        "owner": "Syphon",
+        "script": {
+          "assembly": "PlayMaker.dll",
+          "fileId": 1384774831
+        },
+        "occurrence": 0
+      }
+    ]
+  },
+  {
     "id": "6b64138ab9ff2582",
     "found_in": [
       {
@@ -8025,6 +8050,31 @@
     ]
   },
   {
+    "id": "72dfcfb0c470ac25",
+    "found_in": [
+      {
+        "file": "sharedassets1.assets",
+        "path": "fsm.states[1].actionData.fsmStringParams[14].value",
+        "owner": "Fuel",
+        "script": {
+          "assembly": "PlayMaker.dll",
+          "fileId": 1384774831
+        },
+        "occurrence": 0
+      },
+      {
+        "file": "sharedassets1.assets",
+        "path": "fsm.states[1].actionData.fsmStringParams[14].value",
+        "owner": "Syphon",
+        "script": {
+          "assembly": "PlayMaker.dll",
+          "fileId": 1384774831
+        },
+        "occurrence": 0
+      }
+    ]
+  },
+  {
     "id": "850643427a4c518b",
     "found_in": [
       {
@@ -13155,7 +13205,7 @@
     ]
   },
   {
-    "id": "a83a275bf3c2cb2b",
+    "id": "6a71176f59f0a09a",
     "found_in": [
       {
         "file": "level0",
@@ -14726,6 +14776,21 @@
         "file": "sharedassets1.assets",
         "path": "m_Text",
         "owner": "disable insanity",
+        "script": {
+          "assembly": "UnityEngine.UI.dll",
+          "fileId": 708705254
+        },
+        "occurrence": 0
+      }
+    ]
+  },
+  {
+    "id": "68b88a2b3842c694",
+    "found_in": [
+      {
+        "file": "level1",
+        "path": "m_Text",
+        "owner": "disable sandstorm",
         "script": {
           "assembly": "UnityEngine.UI.dll",
           "fileId": 708705254

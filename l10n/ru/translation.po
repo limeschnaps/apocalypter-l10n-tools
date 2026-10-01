@@ -58,6 +58,11 @@ msgstr ""
 msgid "/\n"
 msgstr ""
 
+#. sharedassets1.assets | Fuel | fsm.states[1].actionData.fsmStringParams[12].value
+#. sharedassets1.assets | Syphon | fsm.states[1].actionData.fsmStringParams[12].value
+msgid "/ "
+msgstr ""
+
 #. sharedassets1.assets | Diesel | fsm.states[1].actionData.fsmStringParams[6].value
 #. sharedassets1.assets | Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
 msgid "/ 100L"
@@ -1515,6 +1520,11 @@ msgstr "Громитель"
 msgid "Karl Casey @ White Bat Audio"
 msgstr ""
 
+#. sharedassets1.assets | Fuel | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Syphon | fsm.states[1].actionData.fsmStringParams[14].value
+msgid "L"
+msgstr ""
+
 #. level0 | Text | m_Text
 msgid "LOAD GAME"
 msgstr "Загрузить игру"
@@ -2425,7 +2435,7 @@ msgstr ""
 
 #. level0 | Version_text | m_Text
 #. level1 | Version_text | m_Text
-msgid "Version: 28/09/26"
+msgid "Version: 30/09/26"
 msgstr ""
 
 #. sharedassets1.assets | Volume | fsm.states[1].actionData.fsmStringParams[0].value
@@ -2815,6 +2825,12 @@ msgstr "Отключить усталость"
 #. sharedassets1.assets | disable insanity | m_Text
 msgid "disable insanity"
 msgstr "Отключить шизу"
+
+#. level1 | disable sandstorm | m_Text
+msgid "disable sandstorm"
+msgstr ""
+"Отключить \n"
+"песчанные бури"
 
 #. level1 | disable thirst hunger | m_Text
 #. sharedassets1.assets | disable thirst hunger | m_Text
