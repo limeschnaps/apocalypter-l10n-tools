@@ -4,6 +4,12 @@ Localization tools for Unity games. A player gets `patcher`, `*.lang` packages a
 
 `editor` is for package authors. It is a local web tool that searches and edits MonoBehaviour string fields in Unity assets (`.prefab`, `.unity`, `.asset`) or directly in a game build. Every edit goes to the `patches.json` journal. Repeated strings are easier to translate through the dictionary: a `translation.po` file for a PO editor and a `translation.map` file with the places of the strings in the game (see "Dictionary"). `patcher pack` builds a package from the journal and the dictionary.
 
+## Disclaimer
+
+This software is provided "AS IS", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors be liable for any claim, damages or other liability arising from the use of this software, including damage to game files or saved games. Use it at your own risk.
+
+This is an unofficial fan project. It is not affiliated with, endorsed by or supported by the developers or publishers of Apocalypter.
+
 ## Installing a localization
 
 Players get these steps in more detail, in `INSTALL_RU.txt` (Russian) and `INSTALL_EN.txt` (English) inside the archive.

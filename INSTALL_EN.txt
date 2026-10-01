@@ -1,6 +1,19 @@
 Apocalypter: installing a localization
 ======================================
 
+Disclaimer
+----------
+
+This software is provided "AS IS", without warranty of any kind, express
+or implied, including but not limited to the warranties of
+merchantability, fitness for a particular purpose and noninfringement.
+In no event shall the authors be liable for any claim, damages or other
+liability arising from the use of this software, including damage to
+game files or saved games. You use it at your own risk.
+
+This is an unofficial fan project. It is not affiliated with, endorsed
+by or supported by the developers or publishers of Apocalypter.
+
 What is in the archive
 ----------------------
 
