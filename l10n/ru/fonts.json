@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "fonts": [
+    {"name": "Helveticrap", "file": "./fonts/RubikDistressed-Regular.ttf"},
+    {"name": "forcedSquare", "file": "./fonts/ScienceGothic_ExtraCondensed-Regular.ttf"}
+  ]
+}

@@ -1,0 +1,16 @@
+/.idea
+
+# make output: binaries, packages, release archives, coverage
+/build/
+
+# Binaries and packages built by hand in the repository root, as the
+# README shows (go -C src build -o ../editor, patcher pack -s ./l10n/ru)
+/editor
+/editor.exe
+/patcher
+/patcher.exe
+/*.lang
+
+# Compiled catalogs PO editors write next to translation.po; pack reads
+# only the .po
+*.mo

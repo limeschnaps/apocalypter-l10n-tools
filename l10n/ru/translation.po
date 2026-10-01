@@ -1,0 +1,3763 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Apocalypter\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#. level1 | game made by (1) | m_Text
+msgid " sawyerk"
+msgstr "SawyerK"
+
+#. level1 | percent | m_Text
+#. sharedassets1.assets | 1.2L I4 59HP 87Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 1.3L v2 55HP 94Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[6].value
+#. … +41
+msgid "%"
+msgstr ""
+
+#. level1 | plus | m_Text
+msgid "+"
+msgstr ""
+
+#. level0 | point1 | m_Text
+#. level0 | point2 | m_Text
+#. level0 | point3 | m_Text
+#. level1 | chambered_indicator | m_Text
+#. level1 | dot1 | m_Text
+#. … +8
+msgid "."
+msgstr ""
+
+#. level1 | .22 cal | m_Text
+msgid ".22"
+msgstr ".22LR"
+
+#. level1 | Text | m_Text
+#. level1 | text | m_Text
+msgid ".22 pipe pistol"
+msgstr "Самопальный пистолет .22LR"
+
+#. level1 | .30-06 | m_Text
+msgid ".30-06"
+msgstr ""
+
+#. level1 | / | m_Text
+msgid "/"
+msgstr ""
+
+#. level1 | / | m_Text
+msgid "/\n"
+msgstr ""
+
+#. sharedassets1.assets | Diesel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 100L"
+msgstr "/ 100л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 10L"
+msgstr "/ 10л"
+
+#. level1 | Water | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Water | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Water_Can_Plastic | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 13L"
+msgstr "/ 13л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 14L"
+msgstr "/ 14л"
+
+#. sharedassets1.assets | Diesel_Barrel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Gasoline_Barrel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Water_Barrel | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "/ 150L"
+msgstr "/ 150л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 16L"
+msgstr "/ 16л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 18L"
+msgstr "/ 18л"
+
+#. sharedassets1.assets | Diesel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Diesel_Can | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Gasoline_Can | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 20L"
+msgstr "/ 20л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 24L"
+msgstr "/ 24л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 28L"
+msgstr "/ 28л"
+
+#. sharedassets1.assets | Water | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | plant_tobacco | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[8].value
+msgid "/ 2L"
+msgstr "/ 2л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 3.3L"
+msgstr "/ 3.3л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 3.9L"
+msgstr "/ 3.9л"
+
+#. sharedassets1.assets | MotorOil_Can_Big | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 30L"
+msgstr "/ 30л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | gasoline_stove | fsm.states[1].actionData.fsmStringParams[8].value
+msgid "/ 3L"
+msgstr "/ 3л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 5.1L"
+msgstr "/ 5.1л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 5.3L"
+msgstr "/ 5.3л"
+
+#. sharedassets1.assets | MotorOil_Can_Small | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 5L"
+msgstr "/ 5л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 6L"
+msgstr "/ 6л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 7.5L"
+msgstr "/ 7.5л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 7L"
+msgstr "/ 7л"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[6].value
+msgid "/ 9L"
+msgstr "/ 9л"
+
+#. level1 | Text | m_Text
+msgid "0.6l engine"
+msgstr "[Двигатель] 0.6л"
+
+#. sharedassets1.assets | save 1 time | m_Text
+#. sharedassets1.assets | save 2 time | m_Text
+msgid "01.04.2026.16.00"
+msgstr ""
+
+#. sharedassets1.assets | 1.2L I4 59HP 87Nm Gasoline | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | 1.2L I4 59HP 87Nm Gasoline | fsm.variables.stringVariables[2].value
+msgid "1.2L I4 59HP 87Nm Gasoline"
+msgstr "Бензиновый двигатель 1.2 л, I4, 59 л. с., 87 Н·м"
+
+#. sharedassets1.assets | 1.3L v2 55HP 94Nm Gasoline | fsm.variables.stringVariables[2].value
+msgid "1.3L v2 55HP 94Nm Gasoline"
+msgstr "Бензиновый двигатель 1.3 л, V2, 55 л. с., 94 Н·м"
+
+#. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.variables.stringVariables[1].value
+msgid "11.5L V12 274HP 854Nm Gasoline"
+msgstr "Бензиновый двигатель 11.5 л, V12, 274 л. с., 854 Н·м"
+
+#. level1 | 12gauge | m_Text
+msgid "12ga"
+msgstr "12-й калибр"
+
+#. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.variables.stringVariables[1].value
+msgid "18L V8 335HP 1700Nm Diesel"
+msgstr "Дизельный двигатель 18 л, V8, 335 л. с., 1700 Н·м"
+
+#. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.variables.stringVariables[2].value
+msgid "2.3L I4 89HP 165Nm Gasoline"
+msgstr "Бензиновый двигатель 2.3 л, I4, 89 л. с., 165 Н·м"
+
+#. sharedassets1.assets | 2.8L V6 115HP 183Nm Gasoline | fsm.variables.stringVariables[1].value
+msgid "2.8L V6 115HP 183Nm Gasoline"
+msgstr "Бензиновый двигатель 2.8 л, V6, 115 л. с., 183 Н·м"
+
+#. sharedassets1.assets | 2.8L V6 115HP 183Nm Gasoline | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "2.8L V6 115HP 183Nm Gasoline Engine"
+msgstr "Бензиновый двигатель 2.8 л, V6, 115 л. с., 183 Н·м"
+
+#. sharedassets1.assets | slamfire_shotgun | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "20 gauge Slamfire Shotgun  / Damage - 40"
+msgstr "Самопальный дробовик 20-го калибра / Урон - 40"
+
+#. level1 | 20gauge | m_Text
+msgid "20ga"
+msgstr "20-й калибр"
+
+#. sharedassets1.assets | 22_pipe_pistol | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "22.caliber Pipe Pistol / Damage - 12"
+msgstr "Самопальный пистолет .22LR / Урон - 12"
+
+#. sharedassets1.assets | 3.7L I6 145HP 292Nm Gasoline | fsm.variables.stringVariables[2].value
+msgid "3.7L i6 145HP 292Nm Gasoline"
+msgstr "Бензиновый двигатель 3.7 л, I6, 145 л. с., 292 Н·м"
+
+#. sharedassets1.assets | 3.8L V6 165HP 285Nm Gasoline | fsm.variables.stringVariables[1].value
+msgid "3.8L V6 165HP 285Nm Gasoline"
+msgstr "Бензиновый двигатель 3.8 л, V6, 165 л. с., 285 Н·м"
+
+#. sharedassets1.assets | 3L I5 87HP 172Nm Diesel | fsm.variables.stringVariables[1].value
+msgid "3L I5 87HP 172Nm Diesel"
+msgstr "Дизельный двигатель 3.0 л, I5, 87 л. с., 172 Н·м"
+
+#. sharedassets1.assets | 3L I5 87HP 172Nm Diesel | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "3L I5 87HP 172Nm Diesel Engine"
+msgstr "Дизельный двигатель 3.0л, I5, 87 л.с., 172 Н·м"
+
+#. sharedassets1.assets | 5.2L V8 230HP 340Nm Gasoline | fsm.variables.stringVariables[1].value
+msgid "5.2L V8 230HP 340Nm Gasoline"
+msgstr "Бензиновый двигатель 5.2 л, V8, 230 л. с., 340 Н·м"
+
+#. level1 | 5.56mm | m_Text
+msgid "5.56mm"
+msgstr "5.56 мм"
+
+#. sharedassets1.assets | 5.8L I6 120HP 356Nm Diesel | fsm.variables.stringVariables[1].value
+msgid "5.8L I6 120HP 356Nm Diesel"
+msgstr "Дизельный двигатель 5.8 л, I6, 120 л. с., 356 Н·м"
+
+#. sharedassets1.assets | 594cc I2 23HP 39Nm Gasoline | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | 594cc I2 23HP 39Nm Gasoline | fsm.variables.stringVariables[2].value
+msgid "594cc I2 23HP 39Nm Gasoline"
+msgstr "Бензиновый двигатель 594 см³, I2 , 23 л. с., 39 Н·м"
+
+#. level1 | 7.62mm | m_Text
+msgid "7.62mm"
+msgstr "7.62 мм"
+
+#. sharedassets1.assets | 7L I6 165HP 542Nm Diesel | fsm.variables.stringVariables[1].value
+msgid "7L I6 165HP 542Nm Diesel"
+msgstr "Дизельный двигатель 7.0 л, I6, 165 л. с., 542 Н·м"
+
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline | fsm.variables.stringVariables[1].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline TEST | fsm.variables.stringVariables[1].value
+msgid "7L V8 355HP 569Nm Gasoline"
+msgstr "Бензиновый двигатель 7.0 л, V8, 355 л. с., 569 Н·м"
+
+#. sharedassets1.assets | 8.2L V8 400HP 746Nm Gasoline | fsm.variables.stringVariables[1].value
+msgid "8.2L V8 400HP 746Nm Gasoline"
+msgstr "Бензиновый двигатель 8.2 л, V8, 400 л. с., 746 Н·м"
+
+#. level1 | 9mm | m_Text
+msgid "9mm"
+msgstr "9 мм"
+
+#. sharedassets1.assets | 9mm_borz_smg | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "9mm Borz SMG / Damage - 14"
+msgstr "ПП \"Борз\" 9 мм / Урон - 14"
+
+#. level1 | Text | m_Text
+msgid "9mm ammo"
+msgstr "9 мм патрон"
+
+#. level1 | Text | m_Text
+msgid "9mm borz smg"
+msgstr "ПП \"Борз\" 9 мм"
+
+#. level1 | AmmoLable | m_Text
+msgid ":AMMO"
+msgstr ": Патроны"
+
+#. level1 | ArmorLable | m_Text
+msgid ":ARMOR"
+msgstr ": Броня"
+
+#. level1 | NutsLable | m_Text
+msgid ":NUTS"
+msgstr ": Гайки"
+
+#. level1 | time | m_Text
+msgid ":time"
+msgstr ": Время"
+
+#. level1 | Text | m_Text
+#. sharedassets1.assets | Text | m_Text
+msgid "A"
+msgstr ""
+
+#. sharedassets1.assets | EnemySpawn_Scrapyard_Boss | fsm.states[3].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | EnemySpawn_Wild_Boss | fsm.states[3].actionData.fsmStringParams[2].value
+msgid "A garage door has been opened outside"
+msgstr "Снаружи открылась дверь гаража!"
+
+#. sharedassets1.assets | akm_drum | fsm.variables.stringVariables[0].value
+msgid "AKM Drum Mag (7.62mm)"
+msgstr "АКМ с барабанным магазином (7.62 мм)"
+
+#. sharedassets1.assets | akm_trash | fsm.variables.stringVariables[0].value
+msgid "AKM Trash (7.62mm)"
+msgstr "АКМ со свалки (7.62 мм)"
+
+#. sharedassets1.assets | akms | fsm.variables.stringVariables[0].value
+msgid "AKMS (7.62mm)"
+msgstr "АКМС (7.62 мм)"
+
+#. level0 | Game Name | m_Text
+#. level1 | Game Name | m_Text
+msgid "APOCALYPTER"
+msgstr ""
+
+#. level1 | ActionText | m_Text
+#. sharedassets1.assets | ActionText | m_Text
+msgid "Action"
+msgstr "Действие"
+
+#. sharedassets1.assets | transmission | fsm.states[1].actionData.fsmStringParams[5].value
+msgid ""
+"Adjust: left/right mouse button\n"
+"Reset: middle mouse button"
+msgstr ""
+"Настройка: ЛКМ/ПКМ\n"
+"Сброс: СКМ"
+
+#. sharedassets1.assets | alcohol_canister | fsm.variables.stringVariables[0].value
+msgid "Alcohol"
+msgstr "Алкоголь"
+
+#. sharedassets1.assets | wheel_3 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "All-Terrain Wheel / Grip: 1"
+msgstr "Вездеходное колесо / Сцепление: 1.0"
+
+#. level1 | Alpha_Nightwalker | m_Text
+msgid ""
+"Alpha\n"
+"Nightwalker"
+msgstr ""
+"Вожак\n"
+"Полуночников"
+
+#. sharedassets1.assets | Alpha_Nightwalker | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Alpha_Nightwalker_BACKUP | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Alpha_Nightwalker_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Alpha Nightwalker"
+msgstr "Вожак Полуночников"
+
+#. sharedassets1.assets | ammo_box_3006 | fsm.variables.stringVariables[0].value
+msgid "Ammo .30-06"
+msgstr "Патроны .30-06"
+
+#. sharedassets1.assets | ammo_box_12gauge | fsm.variables.stringVariables[0].value
+msgid "Ammo 12 gauge"
+msgstr "Патроны 12-го калибра"
+
+#. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_20gauge | fsm.variables.stringVariables[0].value
+msgid "Ammo 20 gauge"
+msgstr "Патроны 20-го калибра"
+
+#. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_22 | fsm.variables.stringVariables[0].value
+msgid "Ammo 22.caliber"
+msgstr "Патроны .22LR"
+
+#. sharedassets1.assets | ammo_box_556mm | fsm.variables.stringVariables[0].value
+msgid "Ammo 5.56mm"
+msgstr "Патроны 5.56 мм"
+
+#. sharedassets1.assets | ammo_box_762mm | fsm.variables.stringVariables[0].value
+msgid "Ammo 7.62mm"
+msgstr "Патроны 7.62 мм"
+
+#. sharedassets1.assets | ammo_box_9mm | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_9mm | fsm.variables.stringVariables[0].value
+msgid "Ammo 9mm"
+msgstr "Патроны 9 мм"
+
+#. sharedassets1.assets | ammo_arrow | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_arrow | fsm.variables.stringVariables[0].value
+msgid "Ammo Arrow"
+msgstr "Стрелы"
+
+#. sharedassets1.assets | ammo_box_big_3006 | fsm.variables.stringVariables[0].value
+msgid "Ammo Box .30-06"
+msgstr "Коробка патронов .30-06"
+
+#. sharedassets1.assets | ammo_box_big_12gauge | fsm.variables.stringVariables[0].value
+msgid "Ammo Box 12 gauge"
+msgstr "Коробка патронов 12-го калибра"
+
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.variables.stringVariables[0].value
+msgid "Ammo Box 20 gauge"
+msgstr "Коробка патронов 20-го калибра"
+
+#. sharedassets1.assets | ammo_box_big_22 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_22 | fsm.variables.stringVariables[0].value
+msgid "Ammo Box 22.caliber"
+msgstr "Коробка патронов .22LR"
+
+#. sharedassets1.assets | ammo_box_big_556mm | fsm.variables.stringVariables[0].value
+msgid "Ammo Box 5.56mm"
+msgstr "Коробка патронов 5.56 мм"
+
+#. sharedassets1.assets | ammo_box_big_762mm | fsm.variables.stringVariables[0].value
+msgid "Ammo Box 7.62mm"
+msgstr "Коробка патронов 7.62 мм"
+
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.variables.stringVariables[0].value
+msgid "Ammo Box 9mm"
+msgstr "Коробка патронов 9 мм"
+
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.variables.stringVariables[0].value
+msgid "Ammo Box Arrow"
+msgstr "Коробка стрел"
+
+#. sharedassets1.assets | backpack_large | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | backpack_large | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Ammo Capacity + 160%"
+msgstr "Вместимость боезапаса +160%"
+
+#. sharedassets1.assets | backpack_small | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Ammo Capacity + 20%"
+msgstr "Вместимость боезапаса +20%"
+
+#. sharedassets1.assets | backpack_huge | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | backpack_huge | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Ammo Capacity + 300%"
+msgstr "Вместимость боезапаса +300%"
+
+#. sharedassets1.assets | backpack_medium | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | backpack_medium | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Ammo Capacity + 80%"
+msgstr "Вместимость боезапаса +80%"
+
+#. level1 | Canvas | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Ammo Full"
+msgstr "Боезапас полон!"
+
+#. level1 | Text | m_Text
+msgid "Apply"
+msgstr "Применить"
+
+#. sharedassets1.assets | Arachnid_Dead | fsm.variables.stringVariables[0].value
+msgid "Arachnid"
+msgstr "Арахнид"
+
+#. sharedassets1.assets | armorplate | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Armor +50"
+msgstr "Защита +50"
+
+#. sharedassets1.assets | bodyarmor_type_2 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | bodyarmor_type_2 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armor Capacity: 150"
+msgstr "Вместительность плитника: 150"
+
+#. sharedassets1.assets | bodyarmor_type_3 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | bodyarmor_type_3 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armor Capacity: 200"
+msgstr "Вместительность плитника: 200"
+
+#. sharedassets1.assets | bodyarmor_type_4 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | bodyarmor_type_4 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armor Capacity: 250"
+msgstr "Вместительность плитника: 250"
+
+#. sharedassets1.assets | bodyarmor_type_0 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | bodyarmor_type_0 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armor Capacity: 50"
+msgstr "Вместительность плитника: 50"
+
+#. sharedassets1.assets | bodyarmor_type_1 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Armor Capacity: 70"
+msgstr "Вместительность плитника: 75"
+
+#. level1 | Canvas | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Armor Full"
+msgstr "Броня не повреждена!"
+
+#. sharedassets1.assets | armorplate | fsm.variables.stringVariables[0].value
+msgid "Armor Plate"
+msgstr "Бронеплита"
+
+#. sharedassets1.assets | armorplate | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Armor Plate - Armor +50"
+msgstr "Бронеплита - Защита +50"
+
+#. sharedassets1.assets | wheel_3_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored All-Terrain Wheel / Grip: 1"
+msgstr "Бронированное колесо для бездорожья / Сцепление: 1.0"
+
+#. sharedassets1.assets | wheel_5_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored Big Off-Road Wheel / Grip: 1.2"
+msgstr "Бронированное большое внедорожное колесо / Сцепление: 1.2"
+
+#. sharedassets1.assets | truck_wheel_2_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored Dually Truck Wheel / Grip: 1"
+msgstr "Бронированное двухскатное колесо грузовика / Сцепление: 1.0"
+
+#. sharedassets1.assets | truck_wheel_3_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored Off-Road Truck Wheel / Grip: 1.2"
+msgstr "Бронированное внедорожное колесо грузовика / Сцепление: 1.2"
+
+#. sharedassets1.assets | wheel_4_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored Off-Road Wheel / Grip: 1.1"
+msgstr "Бронированное внедорожное колесо / Сцепление: 1.1"
+
+#. sharedassets1.assets | wheel_2_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored Street Wheel / Grip: 0.9"
+msgstr "Бронированное уличное колесо / Сцепление: 0.9"
+
+#. sharedassets1.assets | truck_wheel_1_armored | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Armored Truck Wheel / Grip: 0.9"
+msgstr "Бронированное колесо грузовика / Сцепление: 0.9"
+
+#. level1 | Canvas | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Crossbreed | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Duke | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Halfbreed | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Junker | fsm.states[1].actionData.fsmStringParams[0].value
+#. … +10
+msgid "Attach Trailer (H)"
+msgstr "Присоединить прицеп: H"
+
+#. level1 | Canvas | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Attach/Detach: F"
+msgstr "Присоединить/Отсоединить: F"
+
+#. level1 | Canvas | fsm.states[3].actionData.fsmStringParams[0].value
+msgid "Attach: E"
+msgstr "Присоединить: E"
+
+#. sharedassets1.assets | maggot_farm_portable | fsm.states[4].actionData.fsmStringParams[0].value
+msgid "Attach: F"
+msgstr "Присоединить: F"
+
+#. level1 | Audio_text | m_Text
+#. level1 | Text | m_Text
+msgid "Audio"
+msgstr "Звук"
+
+#. level1 | Text | m_Text
+#. sharedassets1.assets | Text | m_Text
+msgid "Auto detect"
+msgstr "Автоопределение"
+
+#. level1 | B_item | m_Text
+#. sharedassets1.assets | mapIcon | m_text
+msgid "B"
+msgstr ""
+
+#. sharedassets1.assets | mapIcon | m_text
+msgid "B*"
+msgstr ""
+
+#. level0 | Text | m_Text
+#. level1 | Text | m_Text
+#. sharedassets1.assets | Text | m_Text
+msgid "BACK"
+msgstr "Назад"
+
+#. sharedassets1.assets | bandage_1 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | bandage_1 | fsm.variables.stringVariables[0].value
+msgid "Bandage"
+msgstr "Бинт"
+
+#. sharedassets1.assets | Bat_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Bat"
+msgstr "Летучая мышь"
+
+#. sharedassets1.assets | bedroll | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | bedroll | fsm.variables.stringVariables[1].value
+msgid "Bedroll"
+msgstr "Спальник"
+
+#. sharedassets1.assets | exhaust_duo_big | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Big Duo Exhaust"
+msgstr "Большой сдвоенный выхлоп"
+
+#. sharedassets1.assets | wheel_5 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Big Off-Road Wheel / Grip: 1.2"
+msgstr "Большое внедорожное колесо / Сцепление: 1.2"
+
+#. sharedassets1.assets | exhaust_quad_big | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Big Quad Exhaust"
+msgstr "Большой счетверенный выхлоп"
+
+#. sharedassets1.assets | exhaust_single_big | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Big Single Exhaust"
+msgstr "Большой одинарный выхлоп"
+
+#. sharedassets1.assets | radiator_truck_big | fsm.variables.stringVariables[2].value
+msgid "Big Truck Radiator"
+msgstr "Большой радиатор грузовика"
+
+#. sharedassets1.assets | binocular | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | binocular | fsm.variables.stringVariables[0].value
+msgid "Binocular"
+msgstr "Бинокль"
+
+#. level1 | Black_Juggernaut | m_Text
+msgid ""
+"Black\n"
+"Juggernaut"
+msgstr ""
+"Черный\n"
+"Громитель"
+
+#. sharedassets1.assets | Black_Juggernaut | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Black_Juggernaut_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Black Juggernaut"
+msgstr "Черный Громитель"
+
+#. sharedassets1.assets | blastlance_1 | fsm.variables.stringVariables[0].value
+msgid "Blastlance"
+msgstr "Взрывное копье"
+
+#. sharedassets1.assets | blastlance_2 | fsm.variables.stringVariables[0].value
+msgid "Blastlance Big"
+msgstr "Большое взрывное копье"
+
+#. level1 | Canvas | fsm.states[2].actionData.fsmStringParams[0].value
+msgid "Bodyarmor Needed"
+msgstr "Нужен плитник!"
+
+#. sharedassets1.assets | bodyarmor_type_0 | fsm.variables.stringVariables[0].value
+msgid "Bodyarmor Type-0"
+msgstr "Плитник Тип-0"
+
+#. sharedassets1.assets | bodyarmor_type_1 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | bodyarmor_type_1 | fsm.variables.stringVariables[0].value
+msgid "Bodyarmor Type-1"
+msgstr "Плитник Тип-1"
+
+#. sharedassets1.assets | bodyarmor_type_2 | fsm.variables.stringVariables[0].value
+msgid "Bodyarmor Type-2"
+msgstr "Плитник Тип-2"
+
+#. sharedassets1.assets | bodyarmor_type_3 | fsm.variables.stringVariables[0].value
+msgid "Bodyarmor Type-3"
+msgstr "Плитник Тип-3"
+
+#. sharedassets1.assets | bodyarmor_type_4 | fsm.variables.stringVariables[0].value
+msgid "Bodyarmor Type-4"
+msgstr "Плитник Тип-4"
+
+#. sharedassets1.assets | Bodyguard_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Bodyguard"
+msgstr "Телохранитель"
+
+#. sharedassets1.assets | Bolter_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Bolter"
+msgstr "Стрелок"
+
+#. sharedassets1.assets | Boltjaw_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Boltjaw"
+msgstr "Арбалетчик"
+
+#. sharedassets1.assets | gauge_boost_level | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Boost Gauge"
+msgstr "[Шкала] Наддув"
+
+#. sharedassets1.assets | 9mm_borz_smg | fsm.variables.stringVariables[0].value
+msgid "Borz SMG (9mm)"
+msgstr "ПП \"Борз\" (9 мм)"
+
+#. sharedassets1.assets | exhaust_buggy | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Buggy Exhaust"
+msgstr "Выхлоп багги"
+
+#. level1 | codex_name_text | m_Text
+msgid "Buildings"
+msgstr "Здания"
+
+#. sharedassets1.assets | Burrower_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Burrower"
+msgstr "Землерой"
+
+#. level1 | machete | fsm.states[0].actionData.fsmStringParams[0].value
+#. level1 | old_knife | fsm.states[0].actionData.fsmStringParams[0].value
+#. level1 | shiv | fsm.states[0].actionData.fsmStringParams[0].value
+msgid "Butcher: F"
+msgstr "Разделать: F"
+
+#. sharedassets1.assets | 1.2L I4 59HP 87Nm Gasoline | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | 1.3L v2 55HP 94Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. … +124
+msgid "Buy: F"
+msgstr "Купить: F"
+
+#. level1 | Buzzgut | m_Text
+#. sharedassets1.assets | Buzzgut | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Buzzgut_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Buzzgut"
+msgstr "Гнилобрюх"
+
+#. level1 | mapIcon | m_text
+#. sharedassets1.assets | mapIcon | m_text
+msgid "C"
+msgstr ""
+
+#. sharedassets1.assets | mapIcon | m_text
+msgid "C*"
+msgstr ""
+
+#. level1 | codex_text | m_Text
+msgid "CODEX"
+msgstr "Кодекс"
+
+#. level1 | Text | m_Text
+msgid "CODEx"
+msgstr "Кодекс"
+
+#. level1 | Text | m_Text
+msgid "CONTINUE"
+msgstr "Продолжить"
+
+#. level1 | codex_name_text | m_Text
+msgid "Camps 1"
+msgstr "Лагеря 1"
+
+#. level1 | codex_name_text | m_Text
+msgid "Camps 2"
+msgstr "Лагеря 2"
+
+#. sharedassets1.assets | tin_can_light | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | tin_can_light | fsm.variables.stringVariables[1].value
+msgid "Can Light"
+msgstr "Светильник из банки"
+
+#. level1 | Cartext | m_Text
+msgid "Car"
+msgstr "Машина"
+
+#. sharedassets1.assets | cassette_80ssynthwave | fsm.variables.stringVariables[0].value
+msgid "Cassette 80's Synthwave Mix"
+msgstr "Кассета: синтвейв 80-х"
+
+#. sharedassets1.assets | cassette_chill | fsm.variables.stringVariables[0].value
+msgid "Cassette Chill Mix"
+msgstr "Кассета: чилл-микс"
+
+#. sharedassets1.assets | cassette_industrialmetal | fsm.variables.stringVariables[0].value
+msgid "Cassette Industrial Metal Mix"
+msgstr "Кассета: индастриал-метал"
+
+#. sharedassets1.assets | radio_car | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | radio_car | fsm.variables.stringVariables[0].value
+msgid "Cassette Player"
+msgstr "Кассетная магнитола"
+
+#. sharedassets1.assets | cassette_retrosynth | fsm.variables.stringVariables[0].value
+msgid "Cassette Retro Synth Mix"
+msgstr "Кассета: ретро-синт"
+
+#. sharedassets1.assets | cassette_whitebat | fsm.variables.stringVariables[0].value
+msgid "Cassette White Bat Mix"
+msgstr "Кассета: White Bat Mix"
+
+#. level1 | codex_name_text | m_Text
+msgid "Caves"
+msgstr "Пещеры"
+
+#. level1 | Cheats | m_Text
+#. sharedassets1.assets | Cheats | m_Text
+msgid "Cheats"
+msgstr "Читы"
+
+#. sharedassets1.assets | cigar | fsm.variables.stringVariables[0].value
+msgid "Cigar"
+msgstr "Сигара"
+
+#. sharedassets1.assets | cigar | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Cigar - 5"
+msgstr "Сигара - 5"
+
+#. sharedassets1.assets | cigarette_bactrian | fsm.variables.stringVariables[0].value
+msgid "Cigarette"
+msgstr "Сигареты"
+
+#. sharedassets1.assets | cigarette_bactrian | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Cigarette - 8"
+msgstr "Сигареты - 8"
+
+#. level1 | Controls | m_Text
+#. level1 | Controls_text | m_Text
+#. level1 | Text | m_Text
+msgid "Controls"
+msgstr "Управление"
+
+#. sharedassets1.assets | meat_dog_cooked | fsm.variables.stringVariables[1].value
+msgid "Cooked Dog meat"
+msgstr "Жареная собачатина"
+
+#. sharedassets1.assets | meat_insect_cooked | fsm.variables.stringVariables[1].value
+msgid "Cooked Insect meat"
+msgstr "Жареное мясо насекомого"
+
+#. sharedassets1.assets | Lizard_cooked | fsm.variables.stringVariables[1].value
+msgid "Cooked Lizard"
+msgstr "Жареная ящерица"
+
+#. sharedassets1.assets | meat_mutant_cooked | fsm.variables.stringVariables[1].value
+msgid "Cooked Mutant meat"
+msgstr "Жареное мясо мутанта"
+
+#. sharedassets1.assets | Rat_cooked | fsm.variables.stringVariables[0].value
+msgid "Cooked Rat"
+msgstr "Жареная крыса"
+
+#. sharedassets1.assets | Scorpion_Small_cooked | fsm.variables.stringVariables[0].value
+msgid "Cooked Scorpion"
+msgstr "Жареный скорпион"
+
+#. sharedassets1.assets | Spider_Small_cooked | fsm.variables.stringVariables[0].value
+msgid "Cooked Spider"
+msgstr "Жареный паук"
+
+#. sharedassets1.assets | gauge_water_temp | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Coolant Temperature Gauge"
+msgstr "[Шкала] Температура охлаждающей жидкости"
+
+#. sharedassets1.assets | radiator_motorcycle | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 1.5"
+msgstr "Охлаждение - 1.5"
+
+#. sharedassets1.assets | radiator_small | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 2.2"
+msgstr "Охлаждение - 2.2"
+
+#. sharedassets1.assets | radiator_medium | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | rustallion_radiator | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 2.8"
+msgstr "Охлаждение - 2.8"
+
+#. sharedassets1.assets | radiator_truck | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 3.2"
+msgstr "Охлаждение - 3.2"
+
+#. sharedassets1.assets | radiator_medium_race | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 4"
+msgstr "Охлаждение - 4.0"
+
+#. sharedassets1.assets | radiator_truck_big | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 4.3"
+msgstr "Охлаждение - 4.3"
+
+#. sharedassets1.assets | radiator_truck_ultra | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Cooling - 5"
+msgstr "Охлаждение - 5.0"
+
+#. level1 | coyotes | m_Text
+msgid "Coyotes"
+msgstr "\"Койоты\""
+
+#. sharedassets1.assets | crossbow | fsm.variables.stringVariables[0].value
+msgid "Crossbow"
+msgstr "Арбалет"
+
+#. sharedassets1.assets | crossbow | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Crossbow / Damage - 20"
+msgstr "Арбалет / Урон - 20"
+
+#. sharedassets1.assets | 22_pipe_pistol | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | 22_pipe_revolver | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | old_knife | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 12"
+msgstr "Урон - 12"
+
+#. sharedassets1.assets | 9mm_borz_smg | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 14"
+msgstr "Урон - 14"
+
+#. sharedassets1.assets | folk_17 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 16"
+msgstr "Урон - 16"
+
+#. sharedassets1.assets | machete | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 19"
+msgstr "Урон - 19"
+
+#. sharedassets1.assets | crossbow | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 20"
+msgstr "Урон - 20"
+
+#. sharedassets1.assets | m16a1 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 23"
+msgstr "Урон - 23"
+
+#. sharedassets1.assets | akm_drum | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | akm_trash | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | akms | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | pipe_wrench | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 25"
+msgstr "Урон - 25"
+
+#. sharedassets1.assets | slamfire_shotgun | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 40"
+msgstr "Урон - 40"
+
+#. sharedassets1.assets | slamberg_500_chopped | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 60"
+msgstr "Урон - 60"
+
+#. sharedassets1.assets | rochester_m24_chopped | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | slamberg_500 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 65"
+msgstr "Урон - 65"
+
+#. sharedassets1.assets | rochester_m24 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 70"
+msgstr "Урон - 70"
+
+#. sharedassets1.assets | 22_pipe_smg | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | shiv | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 9"
+msgstr "Урон - 9"
+
+#. sharedassets1.assets | redmark_m11 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | redmark_m11_scoped | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Damage - 90"
+msgstr "Урон - 90"
+
+#. level1 | Name | m_Text
+#. sharedassets1.assets | Name | m_Text
+msgid "Dead Zone"
+msgstr "Мертвая зона"
+
+#. level1 | Canvas | fsm.states[2].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Crossbreed | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Duke | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Halfbreed | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Junker | fsm.states[2].actionData.fsmStringParams[2].value
+#. … +10
+msgid "Detach Trailer (H)"
+msgstr "Отсоединить прицеп: H"
+
+#. sharedassets1.assets | Diesel | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Diesel"
+msgstr "Дизель"
+
+#. sharedassets1.assets | Diesel_Barrel | fsm.variables.stringVariables[1].value
+msgid "Diesel Barrel"
+msgstr "Бочка дизеля"
+
+#. sharedassets1.assets | Diesel_Barrel | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Diesel Barrel / 100L Full"
+msgstr "Бочка дизеля / 100л, полная"
+
+#. sharedassets1.assets | Diesel_Can | fsm.variables.stringVariables[1].value
+msgid "Diesel Can"
+msgstr "Канистра дизеля"
+
+#. sharedassets1.assets | Diesel_Can | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Diesel Can / 20L Full"
+msgstr "Канистра дизеля / 20л, полная"
+
+#. level1 | travelled | m_Text
+msgid "Distance Travelled:"
+msgstr "Пройдено:"
+
+#. level1 | do not alt tab | m_Text
+#. sharedassets1.assets | do not alt tab | m_Text
+msgid ""
+"Do not alt+tab when saving game\n"
+"it could corrupt the save file"
+msgstr ""
+"Не нажимайте Alt+Tab во время сохранения:\n"
+"файл сохранения может повредиться"
+
+#. sharedassets1.assets | dogfood_can | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | dogfood_can | fsm.variables.stringVariables[0].value
+msgid "Dogfood"
+msgstr "Собачий корм"
+
+#. sharedassets1.assets | alcohol_canister | fsm.states[1].actionData.fsmStringParams[2].value
+msgid "Drink: Hold (F)"
+msgstr "Выпить: удерживать F"
+
+#. sharedassets1.assets | Water_Barrel | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Water_Can_Plastic | fsm.states[1].actionData.fsmStringParams[5].value
+msgid "Drink: Hold F"
+msgstr "Выпить: удерживать F"
+
+#. level1 | PlayerCamera | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Drive (F)"
+msgstr "Сесть за руль: F"
+
+#. sharedassets1.assets | drop here | m_text
+msgid ""
+"Drop canisters here\n"
+"to sell liquids"
+msgstr ""
+"Бросьте канистры сюда,\n"
+"чтобы продать жидкости"
+
+#. sharedassets1.assets | drop here | m_text
+msgid "Drop here to sell"
+msgstr "Бросьте сюда, чтобы продать"
+
+#. sharedassets1.assets | drop here | m_text
+msgid ""
+"Drop here to sell\n"
+"items"
+msgstr "Бросьте сюда, чтобы продать"
+
+#. sharedassets1.assets | truck_wheel_2 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Dually Truck Wheel / Grip: 1"
+msgstr "Двухскатное колесо грузовика / Сцепление: 1.0"
+
+#. level1 | Duke_Ironjaw | m_Text
+msgid ""
+"Duke\n"
+"Ironjaw"
+msgstr ""
+"Дюк\n"
+"Железная Челюсть"
+
+#. sharedassets1.assets | Duke_Ironjaw | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Duke_Ironjaw_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Duke Ironjaw"
+msgstr "Дюк Железная Челюсть"
+
+#. sharedassets1.assets | exhaust_duo | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Duo Exhaust"
+msgstr "Сдвоенный выхлоп"
+
+#. level0 | EnterSeedText | m_Text
+msgid "ENTER MAP SEED"
+msgstr "Введите сид карты"
+
+#. level1 | maggots | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Lizard_Dead | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Lizard_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Rat_Dead | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Rat_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. … +13
+msgid "Eat: F"
+msgstr "Съесть: F"
+
+#. sharedassets1.assets | hinge_engine | fsm.states[1].actionData.fsmStringParams[0].value
+msgid ""
+"Engine Attach Point\n"
+"move/rotate with part adjuster tool"
+msgstr ""
+"Точка крепления двигателя\n"
+"сдвиг/поворот набором для регулировки"
+
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Engine Oil"
+msgstr "Моторное масло"
+
+#. sharedassets1.assets | gauge_oil_temp | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Engine Oil Temperature Gauge"
+msgstr "[Шкала] Температура масла"
+
+#. level0 | Placeholder | m_Text
+msgid "Enter Seed"
+msgstr "Введите сид"
+
+#. sharedassets1.assets | hinge_exhaust | fsm.states[1].actionData.fsmStringParams[0].value
+msgid ""
+"Exhaust Attach Point\n"
+"move/rotate with part adjuster tool"
+msgstr ""
+"Точка крепления выхлопа\n"
+"сдвиг/поворот набором для регулировки"
+
+#. level1 | PlayerCamera | fsm.states[4].actionData.fsmStringParams[0].value
+msgid "Exit (F)"
+msgstr "Выйти: F"
+
+#. level1 | F1_item | m_Text
+msgid "F1"
+msgstr ""
+
+#. level1 | F2_item | m_Text
+msgid "F2"
+msgstr ""
+
+#. level1 | FatigueLable | m_Text
+msgid "FATIGUE:"
+msgstr "Усталость :"
+
+#. level1 | FPS | m_Text
+msgid "FPS"
+msgstr ""
+
+#. level1 | Bandage_Item | fsm.states[3].actionData.fsmStringParams[0].value
+#. level1 | Binocular_Item | fsm.states[3].actionData.fsmStringParams[0].value
+#. level1 | FirstAid_Item | fsm.states[3].actionData.fsmStringParams[0].value
+msgid "FULL"
+msgstr "Максимум"
+
+#. sharedassets1.assets | transmission | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Final Drive Ratio"
+msgstr "Передаточное число главной передачи"
+
+#. sharedassets1.assets | first_aid_1 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | first_aid_1 | fsm.variables.stringVariables[0].value
+msgid "First Aid"
+msgstr "Аптечка"
+
+#. sharedassets1.assets | flashlight_batteries | fsm.variables.stringVariables[0].value
+msgid "Flashlight Batteries"
+msgstr "Батарейки для фонаря"
+
+#. sharedassets1.assets | flashlight_batteries | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Flashlight Batteries - 5"
+msgstr "Батарейки для фонаря - 5"
+
+#. sharedassets1.assets | Flexa_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Flexa"
+msgstr "Флекса"
+
+#. sharedassets1.assets | folk_17 | fsm.variables.stringVariables[0].value
+msgid "Folk 17 (9mm)"
+msgstr "Фолк 17 (9 мм)"
+
+#. sharedassets1.assets | ForwardBackward | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Forward"
+msgstr "Перемотка"
+
+#. sharedassets1.assets | 594cc I2 23HP 39Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 0.6"
+msgstr "Расход топлива: 0.6"
+
+#. sharedassets1.assets | 1.2L I4 59HP 87Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 1.3L v2 55HP 94Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 1.1"
+msgstr "Расход топлива: 1.1"
+
+#. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 1.5"
+msgstr "Расход топлива: 1.5"
+
+#. sharedassets1.assets | 3L I5 87HP 172Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 1.6"
+msgstr "Расход топлива: 1.6"
+
+#. sharedassets1.assets | 3.7L I6 145HP 292Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 1.7"
+msgstr "Расход топлива: 1.7"
+
+#. sharedassets1.assets | 2.8L V6 115HP 183Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 1.8"
+msgstr "Расход топлива: 1.8"
+
+#. sharedassets1.assets | 3.8L V6 165HP 285Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 1.9"
+msgstr "Расход топлива: 1.9"
+
+#. sharedassets1.assets | 5.8L I6 120HP 356Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.0"
+msgstr "Расход топлива: 2.0"
+
+#. sharedassets1.assets | 5.2L V8 230HP 340Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.1"
+msgstr "Расход топлива: 2.1"
+
+#. sharedassets1.assets | 7L I6 165HP 542Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.3"
+msgstr "Расход топлива: 2.3"
+
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.5"
+msgstr "Расход топлива: 2.5"
+
+#. sharedassets1.assets | 8.2L V8 400HP 746Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.7"
+msgstr "Расход топлива: 2.7"
+
+#. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.8"
+msgstr "Расход топлива: 2.8"
+
+#. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+msgid "Fuel Consumption: 2.9"
+msgstr "Расход топлива: 2.9"
+
+#. sharedassets1.assets | gauge_fuel_level | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Fuel Level Gauge"
+msgstr "[Шкала] Уровень топлива"
+
+#. level1 | SubOptionText | m_Text
+msgid "FullScreenWindow"
+msgstr "Полноэкранный в окне"
+
+#. level1 | TitleText | m_Text
+msgid "GRAPHICS SETTINGS"
+msgstr "Настройки графики"
+
+#. level1 | Gameplay_text | m_Text
+#. sharedassets1.assets | Gameplay_text | m_Text
+msgid "Gameplay"
+msgstr "Геймплей"
+
+#. level1 | Text | m_Text
+msgid "Gameplay Cheats"
+msgstr "Игровые читы"
+
+#. sharedassets1.assets | Gasoline | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Gasoline"
+msgstr "Бензин"
+
+#. sharedassets1.assets | Gasoline_Barrel | fsm.variables.stringVariables[1].value
+msgid "Gasoline Barrel"
+msgstr "Бочка бензина"
+
+#. sharedassets1.assets | Gasoline_Barrel | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Gasoline Barrel / 100L Full"
+msgstr "Бочка бензина / 100л, полная"
+
+#. sharedassets1.assets | Gasoline_Can | fsm.variables.stringVariables[1].value
+msgid "Gasoline Can"
+msgstr "Канистра бензина"
+
+#. sharedassets1.assets | Gasoline_Can | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Gasoline Can / 20L Full"
+msgstr "Канистра бензина / 20л, полная"
+
+#. sharedassets1.assets | gearlever_1 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gearlever_2 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gearlever_3 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gearlever_4 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gearlever_5 | fsm.states[1].actionData.fsmStringParams[0].value
+#. … +6
+msgid "Gear Lever"
+msgstr "Рычаг КПП"
+
+#. level1 | get out to save | m_Text
+msgid ""
+"Get out of the car\n"
+"to save game"
+msgstr ""
+"Выйдите из машины,\n"
+"чтобы сохранить игру"
+
+#. level1 | GodHandsUI | m_Text
+msgid "God Hands Active (F10)"
+msgstr "Руки бога включены: F10"
+
+#. level1 | GodModeUI | m_Text
+msgid "God Mode Active (F11)"
+msgstr "Режим бога включен: F11"
+
+#. level1 | Graphics_text | m_Text
+#. level1 | Text | m_Text
+msgid "Graphics"
+msgstr "Графика"
+
+#. sharedassets1.assets | grenade | fsm.variables.stringVariables[0].value
+msgid "Grenade"
+msgstr "Граната"
+
+#. sharedassets1.assets | Grimhound_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Grimhound"
+msgstr "Мрачная гончая"
+
+#. sharedassets1.assets | Gunnar_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Gunnar"
+msgstr "Пострел"
+
+#. level1 | mapIcon | m_text
+msgid "H"
+msgstr ""
+
+#. level1 | HealthLable | m_Text
+msgid "HEALTH:"
+msgstr "Здоровье:"
+
+#. level1 | HungerLable | m_Text
+msgid "HUNGER:"
+msgstr "Голод:"
+
+#. sharedassets1.assets | handbrake | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | handbrake | fsm.states[4].actionData.fsmStringParams[0].value
+msgid "Handbrake"
+msgstr "Ручник"
+
+#. sharedassets1.assets | Headlight | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Headlight_3 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Headlight"
+msgstr "Фара"
+
+#. sharedassets1.assets | switch_lights | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Headlights"
+msgstr "Фары"
+
+#. sharedassets1.assets | bandage_1 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Health + 25"
+msgstr "Здоровье +25"
+
+#. sharedassets1.assets | first_aid_1 | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Health + 50"
+msgstr "Здоровье +50"
+
+#. level1 | Boss_Health_UI | m_Text
+msgid "Health:"
+msgstr "Здоровье:"
+
+#. level1 | text | m_Text
+msgid "Home"
+msgstr "Дом"
+
+#. sharedassets1.assets | hood_1 | fsm.variables.stringVariables[0].value
+#. sharedassets1.assets | hood_2 | fsm.variables.stringVariables[0].value
+msgid "Hood"
+msgstr "Капот"
+
+#. sharedassets1.assets | backpack_huge | fsm.variables.stringVariables[0].value
+msgid "Huge Backpack"
+msgstr "Огромный рюкзак"
+
+#. sharedassets1.assets | meat_rotten | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -1\n"
+"Insanity +20"
+msgstr ""
+"Голод -1\n"
+"Шиза +20"
+
+#. sharedassets1.assets | Spider_Small_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -10\n"
+"Health +3\n"
+msgstr ""
+"Голод -10\n"
+"Здоровье +3\n"
+
+#. sharedassets1.assets | Scorpion_Small_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -11\n"
+"Health +4\n"
+msgstr ""
+"Голод -11\n"
+"Здоровье +4\n"
+
+#. sharedassets1.assets | Rat_Dead | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -12\n"
+"Insanity +3"
+msgstr ""
+"Голод -12\n"
+"Шиза +3"
+
+#. sharedassets1.assets | meat_insect_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -13\n"
+"Health +4\n"
+"Insanity +4"
+msgstr ""
+"Голод -13\n"
+"Здоровье +4\n"
+"Шиза +4"
+
+#. sharedassets1.assets | meat_mutant_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -15\n"
+"Health +2\n"
+"Insanity +15"
+msgstr ""
+"Голод -15\n"
+"Здоровье +2\n"
+"Шиза +15"
+
+#. sharedassets1.assets | Rat_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -15\n"
+"Health +6"
+msgstr ""
+"Голод -15\n"
+"Здоровье +6"
+
+#. sharedassets1.assets | meat_dog_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -15\n"
+"Health +6\n"
+"Insanity +2"
+msgstr ""
+"Голод -15\n"
+"Здоровье +6\n"
+"Шиза +2"
+
+#. sharedassets1.assets | dogfood_can | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -30\n"
+"Health +15"
+msgstr ""
+"Голод -30\n"
+"Здоровье +15"
+
+#. sharedassets1.assets | meat_insect_raw | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -4\n"
+"Insanity +6"
+msgstr ""
+"Голод -4\n"
+"Шиза +6"
+
+#. sharedassets1.assets | meat_mutant_raw | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -5\n"
+"Insanity +20"
+msgstr ""
+"Голод -5\n"
+"Шиза +20"
+
+#. level1 | maggots | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | maggots | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -5\n"
+"Insanity +3"
+msgstr ""
+"Голод -5\n"
+"Шиза +3"
+
+#. sharedassets1.assets | meat_dog_raw | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -5\n"
+"Insanity +5"
+msgstr ""
+"Голод -5\n"
+"Шиза +5"
+
+#. sharedassets1.assets | Lizard_Dead | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -7\n"
+"Health +3"
+msgstr ""
+"Голод -7\n"
+"Здоровье +3"
+
+#. sharedassets1.assets | Spider_Small_Dead | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | maggots | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -8\n"
+"Insanity +1"
+msgstr ""
+"Голод -8\n"
+"Шиза +1"
+
+#. sharedassets1.assets | Scorpion_Small_Dead | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Hunger -9\n"
+msgstr "Голод -9\n"
+
+#. sharedassets1.assets | Lizard_cooked | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Hunger -9\n"
+"Health +8"
+msgstr ""
+"Голод -9\n"
+"Здоровье +8"
+
+#. sharedassets1.assets | i buy | m_text
+msgid "I buy liquids:"
+msgstr "Покупаю жидкости:"
+
+#. sharedassets1.assets | i buy | m_text
+msgid "I buy these items:"
+msgstr "Покупаю эти предметы:"
+
+#. level1 | SanityLable | m_Text
+msgid "INSANITY:"
+msgstr "Шиза :"
+
+#. level1 | TutorialText | m_Text
+msgid ""
+"If you need help, check out the 'TUTORIAL' menu\n"
+"check 'CODEX' menu to discover game content\n"
+"press (F) to continue"
+msgstr ""
+"Если нужна помощь, загляните в меню 'Обучение'\n"
+"в меню 'Кодекс' собраны сведения об игре\n"
+"нажмите F, чтобы продолжить"
+
+#. sharedassets1.assets | START | fsm.states[2].actionData.fsmStringParams[0].value
+msgid "Ignition"
+msgstr "Зажигание"
+
+#. level1 | HeaderText | m_Text
+#. sharedassets1.assets | HeaderText | m_Text
+msgid "Input settings"
+msgstr "Настройки управления"
+
+#. level1 | Label | m_Text
+#. sharedassets1.assets | Label | m_Text
+msgid "Invert axis"
+msgstr "Инвертировать ось"
+
+#. sharedassets1.assets | Juggernaut_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Juggernaut"
+msgstr "Громитель"
+
+#. level1 | credits_music | m_Text
+msgid "Karl Casey @ White Bat Audio"
+msgstr ""
+
+#. level0 | Text | m_Text
+msgid "LOAD GAME"
+msgstr "Загрузить игру"
+
+#. sharedassets1.assets | Lanky_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Lanky"
+msgstr "Долговязый"
+
+#. sharedassets1.assets | backpack_large | fsm.variables.stringVariables[0].value
+msgid "Large Backpack"
+msgstr "Большой рюкзак"
+
+#. sharedassets1.assets | Lift_Button | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Lift Button"
+msgstr "Кнопка подъемника"
+
+#. sharedassets1.assets | interior_car_light | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | interior_car_light (1) | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | interior_car_light (2) | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Light"
+msgstr "Свет"
+
+#. sharedassets1.assets | Lizard_Dead | fsm.variables.stringVariables[1].value
+msgid "Lizard"
+msgstr "Ящерица"
+
+#. level0 | LoadingText | m_Text
+#. level1 | Loading | m_Text
+msgid "Loading"
+msgstr "Загрузка"
+
+#. sharedassets1.assets | Lugger_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Lugger"
+msgstr "Таскун"
+
+#. sharedassets1.assets | Lugnut_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Lugnut"
+msgstr "Гайка"
+
+#. sharedassets1.assets | m16a1 | fsm.variables.stringVariables[0].value
+msgid "M16A1 (5.56mm)"
+msgstr "M16A1 (5.56 мм)"
+
+#. sharedassets1.assets | machete | fsm.variables.stringVariables[0].value
+msgid "Machete"
+msgstr "Мачете"
+
+#. sharedassets1.assets | machete | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Machete / Damage - 19"
+msgstr "Мачете / Урон - 19"
+
+#. level1 | maggots | fsm.variables.stringVariables[1].value
+#. sharedassets1.assets | maggots | fsm.variables.stringVariables[1].value
+msgid "Maggots"
+msgstr "Личинки"
+
+#. sharedassets1.assets | Mechanic_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Mechanic"
+msgstr "Механик"
+
+#. sharedassets1.assets | backpack_medium | fsm.variables.stringVariables[0].value
+msgid "Medium Backpack"
+msgstr "Средний рюкзак"
+
+#. sharedassets1.assets | radiator_medium_race | fsm.variables.stringVariables[2].value
+msgid "Medium Race Radiator"
+msgstr "Средний гоночный радиатор"
+
+#. sharedassets1.assets | radiator_medium | fsm.variables.stringVariables[2].value
+msgid "Medium Radiator"
+msgstr "Средний радиатор"
+
+#. sharedassets1.assets | Merchant_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Merchant"
+msgstr "Торговец"
+
+#. sharedassets1.assets | flashlight2 | fsm.variables.stringVariables[0].value
+msgid "Military Flashlight"
+msgstr "Армейский фонарик"
+
+#. sharedassets1.assets | MotorOil_Can_Big | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | MotorOil_Can_Small | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Motor Oil Can / 5L Full"
+msgstr "Канистра моторного масла / 5л, полная"
+
+#. sharedassets1.assets | MotorOil_Can_Big | fsm.variables.stringVariables[1].value
+msgid "Motor Oil Can Big"
+msgstr "Большая канистра моторного масла"
+
+#. sharedassets1.assets | MotorOil_Can_Small | fsm.variables.stringVariables[1].value
+msgid "Motor Oil Can Small"
+msgstr "Малая канистра моторного масла"
+
+#. sharedassets1.assets | exhaust_motorcycle | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Motorcycle Exhaust"
+msgstr "Мотоциклетный выхлоп"
+
+#. sharedassets1.assets | radiator_motorcycle | fsm.variables.stringVariables[2].value
+msgid "Motorcycle Radiator"
+msgstr "Мотоциклетный радиатор"
+
+#. sharedassets1.assets | motorcycle_wheel | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Motorcycle wheel / Grip: 0.9"
+msgstr "Мотоциклетное колесо / Сцепление: 0.9"
+
+#. level1 | MouseSteeringUI | m_Text
+msgid "Mouse Steering On (O)"
+msgstr "Руление мышью включено: O"
+
+#. level1 | Canvas | fsm.states[2].actionData.fsmStringParams[0].value
+msgid "Move/Rotate: F"
+msgstr "Сдвинуть/Повернуть: F"
+
+#. level0 | Text | m_Text
+msgid "NEW GAME"
+msgstr "Новая игра"
+
+#. sharedassets1.assets | Nightwalker_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Nightwalker"
+msgstr "Полуночник"
+
+#. level1 | Text | m_Text
+msgid "No"
+msgstr "Нет"
+
+#. level1 | Canvas | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Not Enough Nuts"
+msgstr "Не хватает гаек!"
+
+#. level1 | PlayerCamera | fsm.states[4].actionData.fsmStringParams[0].value
+msgid "Not Tired Enough"
+msgstr "Пока не хочется спать!"
+
+#. level1 | message | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Note: “The roads are devastated by recent earthquakes, sometimes they end and start again from 10 meters away to the left or right side. You don’t have to backtrack here or any other location, this world goes on forever and you will encounter the same camp multiple times, so don’t worry about leaving them behind if you are not equipped enough to deal with them. Chose one direction north, south, east, or west at the start and follow it roughly, this way you don’t end up going in circles. Always keep the engine filled with oil and radiator with water, good luck.”"
+msgstr "Записка: \"Дороги разрушены недавними землетрясениями: иногда они обрываются и продолжаются в 10 метрах левее или правее. Возвращаться сюда или в другие места не нужно: этот мир бесконечен, и один и тот же лагерь встретится еще не раз. Если снаряжения пока не хватает, смело оставляйте лагеря позади. В самом начале выберите одно направление — север, юг, восток или запад — и примерно его придерживайтесь, чтобы не ходить кругами. Всегда следите, чтобы в двигателе было масло, а в радиаторе — вода. Удачи.\""
+
+#. sharedassets1.assets | 1.2L I4 59HP 87Nm Gasoline | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | 1.3L v2 55HP 94Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. … +125
+msgid "Nuts"
+msgstr "Гайки"
+
+#. sharedassets1.assets | rustallion_exhaust_2 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Octo Side Exhaust"
+msgstr "Восьмитрубный боковой выхлоп"
+
+#. sharedassets1.assets | truck_wheel_3 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Off-Road Truck Wheel / Grip: 1.2"
+msgstr "Внедорожное колесо грузовика / Сцепление: 1.2"
+
+#. sharedassets1.assets | wheel_4 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Off-Road Wheel / Grip: 1.1"
+msgstr "Внедорожное колесо / Сцепление: 1.1"
+
+#. sharedassets1.assets | flashlight1 | fsm.variables.stringVariables[0].value
+msgid "Old Flashlight"
+msgstr "Старый фонарик"
+
+#. sharedassets1.assets | old_knife | fsm.variables.stringVariables[0].value
+msgid "Old Knife"
+msgstr "Старый нож"
+
+#. sharedassets1.assets | old_knife | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Old Knife / Damage - 12"
+msgstr "Старый нож / Урон - 12"
+
+#. level1 | AxisDropdown | m_Options.m_Options[0].m_Text
+#. level1 | Item Label | m_Text
+#. level1 | Label | m_Text
+#. sharedassets1.assets | AxisDropdown | m_Options.m_Options[0].m_Text
+#. sharedassets1.assets | Item Label | m_Text
+#. … +1
+msgid "Option A"
+msgstr ""
+
+#. level1 | AxisDropdown | m_Options.m_Options[1].m_Text
+#. sharedassets1.assets | AxisDropdown | m_Options.m_Options[1].m_Text
+msgid "Option B"
+msgstr ""
+
+#. level1 | AxisDropdown | m_Options.m_Options[2].m_Text
+#. sharedassets1.assets | AxisDropdown | m_Options.m_Options[2].m_Text
+msgid "Option C"
+msgstr ""
+
+#. sharedassets1.assets | Organic_Mechanic_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Organic Mechanic"
+msgstr "Биомеханик"
+
+#. sharedassets1.assets | toolset_2 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Part Adjuster Toolset"
+msgstr "Набор для регулировки деталей"
+
+#. sharedassets1.assets | perma base text | m_Text
+msgid ""
+"Permanent base mode disables far away item deletion (optimization), therefore making it possible to settle down and store items, cars in one place, use this option with map cheat, press \"Home\" button to mark home base on the map.\n"
+"\n"
+"WARNING: This can cause massive performance issues late game, due to far away items not being deleted. Use at own risk."
+msgstr ""
+"Режим постоянной базы отключает удаление далеких предметов (оптимизацию). Благодаря этому можно обосноваться и хранить предметы и машины в одном месте. Используйте режим вместе с читом на карту: клавиша \"Home\" отмечает базу на карте.\n"
+"\n"
+"ВНИМАНИЕ: на поздних этапах игры производительность может сильно упасть, так как далекие предметы не удаляются. Используйте на свой страх и риск."
+
+#. level1 | perma base text | m_Text
+msgid ""
+"Permanent base mode disables far away item deletion (optimization), therefore making it possible to settle down and store items, cars in one place, use this option with map cheat, press \"Home\" button to mark home base on the map.\n"
+"\n"
+"WARNING: This can cause massive performance issues, crashes late game, due to far away items not being deleted. Use at own risk."
+msgstr ""
+"Режим постоянной базы отключает удаление далеких предметов (оптимизацию). Благодаря этому можно обосноваться и хранить предметы и машины в одном месте. Используйте режим вместе с читом на карту: клавиша \"Home\" отмечает базу на карте.\n"
+"\n"
+"ВНИМАНИЕ: на поздних этапах игры производительность может сильно упасть, а игра — вылетать, так как далекие предметы не удаляются. Используйте на свой страх и риск."
+
+#. sharedassets1.assets | 22_pipe_pistol | fsm.variables.stringVariables[0].value
+msgid "Pipe Pistol (.22lr)"
+msgstr "Самопальный пистолет (.22LR)"
+
+#. sharedassets1.assets | 22_pipe_revolver | fsm.variables.stringVariables[0].value
+msgid "Pipe Revolver (.22lr)"
+msgstr "Самопальный револьвер (.22LR)"
+
+#. sharedassets1.assets | 22_pipe_smg | fsm.variables.stringVariables[0].value
+msgid "Pipe SMG (.22lr)"
+msgstr "Самопальный ПП (.22LR)"
+
+#. sharedassets1.assets | pipe_wrench | fsm.variables.stringVariables[1].value
+msgid "Pipe Wrench"
+msgstr "Газовый ключ"
+
+#. sharedassets1.assets | pipe_wrench | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Pipe Wrench / Damage - 25"
+msgstr "Газовый ключ / Урон - 25"
+
+#. sharedassets1.assets | Pistoleer_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Pistoleer"
+msgstr "Пистольер"
+
+#. sharedassets1.assets | PlayStop | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Play - Stop"
+msgstr "Воспроизвести - Стоп"
+
+#. level1 | Text | m_Text
+msgid "Play demo!"
+msgstr "Играть в демо!"
+
+#. level1 | Playertext | m_Text
+msgid "Player"
+msgstr "Игрок"
+
+#. level1 | PlayerCar_text | m_Text
+#. level1 | Text | m_Text
+msgid "Player/Car"
+msgstr "Игрок/Машина"
+
+#. sharedassets1.assets | flashlight3 | fsm.variables.stringVariables[0].value
+msgid "Police Flashlight"
+msgstr "Полицейский фонарик"
+
+#. sharedassets1.assets | poloska_exhaust | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Poloska Exhaust Pipe"
+msgstr "Выхлопная труба \"Полоски\""
+
+#. sharedassets1.assets | dew_collector_portable | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | dew_collector_portable | fsm.variables.stringVariables[0].value
+msgid "Portable Dew Collector"
+msgstr "Переносной сборщик росы"
+
+#. sharedassets1.assets | gasoline_stove | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gasoline_stove | fsm.variables.stringVariables[1].value
+msgid "Portable Gasoline Stove"
+msgstr "Походная бензиновая плитка"
+
+#. sharedassets1.assets | maggot_farm_portable | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | maggot_farm_portable | fsm.variables.stringVariables[0].value
+msgid "Portable Maggot Farm"
+msgstr "Переносная ферма личинок"
+
+#. level1 | Help Text | m_Text
+msgid "Press new button or move controller by axis. Press Esc to clear selected key or cancel axis detect."
+msgstr "Нажмите новую кнопку или отклоните контроллер по оси. Esc сбрасывает выбранную клавишу или отменяет определение оси."
+
+#. level1 | Help Text | m_Text
+msgid "Press new button or move controller by axis. Press Esc to clear selected key or cancel axis detection."
+msgstr "Нажмите новую кнопку или отклоните контроллер по оси. Esc сбрасывает выбранную клавишу или отменяет определение оси."
+
+#. level1 | Professor | m_Text
+#. sharedassets1.assets | Professor | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Professor_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Professor"
+msgstr "Профессор"
+
+#. sharedassets1.assets | Pup_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Pup"
+msgstr "Шнырь"
+
+#. level0 | Text | m_Text
+msgid "QUIT"
+msgstr "Выход"
+
+#. level1 | Text | m_Text
+msgid "QUIT TO MENU"
+msgstr "Выйти в меню"
+
+#. sharedassets1.assets | exhaust_quad | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Quad Exhaust"
+msgstr "Счетверенный выхлоп"
+
+#. level1 | OptionText | m_Text
+msgid "Quality Level"
+msgstr "Уровень качества"
+
+#. sharedassets1.assets | mapIcon | m_text
+msgid "R"
+msgstr ""
+
+#. sharedassets1.assets | mapIcon | m_text
+msgid "R*"
+msgstr ""
+
+#. level1 | RadiationLable | m_Text
+msgid "RADIATION:"
+msgstr "Радиация :"
+
+#. sharedassets1.assets | gauge_rpm | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "RPM Gauge"
+msgstr "[Шкала] Тахометр"
+
+#. sharedassets1.assets | hinge_radiator | fsm.states[1].actionData.fsmStringParams[0].value
+msgid ""
+"Radiator Attach Point\n"
+"move/rotate with part adjuster tool"
+msgstr ""
+"Точка крепления радиатора\n"
+"сдвиг/поворот набором для регулировки"
+
+#. sharedassets1.assets | Rat_Dead | fsm.variables.stringVariables[0].value
+msgid "Rat"
+msgstr "Крыса"
+
+#. sharedassets1.assets | meat_dog_raw | fsm.variables.stringVariables[1].value
+msgid "Raw Dog meat"
+msgstr "Сырая собачатина"
+
+#. sharedassets1.assets | meat_insect_raw | fsm.variables.stringVariables[1].value
+msgid "Raw Insect meat"
+msgstr "Сырое мясо насекомого"
+
+#. sharedassets1.assets | meat_mutant_raw | fsm.variables.stringVariables[1].value
+msgid "Raw Mutant meat"
+msgstr "Сырое мясо мутанта"
+
+#. level1 | Really Quit | m_Text
+msgid "Really Quit?"
+msgstr "Точно выйти?"
+
+#. level1 | Really Save | m_Text
+msgid "Really Save?"
+msgstr "Точно сохранить?"
+
+#. level1 | Really_default | m_Text
+msgid "Really reset to default?"
+msgstr "Точно сбросить настройки?"
+
+#. sharedassets1.assets | redmark_m11 | fsm.variables.stringVariables[0].value
+msgid "Redmark M11 (.30-06)"
+msgstr "Редмарк M11 (.30-06)"
+
+#. sharedassets1.assets | redmark_m11_scoped | fsm.variables.stringVariables[0].value
+msgid "Redmark M11 Scoped (.30-06)"
+msgstr "Редмарк M11 с прицелом (.30-06)"
+
+#. sharedassets1.assets | Release | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Release Cassette"
+msgstr "Извлечь кассету"
+
+#. level1 | PlayerCamera | fsm.states[1].actionData.fsmStringParams[9].value
+msgid ""
+"Release: lmb\n"
+"Throw: rmb\n"
+"Rotate: mmb\n"
+"Move: scroll"
+msgstr ""
+"Отпустить: ЛКМ\n"
+"Бросить: ПКМ\n"
+"Вращать: СКМ\n"
+"Двигать: колесо мыши"
+
+#. sharedassets1.assets | Repairbox_Large | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Repairbox_Large | fsm.variables.stringVariables[2].value
+msgid "Repairbox Large"
+msgstr "Большой ремкомплект"
+
+#. sharedassets1.assets | Repairbox_Medium | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Repairbox_Medium | fsm.variables.stringVariables[2].value
+msgid "Repairbox Medium"
+msgstr "Средний ремкомплект"
+
+#. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Repairbox_Small | fsm.variables.stringVariables[2].value
+msgid "Repairbox Small"
+msgstr "Малый ремкомплект"
+
+#. level1 | OptionText | m_Text
+msgid "Resolution\n"
+msgstr "Разрешение\n"
+
+#. sharedassets1.assets | rochester_m24 | fsm.variables.stringVariables[0].value
+msgid "Rochester M24 (12ga)"
+msgstr "Рочестер M24 (12-й калибр)"
+
+#. sharedassets1.assets | rochester_m24_chopped | fsm.variables.stringVariables[0].value
+msgid "Rochester M24 Chopped (12ga)"
+msgstr "Рочестер M24, обрез (12-й калибр)"
+
+#. sharedassets1.assets | meat_rotten | fsm.variables.stringVariables[1].value
+msgid "Rotten meat"
+msgstr "Тухлое мясо"
+
+#. sharedassets1.assets | wheel_1 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Rubbish Wheel / Grip: 0.7"
+msgstr "Убитое колесо / Сцепление: 0.7"
+
+#. sharedassets1.assets | rustallion_exhaust_1 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Rustallion Basic Exhaust"
+msgstr "Базовый выхлоп \"Ржавца\""
+
+#. sharedassets1.assets | rustallion_radiator | fsm.variables.stringVariables[2].value
+msgid "Rustallion Radiator"
+msgstr "Радиатор от \"Ржавца\""
+
+#. level1 | Text | m_Text
+msgid "SETTINGS"
+msgstr "Настройки"
+
+#. sharedassets1.assets | sanity_pills | fsm.variables.stringVariables[0].value
+msgid "Sanity Pills"
+msgstr "Таблетки от шизы"
+
+#. level1 | Text | m_Text
+msgid "Save Game"
+msgstr "Сохранить игру"
+
+#. level1 | PlayerCamera | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Save Game: (ENTER)"
+msgstr "Сохранить игру: Enter"
+
+#. level1 | Saving game text | m_Text
+#. level1 | Saving game text UI | m_Text
+#. sharedassets1.assets | Saving game text | m_Text
+msgid "Saving Game"
+msgstr "Сохранение игры"
+
+#. sharedassets1.assets | Scorpion_Big_Dead | fsm.variables.stringVariables[0].value
+#. sharedassets1.assets | Scorpion_Small_Dead | fsm.variables.stringVariables[0].value
+msgid "Scorpion"
+msgstr "Скорпионище"
+
+#. level1 | Scorpion_King | m_Text
+msgid ""
+"Scorpion\n"
+"King"
+msgstr ""
+"Король\n"
+"Скорпионов"
+
+#. sharedassets1.assets | Scorpion_King | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Scorpion_King_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Scorpion King"
+msgstr "Король Скорпионов"
+
+#. sharedassets1.assets | Scraffa_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Scraffa"
+msgstr "Хламовщик"
+
+#. level1 | OptionText | m_Text
+msgid "Screen Mode"
+msgstr "Режим экрана"
+
+#. sharedassets1.assets | Scrud_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Scrud"
+msgstr "Шкряб"
+
+#. sharedassets1.assets | sell_trigger | fsm.states[5].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | sell_trigger | fsm.states[6].actionData.fsmStringParams[0].value
+msgid "Sell? press (E)"
+msgstr "Продать? Нажмите E"
+
+#. level1 | Name | m_Text
+#. sharedassets1.assets | Name | m_Text
+msgid "Sensivity"
+msgstr "Чувствительность"
+
+#. sharedassets1.assets | shiv | fsm.variables.stringVariables[1].value
+msgid "Shiv"
+msgstr "Заточка"
+
+#. sharedassets1.assets | shiv | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Shiv / Damage - 9"
+msgstr "Заточка / Урон - 9"
+
+#. sharedassets1.assets | rustallion_exhaust_3 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Side Pipe Exhaust"
+msgstr "Боковой выхлоп"
+
+#. sharedassets1.assets | exhaust_single | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Single Exhaust\n"
+msgstr "Одинарный выхлоп\n"
+
+#. sharedassets1.assets | Skinwal_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Skinwal"
+msgstr "Кожедер"
+
+#. sharedassets1.assets | slamberg_500 | fsm.variables.stringVariables[0].value
+msgid "Slamberg 500 (12ga)"
+msgstr "Сламберг 500 (12-й калибр)"
+
+#. sharedassets1.assets | slamberg_500_chopped | fsm.variables.stringVariables[0].value
+msgid "Slamberg 500 Chopped (12ga)"
+msgstr "Сламберг 500, обрез (12-й калибр)"
+
+#. sharedassets1.assets | slamfire_shotgun | fsm.variables.stringVariables[0].value
+msgid "Slamfire Shotgun (20ga)"
+msgstr "Самопальный дробовик (20-й калибр)"
+
+#. level1 | PlayerCamera | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Sleep"
+msgstr "Спать"
+
+#. level1 | SleepTime | m_Text
+msgid "Sleep for"
+msgstr "Спать"
+
+#. level1 | PlayerCamera | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Sleep: (Hold F)"
+msgstr "Спать: удерживать F"
+
+#. sharedassets1.assets | backpack_small | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | backpack_small | fsm.variables.stringVariables[0].value
+msgid "Small Backpack"
+msgstr "Маленький рюкзак"
+
+#. sharedassets1.assets | radiator_small | fsm.variables.stringVariables[2].value
+msgid "Small Radiator"
+msgstr "Малый радиатор"
+
+#. sharedassets1.assets | small_wheel_1 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Small rubbish wheel / Grip: 0.7"
+msgstr "Малое убитое колесо / Сцепление: 0.7"
+
+#. sharedassets1.assets | small_wheel_3 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Small wheel T1 / Grip: 0.9"
+msgstr "Малое колесо T1 / Сцепление: 0.9"
+
+#. sharedassets1.assets | small_wheel_2 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Small wheel T2 / Grip: 0.9"
+msgstr "Малое колесо T2 / Сцепление: 0.9"
+
+#. sharedassets1.assets | Spanna_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Spanna"
+msgstr "Газовик"
+
+#. sharedassets1.assets | gauge_speedo | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Speed Gauge"
+msgstr "[Шкала] Спидометр"
+
+#. sharedassets1.assets | Spider_Big_Dead | fsm.variables.stringVariables[0].value
+#. sharedassets1.assets | Spider_Small_Dead | fsm.variables.stringVariables[0].value
+msgid "Spider"
+msgstr "Паучище"
+
+#. sharedassets1.assets | Sprokka_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Sprokka"
+msgstr "Шплинт"
+
+#. sharedassets1.assets | START | fsm.states[5].actionData.fsmStringParams[0].value
+msgid "Start"
+msgstr "Пуск"
+
+#. sharedassets1.assets | START | fsm.states[9].actionData.fsmStringParams[0].value
+msgid "Stop"
+msgstr "Стоп"
+
+#. sharedassets1.assets | wheel_2 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Street Wheel / Grip: 0.9"
+msgstr "Уличное колесо / Сцепление: 0.9"
+
+#. level1 | SubOptionText | m_Text
+msgid "SuboptionText"
+msgstr ""
+
+#. sharedassets1.assets | supercharger_7 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - Big Joe - Power x1.8"
+msgstr "Компрессор - \"Большой Джо\" - Мощность x1.8"
+
+#. sharedassets1.assets | supercharger_6 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - Double Barrel - Power x1.7"
+msgstr "Компрессор - \"Двустволка\" - Мощность x1.7"
+
+#. sharedassets1.assets | supercharger_3 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - Med Mark - Power x1.2"
+msgstr "Компрессор - \"Середнячок Марк\" - Мощность x1.2"
+
+#. sharedassets1.assets | supercharger_8 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - Screaming Skull - Power x1.9"
+msgstr "Компрессор - \"Орущая черепушка\" - Мощность x1.9"
+
+#. sharedassets1.assets | supercharger_2 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - Small Sam - Power x1.09"
+msgstr "Компрессор - \"Малыш Сэм\" - Мощность x1.09"
+
+#. sharedassets1.assets | supercharger_5 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - The Average - Power x1.6"
+msgstr "Компрессор - \"Нормально\" - Мощность x1.6"
+
+#. sharedassets1.assets | supercharger_1 | fsm.variables.stringVariables[0].value
+msgid "Supercharger - Tiny Tim - Power x1.05"
+msgstr "Компрессор - \"Кроха Тимоха\" - Мощность x1.05"
+
+#. sharedassets1.assets | supercharger_4 | fsm.variables.stringVariables[0].value
+msgid "Supercharger -The Hero - Power x1.5"
+msgstr "Компрессор - \"Герой\" - Мощность x1.5"
+
+#. sharedassets1.assets | suspension_lift_kit | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | suspension_lift_kit | fsm.variables.stringVariables[2].value
+msgid "Suspension Lift Kit"
+msgstr "Лифт-комплект подвески"
+
+#. sharedassets1.assets | Syphon | fsm.states[1].actionData.fsmStringParams[16].value
+msgid "Syphon Fuel: F"
+msgstr "Слить топливо: F"
+
+#. level1 | ThirstLable | m_Text
+msgid "THIRST:"
+msgstr "Жажда :"
+
+#. level1 | Text | m_Text
+msgid "TUTORIAL"
+msgstr "Обучение"
+
+#. level1 | Weapons | fsm.states[0].actionData.fsmStringParams[0].value
+msgid "Take Weapon (F)"
+msgstr "Взять оружие: F"
+
+#. level1 | Slot 1 | fsm.states[0].actionData.fsmStringParams[0].value
+msgid "Take Weapon to Slot 1 (F)"
+msgstr "Взять оружие в слот 1: F"
+
+#. level1 | Slot 2 | fsm.states[0].actionData.fsmStringParams[0].value
+msgid "Take Weapon to Slot 2 (F)"
+msgstr "Взять оружие в слот 2: F"
+
+#. level1 | Slot 3 | fsm.states[0].actionData.fsmStringParams[0].value
+msgid "Take Weapon to Slot 3 (F)"
+msgstr "Взять оружие в слот 3: F"
+
+#. sharedassets1.assets | ammo_arrow | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_12gauge | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_3006 | fsm.states[1].actionData.fsmStringParams[5].value
+#. … +30
+msgid "Take: F"
+msgstr "Взять: F"
+
+#. sharedassets1.assets | Teacher_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Teacher"
+msgstr "Учитель"
+
+#. level1 | Terror_of_the_Night | m_Text
+msgid ""
+"Terror\n"
+"of the\n"
+"Night"
+msgstr ""
+"Ужас\n"
+"Ночи"
+
+#. sharedassets1.assets | Terror_of_the_Night | fsm.states[1].actionData.fsmStringParams[14].value
+#. sharedassets1.assets | Terror_of_the_Night_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Terror of the Night"
+msgstr "Ужас Ночи"
+
+#. sharedassets1.assets | exhaust_the_four | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "The Four Exhaust"
+msgstr "Выхлоп \"Четверка\""
+
+#. sharedassets1.assets | exhaust_the_six | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "The Six Exhaust"
+msgstr "Выхлоп \"Шестерка\""
+
+#. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[7].value
+msgid ""
+"Thirst +10\n"
+"Hunger +10\n"
+"Insanity -30"
+msgstr ""
+"Жажда +10\n"
+"Голод +10\n"
+"Шиза -30"
+
+#. sharedassets1.assets | alcohol_canister | fsm.states[1].actionData.fsmStringParams[1].value
+msgid ""
+"Thirst +20\n"
+"Insanity -70"
+msgstr ""
+"Жажда +20\n"
+"Шиза -70"
+
+#. sharedassets1.assets | cigarette_bactrian | fsm.states[1].actionData.fsmStringParams[7].value
+msgid ""
+"Thirst +3\n"
+"Insanity -10"
+msgstr ""
+"Жажда +3\n"
+"Шиза -10"
+
+#. sharedassets1.assets | sanity_pills | fsm.states[1].actionData.fsmStringParams[7].value
+msgid ""
+"Thirst +5\n"
+"Hunger +5\n"
+"Health -10\n"
+"Insanity -50"
+msgstr ""
+"Жажда +5\n"
+"Голод +5\n"
+"Здоровье -10\n"
+"Шиза -50"
+
+#. sharedassets1.assets | cigar | fsm.states[1].actionData.fsmStringParams[7].value
+msgid ""
+"Thirst +5\n"
+"Insanity -15"
+msgstr ""
+"Жажда +5\n"
+"Шиза -15"
+
+#. sharedassets1.assets | door | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | entrance | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "To Surface"
+msgstr "На поверхность"
+
+#. sharedassets1.assets | entrance | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "To Underground Cave"
+msgstr "В подземную пещеру"
+
+#. sharedassets1.assets | door | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "To Underground Laboratory"
+msgstr "В подземную лабораторию"
+
+#. sharedassets1.assets | plant_tobacco | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | plant_tobacco | fsm.variables.stringVariables[0].value
+msgid "Tobacco Plant"
+msgstr "Куст табака"
+
+#. sharedassets1.assets | plant | fsm.variables.stringVariables[0].value
+msgid "Tobacco Plant Growing"
+msgstr "Куст табака (растет)"
+
+#. sharedassets1.assets | withered_plant | fsm.variables.stringVariables[0].value
+msgid "Tobacco Plant Withered"
+msgstr "Куст табака (засох)"
+
+#. sharedassets1.assets | Toolbox | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Toolbox | fsm.variables.stringVariables[1].value
+msgid "Toolbox"
+msgstr "Ящик с инструментами"
+
+#. sharedassets1.assets | toolset_1 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Toolset"
+msgstr "Набор инструментов"
+
+#. sharedassets1.assets | ammo_box_big_12gauge | fsm.states[3].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.states[3].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_22 | fsm.states[3].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_3006 | fsm.states[3].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_556mm | fsm.states[3].actionData.fsmStringParams[0].value
+#. … +3
+msgid "Transfer Ammo: (F)"
+msgstr "Переложить патроны: F"
+
+#. sharedassets1.assets | trophy_alpha_nightwalker | fsm.variables.stringVariables[0].value
+msgid "Trophy - Alpha Nightwalker"
+msgstr "Трофей - Вожак Полуночников"
+
+#. sharedassets1.assets | trophy_black_juggernaut | fsm.variables.stringVariables[0].value
+msgid "Trophy - Black Juggernaut"
+msgstr "Трофей - Черный Громитель"
+
+#. sharedassets1.assets | trophy_buzzgut | fsm.variables.stringVariables[0].value
+msgid "Trophy - Buzzgut"
+msgstr "Трофей - Гнилобрюх"
+
+#. sharedassets1.assets | trophy_duke_ironjaw | fsm.variables.stringVariables[0].value
+msgid "Trophy - Duke Ironjaw"
+msgstr "Трофей - Дюк Железная Челюсть"
+
+#. sharedassets1.assets | trophy_professor | fsm.variables.stringVariables[0].value
+msgid "Trophy - Professor"
+msgstr "Трофей - Профессор"
+
+#. sharedassets1.assets | trophy_scorpion_king | fsm.variables.stringVariables[0].value
+msgid "Trophy - Scorpion King"
+msgstr "Трофей - Король Скорпионов"
+
+#. sharedassets1.assets | trophy_terror_of_the_night | fsm.variables.stringVariables[0].value
+msgid "Trophy - Terror of the Night"
+msgstr "Трофей - Ужас Ночи"
+
+#. sharedassets1.assets | Headlight_2 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Truck Headlight"
+msgstr "Фара грузовика"
+
+#. sharedassets1.assets | radiator_truck | fsm.variables.stringVariables[2].value
+msgid "Truck Radiator"
+msgstr "Радиатор грузовика"
+
+#. sharedassets1.assets | truck_wheel_1 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Truck Wheel / Grip: 0.9"
+msgstr "Колесо грузовика / Сцепление: 0.9"
+
+#. sharedassets1.assets | turbo_bigbrutus | fsm.variables.stringVariables[0].value
+msgid "Turbo - Big Brutus - Power x1.6"
+msgstr "Турбина - \"Большой Брут\" - Мощность x1.6"
+
+#. sharedassets1.assets | turbo_doubletrouble | fsm.variables.stringVariables[0].value
+msgid "Turbo - Double Trouble - Power x1.5"
+msgstr "Турбина - \"Двойная беда\" - Мощность x1.5"
+
+#. sharedassets1.assets | turbo_littlebee | fsm.variables.stringVariables[0].value
+msgid "Turbo - Little Bee - Power x1.05"
+msgstr "Турбина - \"Пчелка\" - Мощность x1.05"
+
+#. sharedassets1.assets | turbo_triplethreat | fsm.variables.stringVariables[0].value
+msgid "Turbo - Triple Threat - Power x1.7"
+msgstr "Турбина - \"Тройная угроза\" - Мощность x1.7"
+
+#. sharedassets1.assets | turbo_warwhistle | fsm.variables.stringVariables[0].value
+msgid "Turbo - War Whistle - Power x1.09"
+msgstr "Турбина - \"Боевой свисток\" - Мощность x1.09"
+
+#. sharedassets1.assets | UTV_wheel_front_1 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "UTV front / Grip: 1"
+msgstr "Переднее колесо UTV / Сцепление: 1.0"
+
+#. sharedassets1.assets | UTV_wheel_rear_1 | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "UTV rear / Grip: 1.1"
+msgstr "Заднее колесо UTV / Сцепление: 1.1"
+
+#. level1 | SubOptionText | m_Text
+msgid "Ultra"
+msgstr "Ультра"
+
+#. sharedassets1.assets | radiator_truck_ultra | fsm.variables.stringVariables[2].value
+msgid "Ultra Truck Radiator"
+msgstr "Ультрарадиатор грузовика"
+
+#. level1 | Uncle | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Uncle - Dead"
+msgstr "Дядя (труп)"
+
+#. level1 | uncles_message | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Uncle's note: \"Kill all Warlords and get back your car from Duke Ironjaw that's rightfully yours\" (press TAB for more info)"
+msgstr "Записка дяди: \"Убей всех главарей и забери у Дюка Железной Челюсти машину, которая по праву твоя\" (TAB - подробнее)"
+
+#. sharedassets1.assets | Lift_Button | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | Release | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | Repairbox_Large | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Repairbox_Medium | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[5].value
+#. … +10
+msgid "Use: F"
+msgstr "Использовать: F"
+
+#. sharedassets1.assets | ForwardBackward | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | PlayStop | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Use: Left mouse button"
+msgstr "Использовать: ЛКМ"
+
+#. sharedassets1.assets | Volume | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Use: Mouse scroll"
+msgstr "Использовать: колесо мыши"
+
+#. sharedassets1.assets | exhaust_v6 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "V6 Exhaust"
+msgstr "Выхлоп V6"
+
+#. sharedassets1.assets | exhaust_v8 | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "V8 Exhaust"
+msgstr "Выхлоп V8"
+
+#. level1 | credits_text | m_Text
+msgid ""
+"Vemsvims - programming help\n"
+"Lisu workshop - some of the player and enemy armors and clothing design\n"
+"Instagram: lisu.workshop\n"
+"Pinterest: FrayedLisu/moje-crafty\n"
+"Denis Pahunov: Map Magic 2"
+msgstr ""
+"Vemsvims - помощь с программированием\n"
+"Lisu workshop - дизайн части брони и одежды игрока и врагов\n"
+"Instagram: lisu.workshop\n"
+"Pinterest: FrayedLisu/moje-crafty\n"
+"Denis Pahunov: Map Magic 2"
+
+#. level0 | Version_text | m_Text
+#. level1 | Version_text | m_Text
+msgid "Version: 28/09/26"
+msgstr ""
+
+#. sharedassets1.assets | Volume | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Volume"
+msgstr "Громкость"
+
+#. level1 | mapIcon | m_text
+#. sharedassets1.assets | mapIcon | m_text
+msgid "W"
+msgstr ""
+
+#. level1 | peaceful text | m_Text
+#. sharedassets1.assets | peaceful text | m_Text
+msgid "WARNING! It ruind immersive survival gameplay. Deletes enemies every 5 sec, Can cause fps drops"
+msgstr "Внимание! Ломает погружение в выживание. Удаляет врагов каждые 5 секунд, может вызывать просадки FPS"
+
+#. level1 | map text | m_Text
+#. sharedassets1.assets | map text | m_Text
+msgid "WARNING! It ruins immersive exploration"
+msgstr "Внимание! Ломает погружение при исследовании"
+
+#. level1 | survival text | m_Text
+#. sharedassets1.assets | survival text | m_Text
+msgid "WARNING! It ruins immersive survival mechanics and gameplay"
+msgstr "Внимание! Ломает механики выживания и погружение в игру"
+
+#. level1 | warning text | m_Text
+#. sharedassets1.assets | warning text | m_Text
+msgid "WARNING! Using cheats can ruin the intended gameplay experience"
+msgstr "Внимание! Читы могут испортить задуманный игровой опыт"
+
+#. level1 | warlords | m_Text
+msgid "Warlords"
+msgstr "Главари"
+
+#. level1 | Water | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Water | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | cap | fsm.states[1].actionData.fsmStringParams[4].value
+msgid "Water"
+msgstr "Вода"
+
+#. sharedassets1.assets | Water_Barrel | fsm.variables.stringVariables[1].value
+msgid "Water Barrel"
+msgstr "Бочка воды"
+
+#. sharedassets1.assets | Water_Barrel | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Water Barrel / 100L Full"
+msgstr "Бочка воды / 100л, полная"
+
+#. sharedassets1.assets | Water_Can_Plastic | fsm.variables.stringVariables[1].value
+msgid "Water Can"
+msgstr "Канистра воды"
+
+#. sharedassets1.assets | Water_Can_Plastic | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Water Can / 13L Full"
+msgstr "Канистра воды / 13л, полная"
+
+#. sharedassets1.assets | weed_bag | fsm.variables.stringVariables[0].value
+msgid "Weed"
+msgstr "\"Муравушка\""
+
+#. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Weed - 8"
+msgstr "\"Муравушка\" - 8"
+
+#. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | plant_weed | fsm.variables.stringVariables[0].value
+msgid "Weed Plant"
+msgstr "Куст \"муравушки\""
+
+#. sharedassets1.assets | plant | fsm.variables.stringVariables[0].value
+msgid "Weed Plant Growing"
+msgstr "Куст \"муравушки\" (растет)"
+
+#. sharedassets1.assets | withered_plant | fsm.variables.stringVariables[0].value
+msgid "Weed Plant Withered"
+msgstr "Куст \"муравушки\" (засох)"
+
+#. sharedassets1.assets | Wild Hound_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Wild Hound"
+msgstr "Дикий пес"
+
+#. sharedassets1.assets | plant_tobacco | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[1].value
+msgid "Withered"
+msgstr "Засохло"
+
+#. level1 | codex_name_text | m_Text
+msgid "Wrecks"
+msgstr "Обломки"
+
+#. sharedassets1.assets | Yard Hound_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Yard Hound"
+msgstr "Дворовый пес"
+
+#. level1 | Text | m_Text
+msgid "Yes\n"
+msgstr "Да\n"
+
+#. sharedassets1.assets | Zombie_Runner_Dead | fsm.states[1].actionData.fsmStringParams[0].value
+msgid "Zombie Runner"
+msgstr "Зомби-бегун"
+
+#. level1 | text | m_Text
+msgid "accident"
+msgstr "Авария"
+
+#. level1 | buttons | m_Text
+msgid "adjust - numpad keys"
+msgstr "Сдвиг - Numpad"
+
+#. level1 | AdjustUI | m_Text
+msgid "adjust car parts"
+msgstr "Регулировка деталей"
+
+#. level1 | aim down sights | m_Text
+msgid "aim down sights toggle"
+msgstr "Прицеливание переключением"
+
+#. level1 | text | m_Text
+msgid "akm drum mag"
+msgstr "АКМ с барабанным магазином"
+
+#. level1 | text | m_Text
+msgid "akm trash"
+msgstr "АКМ с помойки"
+
+#. level1 | text | m_Text
+msgid "akms"
+msgstr "АКМС"
+
+#. level1 | Text | m_Text
+msgid "alcohol"
+msgstr "Алкоголь"
+
+#. level1 | text | m_Text
+msgid "alpha nightwalker"
+msgstr "Вожак Полуночников"
+
+#. level1 | text | m_Text
+msgid "alpha nightwalker's lair"
+msgstr "Логово Вожака Полуночников"
+
+#. level1 | description_text 1 | m_Text
+msgid "always check the character's needs, drink water by holding (f) while looking at a water can, eat by pressing (f) on a food source, certain items decrease insanity. water the portable plants with water can, put meat (f) into portable maggot farm, drain portable dew collector with water can."
+msgstr "Всегда следите за потребностями персонажа. Чтобы попить, удерживайте F, глядя на канистру с водой. Чтобы поесть, нажмите F на источнике еды. Некоторые предметы снижают Шиза. Поливайте переносные растения из канистры с водой, кладите мясо (F) в переносную ферму личинок, сливайте воду из переносного сборщика росы в канистру."
+
+#. level1 | ambient music | m_Text
+msgid "ambient music volume"
+msgstr "Громкость фоновой музыки"
+
+#. level1 | ambient occlusion | m_Text
+msgid "ambient occlusion"
+msgstr "Фоновое затенение"
+
+#. level1 | ambient volume | m_Text
+msgid "ambient sfx volume"
+msgstr "Громкость фоновых звуков"
+
+#. level1 | ammo | m_Text
+msgid "ammo"
+msgstr "Патроны"
+
+#. level1 | codex_name_text | m_Text
+msgid "animals"
+msgstr "Животные"
+
+#. level1 | text | m_Text
+msgid "arachnid"
+msgstr "Арахнид"
+
+#. level1 | armor | m_Text
+msgid "armor"
+msgstr "Броня"
+
+#. level1 | arrow | m_Text
+msgid "arrow"
+msgstr "Стрела"
+
+#. level1 | audio volume | m_Text
+msgid "audio volume"
+msgstr "Общая громкость"
+
+#. level1 | autoclutch | m_Text
+msgid "auto clutch"
+msgstr "Автосцепление"
+
+#. level1 | automatic gearbox | m_Text
+msgid "automatic gearbox"
+msgstr "Автоматическая КПП"
+
+#. level1 | backpack | m_Text
+msgid "backpack"
+msgstr "Рюкзак"
+
+#. level1 | Text | m_Text
+msgid "bandage"
+msgstr "Бинт"
+
+#. level1 | text | m_Text
+msgid "bat"
+msgstr "Летучая мышь"
+
+#. level1 | text | m_Text
+msgid "bat sanity"
+msgstr "Летучая мышь (галлюцинация)"
+
+#. level1 | battery | m_Text
+msgid "battery"
+msgstr "Аккумулятор"
+
+#. level1 | text | m_Text
+msgid "big spider lair"
+msgstr "Большое логово пауков"
+
+#. level1 | text | m_Text
+msgid "big trailer"
+msgstr "Большой прицеп"
+
+#. level1 | binocular | m_Text
+msgid "binocular"
+msgstr "Бинокль"
+
+#. level1 | text | m_Text
+msgid "black juggernaut"
+msgstr "Черный Громитель"
+
+#. level1 | text | m_Text
+msgid "black juggernaut's lair"
+msgstr "Логово Черного Громителя"
+
+#. level1 | text | m_Text
+msgid "blast rat"
+msgstr "Крыса-камикадзе"
+
+#. level1 | text | m_Text
+msgid "blast zombie"
+msgstr "Зомби-камикадзе"
+
+#. level1 | text | m_Text
+msgid "blastlance big"
+msgstr "Большая Бум-палка"
+
+#. level1 | text | m_Text
+msgid "blastlance small"
+msgstr "Бум-палка"
+
+#. level1 | bloom | m_Text
+msgid "bloom"
+msgstr "Свечение"
+
+#. level1 | text | m_Text
+msgid "bodyguard"
+msgstr "Телохранитель"
+
+#. level1 | text | m_Text
+msgid "bolter"
+msgstr "Стрелок"
+
+#. level1 | text | m_Text
+msgid "boltjaw"
+msgstr "Арбалетчик"
+
+#. level1 | text | m_Text
+msgid "borz smg"
+msgstr "ПП \"Борз\""
+
+#. level1 | boss music | m_Text
+msgid "boss fight music volume"
+msgstr "Громкость музыки боя с боссом"
+
+#. level1 | text | m_Text
+msgid "brickstop camp"
+msgstr "Лагерь Кирпичный"
+
+#. level1 | text | m_Text
+msgid "burrower"
+msgstr "Землерой"
+
+#. level1 | text | m_Text
+msgid "bus"
+msgstr "Автобус"
+
+#. level1 | text | m_Text
+msgid "bus merchant"
+msgstr "Торговец в автобусе"
+
+#. level1 | text | m_Text
+msgid "buzzgut"
+msgstr "Гнилобрюх"
+
+#. level1 | text | m_Text
+msgid "buzzgut's base"
+msgstr "База Гнилобрюха"
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "car part attach, detach"
+msgstr "Установка и снятие деталей"
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "car part move, rotate"
+msgstr "Сдвиг и поворот деталей"
+
+#. sharedassets1.assets | box_cardboard | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | box_cardboard | fsm.variables.stringVariables[0].value
+msgid "cardboard box"
+msgstr "Картонная коробка"
+
+#. level1 | change mode | m_Text
+msgid "change position/rotation mode - numpad 5"
+msgstr "Режим сдвига/поворота - Numpad 5"
+
+#. level1 | text | m_Text
+msgid "college teacher"
+msgstr "Преподаватель колледжа"
+
+#. level1 | color grading | m_Text
+msgid "color grading"
+msgstr "Цветокоррекция"
+
+#. level1 | text | m_Text
+msgid "container home 01"
+msgstr "Дом-контейнер 01"
+
+#. level1 | text | m_Text
+msgid "container home 02"
+msgstr "Дом-контейнер 02"
+
+#. level1 | text | m_Text
+msgid "coyote sentry"
+msgstr "Часовая башня \"Койотов\""
+
+#. level1 | codex_name_text | m_Text
+msgid "coyotes"
+msgstr "\"Койоты\""
+
+#. level1 | tutorial_name_text 2 | m_Text
+msgid "crates, gauges attach, detach"
+msgstr "Установка и снятие ящиков и шкал"
+
+#. level1 | Credits_text | m_Text
+#. level1 | Text | m_Text
+msgid "credits"
+msgstr "Титры"
+
+#. level1 | Text | m_Text
+#. level1 | text | m_Text
+msgid "crossbow"
+msgstr "Арбалет"
+
+#. level1 | text | m_Text
+msgid "crossbreed"
+msgstr "\"Кентавр\""
+
+#. level1 | day | m_Text
+msgid "day:"
+msgstr "День :"
+
+#. level1 | Debug_text | m_Text
+#. level1 | Text | m_Text
+msgid "debug"
+msgstr "Отладка"
+
+#. level0 | DEMO | m_Text
+#. level1 | DEMO | m_Text
+msgid "demo"
+msgstr "Демо"
+
+#. level1 | Dev | m_Text
+msgid "dev"
+msgstr ""
+
+#. level1 | Text | m_Text
+msgid "diesel"
+msgstr "Дизель"
+
+#. level1 | Text | m_Text
+msgid "disable cam move control"
+msgstr "Отключить управление камерой"
+
+#. level1 | disable fatigue | m_Text
+#. sharedassets1.assets | disable fatigue | m_Text
+msgid "disable fatigue"
+msgstr "Отключить усталость"
+
+#. level1 | disable insanity | m_Text
+#. sharedassets1.assets | disable insanity | m_Text
+msgid "disable insanity"
+msgstr "Отключить шизу"
+
+#. level1 | disable thirst hunger | m_Text
+#. sharedassets1.assets | disable thirst hunger | m_Text
+msgid "disable thirst/hunger"
+msgstr "Отключить жажду/голод"
+
+#. level1 | text | m_Text
+msgid "dog boat"
+msgstr "\"Собачья\" лодка"
+
+#. level1 | text | m_Text
+msgid "duke"
+msgstr "\"Дюк\""
+
+#. level1 | text | m_Text
+msgid "duke ironjaw"
+msgstr "Дюк Железнозуб"
+
+#. level1 | text | m_Text
+msgid "electric pole"
+msgstr "Электростолб"
+
+#. level1 | Text | m_Text
+msgid "enable cam move control"
+msgstr "Включить управление камерой"
+
+#. level1 | normalize input help text | m_Text
+msgid "enable when pedals only work from halfway (usually Logitech pedals)"
+msgstr "Включите, если педали срабатывают только с середины хода (обычно у педалей Logitech)"
+
+#. level1 | smooth input help text | m_Text
+msgid "enable when using keyboard steering"
+msgstr "Включите при рулении с клавиатуры"
+
+#. level1 | tutorial_name_text 2 | m_Text
+msgid "engine gear ratio"
+msgstr "Передаточное число двигателя"
+
+#. level1 | engine sound volume | m_Text
+msgid "engine sound volume"
+msgstr "Двигатель"
+
+#. level1 | description_text 2 | m_Text
+msgid ""
+"engines gear ratio can be changed by taking out the engine, looking at the transmission and pressing (lmb) and (rmb) to increase, decrease gear ratio.\n"
+"higher gear ration = lower max speed\n"
+"lower gear ration = higher max speed"
+msgstr ""
+"Чтобы изменить передаточное число, снимите двигатель, посмотрите на коробку передач и нажимайте ЛКМ и ПКМ: так число растет или уменьшается.\n"
+"больше передаточное число = ниже макс. скорость\n"
+"меньше передаточное число = выше макс. скорость"
+
+#. level1 | factions | m_Text
+msgid "factions"
+msgstr "Фракции"
+
+#. level1 | text | m_Text
+msgid "factory"
+msgstr "Завод"
+
+#. level1 | steering speed text fast | m_Text
+msgid "fast"
+msgstr "Быстро"
+
+#. level1 | flashlight | m_Text
+msgid "flashlight"
+msgstr "Фонарик"
+
+#. level1 | Text | m_Text
+msgid "flashlight battery"
+msgstr "Батарейка для фонаря"
+
+#. level1 | text | m_Text
+msgid "flexa"
+msgstr "Хлыст"
+
+#. level1 | text | m_Text
+msgid "folk 17"
+msgstr "Флок 17"
+
+#. level1 | footstep sounds | m_Text
+msgid "footstep sounds"
+msgstr "Звуки шагов"
+
+#. level1 | fov | m_Text
+msgid "fov"
+msgstr "Поле зрения"
+
+#. level1 | __GameManager__ | fsm.states[0].actionData.fsmStringParams[0].value
+#. level1 | coyotes_relation | m_Text
+msgid "friendly"
+msgstr "Союзник"
+
+#. level1 | text | m_Text
+msgid "fuel camp"
+msgstr "Топливный лагерь"
+
+#. level1 | game made by | m_Text
+msgid "game made by"
+msgstr "Автор игры"
+
+#. level1 | gasmask | m_Text
+msgid "gas mask"
+msgstr "Противогаз"
+
+#. level1 | Text | m_Text
+msgid "gasoline"
+msgstr "Бензин"
+
+#. sharedassets1.assets | liquid price | m_text
+msgid ""
+"gasoline:    12 nuts/l\n"
+"diesel:       8 nuts/L\n"
+"motor oil:  6 nuts/L\n"
+"water:       9 nuts/L"
+msgstr ""
+"Бензин:    12 гаек/л\n"
+"Дизель:      8 гаек/л\n"
+"Масло:        6 гаек/л\n"
+"Вода:          9 гаек/л"
+
+#. level1 | geiger_counter | m_Text
+msgid "geiger counter"
+msgstr "Счетчик Гейгера"
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "god hands"
+msgstr "Руки бога"
+
+#. level1 | description_text 1 | m_Text
+msgid "god hands (f10) can be used if your can is stuck and needs to be debugged"
+msgstr "Руки бога (F10) помогут, если машина застряла и ее нужно вытащить"
+
+#. level1 | god | m_Text
+msgid ""
+"god hands: F10\n"
+"god mode: F11\n"
+msgstr ""
+"Руки бога: F10\n"
+"Режим бога: F11\n"
+
+#. level1 | PlayerCamera | fsm.states[10].actionData.fsmStringParams[0].value
+msgid "grab: lmb"
+msgstr "Взять: ЛКМ"
+
+#. level1 | grenade | m_Text
+msgid "grenade"
+msgstr "Граната"
+
+#. level1 | text | m_Text
+msgid "grimhound"
+msgstr "Мрачная гончая"
+
+#. level1 | text | m_Text
+msgid "grimhound sanity"
+msgstr "Мрачная гончая (галлюцинация)"
+
+#. level1 | text | m_Text
+msgid "gunnar"
+msgstr "Пострел"
+
+#. level1 | hshifter | m_Text
+msgid "h-shifter"
+msgstr "H-образная КПП"
+
+#. level1 | text | m_Text
+msgid "halfbreed"
+msgstr "\"Полукровка\""
+
+#. level1 | headbob | m_Text
+msgid "headbob"
+msgstr "Покачивание камеры"
+
+#. level1 | __GameManager__ | fsm.states[1].actionData.fsmStringParams[0].value
+#. level1 | scrapyard_relation | m_Text
+msgid "hostile"
+msgstr "Враг"
+
+#. level1 | SleepTimerHours | m_Text
+msgid "hour"
+msgstr "ч."
+
+#. sharedassets1.assets | item_list | m_text
+msgid "item list"
+msgstr "Список предметов"
+
+#. level1 | item rotate | m_Text
+msgid "item rotation speed"
+msgstr "Скорость вращения предметов"
+
+#. level1 | text | m_Text
+msgid "juggernaut"
+msgstr "Громитель"
+
+#. level1 | text | m_Text
+msgid "junker"
+msgstr "\"Драндулет\""
+
+#. level1 | km | m_Text
+msgid "km"
+msgstr "км"
+
+#. level1 | text | m_Text
+msgid "laboratory"
+msgstr "Лаборатория"
+
+#. level1 | text | m_Text
+msgid "labyrinth cave"
+msgstr "Пещера-лабиринт"
+
+#. level1 | text | m_Text
+msgid "lanky"
+msgstr "Долговязый"
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "liquids"
+msgstr "Жидкости"
+
+#. level1 | description_text 1 | m_Text
+msgid "liquids can be poured into certain car parts or other containers. to pour rotate the container or item upside down and move it to the other item's opening"
+msgstr "Жидкости можно заливать в некоторые детали машины или в другие емкости. Чтобы перелить, переверните емкость или предмет вверх дном и поднесите к горловине другого предмета"
+
+#. level1 | text | m_Text
+msgid "lizard"
+msgstr "Ящерица"
+
+#. level0 | loadgame_text | m_Text
+msgid "load game"
+msgstr "Загрузить игру"
+
+#. level0 | Text | m_Text
+msgid "load game 1"
+msgstr "Загрузить 1"
+
+#. level0 | Text | m_Text
+msgid "load game 10"
+msgstr "Загрузить 10"
+
+#. level0 | Text | m_Text
+msgid "load game 2"
+msgstr "Загрузить 2"
+
+#. level0 | Text | m_Text
+msgid "load game 3"
+msgstr "Загрузить 3"
+
+#. level0 | Text | m_Text
+msgid "load game 4"
+msgstr "Загрузить 4"
+
+#. level0 | Text | m_Text
+msgid "load game 5"
+msgstr "Загрузить 5"
+
+#. level0 | Text | m_Text
+msgid "load game 6"
+msgstr "Загрузить 6"
+
+#. level0 | Text | m_Text
+msgid "load game 7"
+msgstr "Загрузить 7"
+
+#. level0 | Text | m_Text
+msgid "load game 8"
+msgstr "Загрузить 8"
+
+#. level0 | Text | m_Text
+msgid "load game 9"
+msgstr "Загрузить 9"
+
+#. level1 | text | m_Text
+msgid "lugger"
+msgstr "Таскун"
+
+#. level1 | text | m_Text
+msgid "lugnut"
+msgstr "Болван"
+
+#. level1 | text | m_Text
+msgid "m16a1"
+msgstr "M16A1"
+
+#. level1 | text | m_Text
+msgid "machete"
+msgstr "Мачете"
+
+#. level1 | map cheat | m_Text
+#. sharedassets1.assets | map cheat | m_Text
+msgid "map cheat (press: M)"
+msgstr "Чит на карту (клавиша M)"
+
+#. level1 | text | m_Text
+msgid "mechanic"
+msgstr "Механик"
+
+#. sharedassets1.assets | crate_metal | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | crate_metal | fsm.variables.stringVariables[0].value
+msgid "metal crate"
+msgstr "Металлический ящик"
+
+#. level1 | Text | m_Text
+msgid "motor oil"
+msgstr "Моторное масло"
+
+#. level1 | mouse sensy x | m_Text
+msgid "mouse look sensivity x (left,right)"
+msgstr "Чувствительность мыши по X (влево, вправо)"
+
+#. level1 | mouse sensy y | m_Text
+msgid "mouse look sensivity y (up,down)"
+msgstr "Чувствительность мыши по Y (вверх, вниз)"
+
+#. level1 | movement sign | m_Text
+msgid "movement"
+msgstr "Движение"
+
+#. level0 | MusicText | m_Text
+#. level1 | music | m_Text
+msgid "music"
+msgstr "Музыка"
+
+#. level1 | text | m_Text
+msgid "mutant problem"
+msgstr "Проблема с мутантами"
+
+#. level1 | codex_name_text | m_Text
+msgid "mutants 1"
+msgstr "Мутанты 1"
+
+#. level1 | codex_name_text | m_Text
+msgid "mutants 2"
+msgstr "Мутанты 2"
+
+#. level1 | CodexEntry | m_Text
+msgid "new content unlocked in codex"
+msgstr "В кодексе открыта новая запись"
+
+#. level1 | Text | m_Text
+msgid "next"
+msgstr "Далее"
+
+#. level1 | text | m_Text
+msgid "nightwalker"
+msgstr "Полуночник"
+
+#. level1 | text | m_Text
+msgid "nightwalker sanity"
+msgstr "Полуночник (галлюцинация)"
+
+#. level1 | normalizeinput | m_Text
+msgid "normalize input"
+msgstr "Нормализация ввода"
+
+#. level1 | TEST_oil temp (1) | m_Text
+msgid "oil temp"
+msgstr "Темп. масла"
+
+#. level1 | Text | m_Text
+msgid "old flashlight"
+msgstr "Старый фонарик"
+
+#. level1 | text | m_Text
+msgid "old knife"
+msgstr "Старый нож"
+
+#. level1 | text | m_Text
+msgid "organic mechanic"
+msgstr "Биомеханик"
+
+#. level1 | text | m_Text
+msgid "outrider"
+msgstr "\"Разведчик\""
+
+#. sharedassets1.assets | Repairbox_Large | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Repairbox_Medium | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | ammo_box_12gauge | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[3].value
+#. … +19
+msgid "pcs"
+msgstr "шт."
+
+#. level1 | peaceful mode | m_Text
+#. sharedassets1.assets | peaceful mode | m_Text
+msgid "peaceful mode"
+msgstr "Мирный режим"
+
+#. level1 | perma base | m_Text
+#. sharedassets1.assets | perma base | m_Text
+msgid "permanent base mode"
+msgstr "Режим постоянной базы"
+
+#. level1 | text | m_Text
+msgid "pigpen"
+msgstr "\"Свинарня\""
+
+#. level1 | text | m_Text
+msgid "pipe home"
+msgstr "Дом в трубе"
+
+#. level1 | text | m_Text
+msgid "pipe revolver .22"
+msgstr "Самопальный револьвер .22LR"
+
+#. level1 | text | m_Text
+msgid "pipe smg .22"
+msgstr "Самопальный ПП .22LR"
+
+#. level1 | text | m_Text
+msgid "pipe wrench"
+msgstr "Газовый ключ"
+
+#. level1 | text | m_Text
+msgid "piperat"
+msgstr "\"Трубокрыс\""
+
+#. level1 | Text | m_Text
+msgid "piperat car"
+msgstr "Машина трубокрысов"
+
+#. level1 | text | m_Text
+msgid "pistoleer"
+msgstr "Пистольер"
+
+#. sharedassets1.assets | crate_plastic | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | crate_plastic | fsm.variables.stringVariables[0].value
+msgid "plastic crate"
+msgstr "Пластиковый ящик"
+
+#. level1 | Text | m_Text
+msgid "player camera interpolate"
+msgstr "Интерполяция камеры игрока"
+
+#. level1 | description_text 1 | m_Text
+msgid "player character can be upgraded with certain items (flashlight, backpack, body armor) or quick items such as bandage or first aid kit. to use bandage press (F1) for first aid kit press (f2), flashlight (l)."
+msgstr "Персонажа можно улучшить некоторыми предметами (фонарик, рюкзак, плитник) и расходниками вроде бинта или аптечки. Бинт - F1, аптечка - F2, фонарик - L."
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "player items"
+msgstr "Предметы игрока"
+
+#. level1 | tutorial_name_text 2 | m_Text
+msgid "player movement"
+msgstr "Передвижение"
+
+#. level1 | tutorial_name_text 2 | m_Text
+msgid "player sheet"
+msgstr "Лист персонажа"
+
+#. level0 | Playtest | m_Text
+#. level1 | Playtest | m_Text
+msgid "playtest"
+msgstr "Плейтест"
+
+#. level1 | text | m_Text
+msgid "poloska"
+msgstr "\"Полоска\""
+
+#. level1 | mode | m_Text
+msgid "position mode"
+msgstr "Режим позиционирования"
+
+#. level1 | MapCheatText | m_Text
+msgid "press (M) to close"
+msgstr "Нажмите M, чтобы закрыть"
+
+#. level1 | description_text 2 | m_Text
+msgid "press (tab) to check player sheet, player items, ammo, factions, day, time, bosses can be seen here"
+msgstr "Tab открывает лист персонажа: здесь видны предметы игрока, патроны, фракции, день, время и боссы"
+
+#. level1 | Text | m_Text
+msgid "previous"
+msgstr "Назад"
+
+#. sharedassets1.assets | price_list | m_text
+msgid "price"
+msgstr "Цена"
+
+#. level1 | text | m_Text
+msgid "pup"
+msgstr "Шнырь"
+
+#. level1 | text | m_Text
+msgid "radio tower"
+msgstr "Радиовышка"
+
+#. level1 | text | m_Text
+msgid "raid camp"
+msgstr "Рейдерский лагерь"
+
+#. level1 | text | m_Text
+msgid "rat"
+msgstr "Крыса"
+
+#. level1 | text | m_Text
+msgid "rat boat"
+msgstr "\"Крысиная\" лодка"
+
+#. level1 | text | m_Text
+msgid "redmark m11"
+msgstr "Редмарк M11"
+
+#. level1 | text | m_Text
+msgid "redmark m11 scoped"
+msgstr "Редмарк M11 с прицелом"
+
+#. level1 | tutorial_name_text 2 | m_Text
+msgid "repair"
+msgstr "Ремонт"
+
+#. level1 | Text | m_Text
+msgid "repair box medium"
+msgstr "Средний ремкомплект"
+
+#. level1 | text | m_Text
+msgid "repair shop"
+msgstr "Автомастерская"
+
+#. level1 | reset | m_Text
+msgid "reset - numpad 0"
+msgstr "Сброс - Numpad 0"
+
+#. level1 | Text | m_Text
+msgid "reset to default"
+msgstr "Сбросить настройки"
+
+#. level1 | text | m_Text
+msgid "rip-off merchant"
+msgstr "Торговец-обдирала"
+
+#. level1 | text | m_Text
+msgid "rip-off merchant camp"
+msgstr "Лагерь торговца-обдиралы"
+
+#. level1 | text | m_Text
+msgid "rochester m24"
+msgstr "Рочестер M24"
+
+#. level1 | text | m_Text
+msgid "rochester m24 chopped"
+msgstr "Рочестер M24 (обрез)"
+
+#. level1 | TEST_rpm (1) | m_Text
+msgid "rpm"
+msgstr "об/мин"
+
+#. level1 | text | m_Text
+msgid "ruin"
+msgstr "Руины"
+
+#. level1 | text | m_Text
+msgid "rustallion"
+msgstr "\"Ржавец\""
+
+#. level1 | text | m_Text
+msgid "rustcargo"
+msgstr "\"Ломовой\""
+
+#. level1 | text | m_Text
+msgid "rustchief"
+msgstr "\"Волок\""
+
+#. level1 | text | m_Text
+msgid "rustliner"
+msgstr "\"Школьник\""
+
+#. level1 | Text | m_Text
+msgid "sanity pills"
+msgstr "Таблетки от шизы"
+
+#. level0 | noSaveFile | m_Text
+msgid "save file does not exist"
+msgstr "Файл сохранения не найден"
+
+#. level1 | Text | m_Text
+#. level1 | savegame_text | m_Text
+#. sharedassets1.assets | savegame_text | m_Text
+msgid "save game"
+msgstr "Сохранить игру"
+
+#. level1 | Text | m_Text
+#. sharedassets1.assets | Text | m_Text
+msgid "save game 1"
+msgstr "Сохранить 1"
+
+#. level1 | Text | m_Text
+msgid "save game 10"
+msgstr "Сохранить 10"
+
+#. level1 | Text | m_Text
+#. sharedassets1.assets | Text | m_Text
+msgid "save game 2"
+msgstr "Сохранить 2"
+
+#. level1 | Text | m_Text
+msgid "save game 3"
+msgstr "Сохранить 3"
+
+#. level1 | Text | m_Text
+msgid "save game 4"
+msgstr "Сохранить 4"
+
+#. level1 | Text | m_Text
+msgid "save game 5"
+msgstr "Сохранить 5"
+
+#. level1 | Text | m_Text
+msgid "save game 6"
+msgstr "Сохранить 6"
+
+#. level1 | Text | m_Text
+msgid "save game 7"
+msgstr "Сохранить 7"
+
+#. level1 | Text | m_Text
+msgid "save game 8"
+msgstr "Сохранить 8"
+
+#. level1 | Text | m_Text
+msgid "save game 9"
+msgstr "Сохранить 9"
+
+#. level1 | text | m_Text
+msgid "school"
+msgstr "Школа"
+
+#. level1 | text | m_Text
+msgid "scorpion king"
+msgstr "Царь Скорпионов"
+
+#. level1 | text | m_Text
+msgid "scorpion king's cave"
+msgstr "Пещера Царя Скорпионов"
+
+#. level1 | text | m_Text
+msgid "scorpion lair"
+msgstr "Логово скорпионов"
+
+#. level1 | text | m_Text
+msgid "scorpion major"
+msgstr "Скорпионище"
+
+#. level1 | text | m_Text
+msgid "scorpion minor"
+msgstr "Скорпиончик"
+
+#. level1 | text | m_Text
+msgid "scraffa"
+msgstr "Хламовщик"
+
+#. level1 | text | m_Text
+msgid "scrap camp"
+msgstr "Лагерь мусорщиков"
+
+#. level1 | text | m_Text
+msgid "scrapwagon"
+msgstr "\"Ломовоз\""
+
+#. level1 | codex_name_text | m_Text
+#. level1 | scrapyard | m_Text
+#. level1 | text | m_Text
+msgid "scrapyard"
+msgstr "\"Мусорщики\""
+
+#. level1 | text | m_Text
+msgid "scrapyard sentry"
+msgstr "Часовая башня \"Мусорщиков\""
+
+#. level1 | screen space shadows | m_Text
+msgid "screen space shadows\n"
+msgstr "Экранные тени\n"
+
+#. level1 | text | m_Text
+msgid "scrud"
+msgstr "Шкряб"
+
+#. level1 | description_text 1 | m_Text
+msgid "set up axes in controls and settings in player/car settings as shown above in the picture"
+msgstr "Настройте оси в разделе \"Управление\", а параметры - в разделе \"Игрок/Машина\", как показано на картинке выше"
+
+#. level1 | UseExit | m_Text
+msgid ""
+"set: mouse wheel\n"
+"sleep: f\n"
+"exit: r"
+msgstr ""
+"Задать: колесо мыши\n"
+"Спать: F\n"
+"Выход: R"
+
+#. level1 | sharpen | m_Text
+msgid "sharpen"
+msgstr "Резкость"
+
+#. level1 | text | m_Text
+msgid "shipwreck 01"
+msgstr "Кораблекрушение 01"
+
+#. level1 | text | m_Text
+msgid "shipwreck 02"
+msgstr "Кораблекрушение 02"
+
+#. level1 | text | m_Text
+msgid "shiv"
+msgstr "Заточка"
+
+#. level1 | show fps | m_Text
+msgid "show fps"
+msgstr "Показывать FPS"
+
+#. level1 | text | m_Text
+msgid "skinwal"
+msgstr "Кожедёр"
+
+#. level1 | text | m_Text
+msgid "slamberg 500"
+msgstr "Слэмберг 500"
+
+#. level1 | text | m_Text
+msgid "slamberg 500 chopped"
+msgstr "Слэмберг 500 (обрез)"
+
+#. level1 | Text | m_Text
+#. level1 | text | m_Text
+msgid "slamfire shotgun"
+msgstr "Самопальный дробовик"
+
+#. level1 | steering speed text slow | m_Text
+msgid "slow"
+msgstr "Медленно"
+
+#. level1 | text | m_Text
+msgid "slumtown"
+msgstr "Трущобы"
+
+#. level1 | Text | m_Text
+msgid "small radiator"
+msgstr "Малый радиатор"
+
+#. level1 | text | m_Text
+msgid "small spider lair"
+msgstr "Маленькое логово пауков"
+
+#. level1 | text | m_Text
+msgid "small trailer"
+msgstr "Малый прицеп"
+
+#. level1 | Text | m_Text
+msgid "small wheel"
+msgstr "Малое колесо"
+
+#. level1 | smoothinput | m_Text
+msgid "smooth input"
+msgstr "Сглаживание ввода"
+
+#. level1 | description_text 1 | m_Text
+msgid ""
+"some car parts (engine, radiator, exhaust) can be moved and rotated with the part adjuster tool.\n"
+"press (f) on a part then move with numpad keys, to rotate switch to rotate mode with (num 5) then press (f) when you are finished, then put the key back."
+msgstr ""
+"Некоторые детали машины (двигатель, радиатор, выхлоп) можно сдвигать и поворачивать набором для регулировки деталей.\n"
+"Нажмите F на детали и сдвигайте ее клавишами Numpad. Для поворота включите режим вращения (Num 5). Закончив, нажмите F и положите ключ на место."
+
+#. level1 | description_text 2 | m_Text
+msgid ""
+"some items such as crates, boxes can be installed anywhere on the car's surface by pressing (f) and detached by pressing (f) again.\n"
+"\n"
+"gauges can be attached anywhere on the dashboard. to detach, use toolset"
+msgstr ""
+"Некоторые предметы, например ящики и коробки, можно установить в любом месте машины нажатием F и снять повторным нажатием F.\n"
+"\n"
+"Шкалы крепятся в любом месте приборной панели. Чтобы снять их, используйте набор инструментов"
+
+#. level1 | text | m_Text
+msgid "spanna"
+msgstr "Газовик"
+
+#. level1 | Spawn_text | m_Text
+msgid "spawn"
+msgstr "Спавн"
+
+#. level1 | special thanks to | m_Text
+msgid "special thanks to"
+msgstr "Особая благодарность"
+
+#. level1 | TEST_speed (1) | m_Text
+msgid "speed"
+msgstr "Скорость"
+
+#. level1 | text | m_Text
+msgid "spider major"
+msgstr "Паучище"
+
+#. level1 | text | m_Text
+msgid "spider minor"
+msgstr "Паучишка"
+
+#. level1 | text | m_Text
+msgid "sprokka"
+msgstr "Шплинт"
+
+#. level1 | steeringspeed | m_Text
+msgid "steering speed"
+msgstr "Скорость руления"
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "steering wheel (logitech g29)"
+msgstr "Руль (Logitech G29)"
+
+#. level1 | tutorial_name_text 1 | m_Text
+msgid "survival"
+msgstr "Выживание"
+
+#. level1 | text | m_Text
+msgid "teacher"
+msgstr "Учитель"
+
+#. level1 | text | m_Text
+msgid "terror of the night"
+msgstr "Ужас Ночи"
+
+#. level1 | text | m_Text
+msgid "the professor's collage"
+msgstr "Колледж Профессора"
+
+#. level1 | text | m_Text
+msgid "tiny tyrant"
+msgstr "\"Тиранчик\""
+
+#. level1 | description_text 1 | m_Text
+msgid ""
+"to attach, pick up a car part move it over to an attach point and press (f).\n"
+"\n"
+"to detach, grab a toolkit or toolbox by pressing (f) then look at the part and press (f) at it"
+msgstr ""
+"Чтобы установить деталь, возьмите ее, поднесите к точке крепления и нажмите F.\n"
+"\n"
+"Чтобы снять деталь, возьмите набор инструментов или ящик с инструментами (F), посмотрите на деталь и нажмите на ней F"
+
+#. level1 | text | m_Text
+msgid "tower of terror"
+msgstr "Башня ужаса"
+
+#. level1 | text | m_Text
+msgid "trucks"
+msgstr "Грузовики"
+
+#. level1 | WeaponUse | m_Text
+msgid ""
+"unequip (0)\n"
+"drop (p)\n"
+"grenade (g)"
+msgstr ""
+"Убрать: 0\n"
+"Выбросить: P\n"
+"Граната: G"
+
+#. level1 | description_text 2 | m_Text
+msgid "use repair boxes to repair broken or low condition car parts. press (f) on repairbox, look at car part then press (f) on it. if you finished put the key back into the box by pressing (f) on it."
+msgstr "Ремкомплекты чинят сломанные и изношенные детали машины. Нажмите F на ремкомплекте, посмотрите на деталь и нажмите на ней F. Закончив, верните ключ в ящик нажатием F."
+
+#. level1 | codex_name_text | m_Text
+msgid "vehicles 1"
+msgstr "Транспорт 1"
+
+#. level1 | codex_name_text | m_Text
+msgid "vehicles 2"
+msgstr "Транспорт 2"
+
+#. level1 | text | m_Text
+msgid "vulture"
+msgstr "\"Стервятник\""
+
+#. level1 | description_text 2 | m_Text
+msgid ""
+"walk (WASD)\n"
+"jump (space)\n"
+"crouch (ctrl)\n"
+"crawl (Y)\n"
+"run (shift)"
+msgstr ""
+"Ходьба: WASD\n"
+"Прыжок: Space\n"
+"Присесть: Ctrl\n"
+"Ползти: Y\n"
+"Бег: Shift"
+
+#. level1 | text | m_Text
+msgid "wasps"
+msgstr "Злобные мухи"
+
+#. level1 | Text | m_Text
+msgid "water"
+msgstr "Вода"
+
+#. level1 | TEST_water temp (1) | m_Text
+msgid "water temp"
+msgstr "Темп. воды"
+
+#. level1 | tutorial_name_text 2 | m_Text
+msgid "weapons"
+msgstr "Оружие"
+
+#. level1 | codex_name_text | m_Text
+msgid "weapons 1"
+msgstr "Оружие 1"
+
+#. level1 | codex_name_text | m_Text
+msgid "weapons 2"
+msgstr "Оружие 2"
+
+#. level1 | codex_name_text | m_Text
+msgid "weapons 3"
+msgstr "Оружие 3"
+
+#. level1 | description_text 2 | m_Text
+msgid ""
+"weapons can be picked up to the 3 weapons slots, use (1)(2)(3) to switch between weapon slots, then press (f) to pick up. \n"
+"to drop a weapons select it by using (1)(2)(3) then press (p) "
+msgstr ""
+"Оружие можно взять в один из 3 слотов: выберите слот клавишами (1) (2) (3) и нажмите F, чтобы подобрать. \n"
+"Чтобы выбросить оружие, выберите его клавишами (1) (2) (3) и нажмите P"
+
+#. level1 | text | m_Text
+msgid "wild hound"
+msgstr "Дикая псина"
+
+#. level1 | text | m_Text
+msgid "yard hound"
+msgstr "Дворняга"
+
+#. level1 | Text | m_Text
+msgid "yes"
+msgstr "Да"
+
+#. level1 | text | m_Text
+msgid "zombie runner"
+msgstr "Зомби-бегун"
+
+#. level1 | steering speed text default | m_Text
+msgid "|"
+msgstr ""
+
+#. level1 | mapPlayerIcon | m_text
+msgid "↓"
+msgstr ""

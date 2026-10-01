@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>apocalypter-l10n-tools editor</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #fff; --text: #1d2330; --muted: #6b7385;
+    --border: #d9dde5; --accent: #2f6fde; --row: #eef3fd; --danger: #c43d3d; --ok: #2e8a4f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d; --panel: #1f2229; --text: #e3e6ed; --muted: #9098a9;
+      --border: #333844; --accent: #6b9cf5; --row: #263045; --danger: #ef7070; --ok: #5fc486;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; height: 100vh; }
+  header { padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--panel); }
+  form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  input[type=text], textarea {
+    font: inherit; color: inherit; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+  }
+  #q { flex: 1 1 280px; }
+  .filter { width: 150px; }
+  label { color: var(--muted); user-select: none; }
+  button {
+    font: inherit; padding: 6px 14px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--panel); color: var(--text);
+  }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:disabled { opacity: .5; cursor: default; }
+  #status { margin-top: 8px; color: var(--muted); min-height: 1.4em; }
+  #pager { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  #pager[hidden] { display: none; }
+  #pager button { padding: 3px 10px; }
+  #pager select { font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; }
+  #page-info { color: var(--muted); }
+  #status.error { color: var(--danger); }
+  #status.ok { color: var(--ok); }
+  main { display: grid; grid-template-columns: minmax(0, 3fr) minmax(320px, 2fr); flex: 1; min-height: 0; }
+  #results { overflow: auto; border-right: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { position: sticky; top: 0; background: var(--panel); color: var(--muted); font-weight: 500; cursor: pointer; user-select: none; white-space: nowrap; }
+  th:hover { color: var(--text); }
+  th.sorted { color: var(--text); }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover, tbody tr.selected { background: var(--row); }
+  td.value { white-space: pre-wrap; word-break: break-word; }
+  td.meta { color: var(--muted); font-size: 12px; word-break: break-all; }
+  #editor { padding: 16px; display: flex; flex-direction: column; gap: 10px; overflow: auto; }
+  #editor dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; }
+  #editor dt { color: var(--muted); }
+  #editor dd { margin: 0; word-break: break-all; }
+  #value { flex: 1; min-height: 200px; resize: vertical; white-space: pre-wrap; }
+  .actions { display: flex; gap: 8px; align-items: center; }
+  #dirty { color: var(--muted); }
+  .empty { color: var(--muted); padding: 24px; }
+  .kind { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 12px; white-space: nowrap; border: 1px solid currentColor; }
+  .kind-screen { color: var(--ok); }
+  .kind-maybe { color: var(--accent); }
+  .kind-service { color: var(--danger); }
+  #m-warning { color: var(--danger); margin: 0; }
+  @media (max-width: 800px) {
+    body { height: auto; }
+    main { grid-template-columns: 1fr; height: auto; }
+    #results { max-height: 50vh; border-right: 0; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <form id="search">
+    <input id="q" type="text" placeholder="Search text" autofocus>
+    <input id="field" class="filter" type="text" placeholder="Field (m_text)">
+    <input id="gameObject" class="filter" type="text" placeholder="GameObject">
+    <input id="script" class="filter" type="text" placeholder="Script">
+    <input id="file" class="filter" type="text" placeholder="File">
+    <label><input id="regex" type="checkbox"> regex</label>
+    <label><input id="case" type="checkbox"> Aa</label>
+    <label title="Names of objects, variables, events and other strings the game uses internally"><input id="service" type="checkbox"> service</label>
+    <label title="Strings the game may display or may use internally: fields of game scripts, FSM variables"><input id="hideMaybe" type="checkbox"> hide &quot;maybe&quot;</label>
+    <button class="primary" type="submit">Search</button>
+    <button id="rescan" type="button">Rescan</button>
+  </form>
+  <div id="status"></div>
+  <div id="pager" hidden>
+    <button id="first" type="button" title="First page">«</button>
+    <button id="prev" type="button">‹ Previous</button>
+    <span id="page-info"></span>
+    <button id="next" type="button">Next ›</button>
+    <button id="last" type="button" title="Last page">»</button>
+    <label><select id="page-size">
+      <option>100</option><option selected>200</option><option>500</option><option>1000</option>
+    </select> per page</label>
+  </div>
+</header>
+<main>
+  <section id="results"><div class="empty">Enter a query and press Search.</div></section>
+  <section id="editor">
+    <div class="empty" id="placeholder">Select a string in the results.</div>
+    <dl id="meta" hidden>
+      <dt>File</dt><dd id="m-file"></dd>
+      <dt>GameObject</dt><dd id="m-go"></dd>
+      <dt>Script</dt><dd id="m-script"></dd>
+      <dt>Field</dt><dd id="m-path"></dd>
+      <dt>Kind</dt><dd id="m-kind"></dd>
+    </dl>
+    <p id="m-warning" hidden>Service string: the game uses it as a name or key. Translating it may break the game logic.</p>
+    <textarea id="value" hidden spellcheck="false"></textarea>
+    <div class="actions" id="actions" hidden>
+      <button class="primary" id="save" type="button" disabled>Save (Ctrl+S)</button>
+      <button id="revert" type="button" disabled>Revert</button>
+      <span id="dirty"></span>
+    </div>
+  </section>
+</main>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+let current = null;
+
+function setStatus(text, kind) {
+  const el = $("status");
+  el.textContent = text;
+  el.className = kind || "";
+}
+
+async function api(url, options) {
+  const resp = await fetch(url, options);
+  const data = await resp.json().catch(() => ({ error: resp.statusText }));
+  return { resp, data };
+}
+
+function post(url, body) {
+  return api(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+function preview(text) {
+  return text.length > 300 ? text.slice(0, 300) + "…" : text;
+}
+
+function cell(tr, text, cls) {
+  const td = document.createElement("td");
+  td.textContent = text;
+  if (cls) td.className = cls;
+  tr.appendChild(td);
+}
+
+// Pagination state: the offset of the page shown and the last total.
+let offset = 0;
+let total = 0;
+
+// Sort state: the column key sent to the API ("" keeps the index order)
+// and the direction.
+let sortColumn = "";
+let sortDesc = false;
+
+const COLUMNS = [
+  { title: "Value", sort: "value" },
+  { title: "Kind", sort: "kind" },
+  { title: "Field", sort: "path" },
+  { title: "GameObject / script", sort: "owner" },
+  { title: "File", sort: "file" },
+];
+
+// cycleSort moves a column through ascending, descending and unsorted.
+function cycleSort(column) {
+  if (sortColumn !== column) {
+    sortColumn = column;
+    sortDesc = false;
+  } else if (!sortDesc) {
+    sortDesc = true;
+  } else {
+    sortColumn = "";
+    sortDesc = false;
+  }
+  goTo(0);
+}
+
+function pageSize() {
+  return Number($("page-size").value);
+}
+
+// search loads the page at offset. keep reselects an entry after a save.
+async function search(keep) {
+  const params = new URLSearchParams({
+    offset: String(offset), limit: String(pageSize()),
+    sort: sortColumn, desc: sortDesc ? "1" : "",
+    q: $("q").value, field: $("field").value,
+    gameObject: $("gameObject").value, script: $("script").value, file: $("file").value,
+    regex: $("regex").checked ? "1" : "", case: $("case").checked ? "1" : "",
+    service: $("service").checked ? "1" : "",
+    hideMaybe: $("hideMaybe").checked ? "1" : "",
+  });
+  // Sorting every string of a large build takes a second the first time.
+  const slow = setTimeout(() => setStatus("Searching…"), 300);
+  const { resp, data } = await api("/api/search?" + params);
+  clearTimeout(slow);
+  if (!resp.ok) { setStatus(data.error, "error"); return; }
+  if (data.entries.length === 0 && data.total > 0 && offset > 0) {
+    // The page emptied, e.g. after an edit moved entries out of the result.
+    offset = lastPageOffset(data.total);
+    return search(keep);
+  }
+  total = data.total;
+  render(data, keep);
+  renderPager();
+}
+
+function lastPageOffset(count) {
+  return Math.max(0, Math.floor((count - 1) / pageSize()) * pageSize());
+}
+
+// goTo searches again from a new offset, unless unsaved changes are kept.
+function goTo(newOffset) {
+  if (isDirty() && !confirm("There are unsaved changes. Discard them?")) return;
+  offset = newOffset;
+  $("results").scrollTop = 0;
+  search();
+}
+
+function renderPager() {
+  const size = pageSize();
+  $("pager").hidden = total <= size && offset === 0;
+  const pages = Math.max(1, Math.ceil(total / size));
+  const page = Math.floor(offset / size) + 1;
+  const from = total === 0 ? 0 : offset + 1;
+  const to = Math.min(offset + size, total);
+  $("page-info").textContent = `${from}–${to} of ${total} · page ${page} of ${pages}`;
+  $("first").disabled = $("prev").disabled = offset === 0;
+  $("next").disabled = $("last").disabled = offset + size >= total;
+}
+
+// newSearch starts from the first page.
+function newSearch() {
+  offset = 0;
+  search();
+}
+
+function render(data, keep) {
+  const box = $("results");
+  box.replaceChildren();
+  if (data.entries.length === 0) {
+    const div = document.createElement("div");
+    div.className = "empty";
+    div.textContent = "Nothing found.";
+    box.appendChild(div);
+  } else {
+    const table = document.createElement("table");
+    const head = table.createTHead().insertRow();
+    for (const col of COLUMNS) {
+      const th = document.createElement("th");
+      const sorted = sortColumn === col.sort;
+      th.textContent = col.title + (sorted ? (sortDesc ? " ▼" : " ▲") : "");
+      th.className = sorted ? "sorted" : "";
+      th.title = "Sort";
+      th.addEventListener("click", () => cycleSort(col.sort));
+      head.appendChild(th);
+    }
+    const body = table.createTBody();
+    for (const entry of data.entries) {
+      const tr = body.insertRow();
+      cell(tr, preview(entry.value), "value");
+      tr.appendChild(kindCell(entry.kind));
+      cell(tr, entry.path, "meta");
+      cell(tr, [entry.gameObject, entry.script].filter(Boolean).join(" / "), "meta");
+      cell(tr, where(entry), "meta");
+      tr.addEventListener("click", () => select(entry, tr));
+      if (keep && keep.file === entry.file && keep.docId === entry.docId && keep.start === entry.start) select(entry, tr);
+    }
+    box.appendChild(table);
+  }
+  const shown = data.total > data.entries.length ? ` (showing ${data.offset + 1}–${data.offset + data.entries.length})` : "";
+  const hidden = [];
+  if (data.hidden > 0) hidden.push(`service: ${data.hidden}`);
+  if (data.hiddenMaybe > 0) hidden.push(`"maybe": ${data.hiddenMaybe}`);
+  setStatus(`Found: ${data.total}${shown}${hidden.length ? ", hidden " + hidden.join(", ") : ""}`);
+}
+
+const KIND_LABELS = { screen: "on screen", maybe: "maybe", service: "service" };
+
+function kindLabel(kind) {
+  const span = document.createElement("span");
+  span.className = `kind kind-${kind}`;
+  span.textContent = KIND_LABELS[kind] || kind;
+  return span;
+}
+
+function kindCell(kind) {
+  const td = document.createElement("td");
+  td.appendChild(kindLabel(kind));
+  return td;
+}
+
+// Entries of a player build have no line; the object path ID locates them.
+function where(entry) {
+  return entry.line ? `${entry.file}:${entry.line}` : `${entry.file} #${entry.docId}`;
+}
+
+function select(entry, tr) {
+  if (isDirty() && entry !== current && !confirm("There are unsaved changes. Discard them?")) return;
+  document.querySelectorAll("tr.selected").forEach((row) => row.classList.remove("selected"));
+  tr.classList.add("selected");
+  current = entry;
+  $("placeholder").hidden = true;
+  $("meta").hidden = $("value").hidden = $("actions").hidden = false;
+  $("m-file").textContent = where(entry);
+  $("m-go").textContent = entry.gameObject || "—";
+  $("m-script").textContent = entry.script || "—";
+  $("m-path").textContent = entry.path;
+  $("m-kind").replaceChildren(kindLabel(entry.kind));
+  $("m-warning").hidden = entry.kind !== "service";
+  $("value").value = entry.value;
+  updateDirty();
+}
+
+function isDirty() {
+  return current !== null && $("value").value !== current.value;
+}
+
+function updateDirty() {
+  const dirty = isDirty();
+  $("save").disabled = $("revert").disabled = !dirty;
+  $("dirty").textContent = dirty ? "Modified" : "";
+}
+
+async function save() {
+  if (!isDirty()) return;
+  $("save").disabled = true;
+  const { resp, data } = await post("/api/edit", {
+    file: current.file, docId: current.docId, start: current.start, end: current.end, raw: current.raw, value: $("value").value,
+  });
+  if (resp.status === 409) {
+    current = null;
+    await search();
+    setStatus("The file changed on disk. Results are refreshed; repeat the edit.", "error");
+    return;
+  }
+  if (!resp.ok) { setStatus(data.error, "error"); updateDirty(); return; }
+  current = data;
+  await search({ file: data.file, docId: data.docId, start: data.start });
+  setStatus(`Saved: ${where(data)}`, "ok");
+}
+
+$("search").addEventListener("submit", (ev) => { ev.preventDefault(); newSearch(); });
+$("service").addEventListener("change", newSearch);
+$("hideMaybe").addEventListener("change", newSearch);
+$("first").addEventListener("click", () => goTo(0));
+$("prev").addEventListener("click", () => goTo(Math.max(0, offset - pageSize())));
+$("next").addEventListener("click", () => goTo(offset + pageSize()));
+$("last").addEventListener("click", () => goTo(lastPageOffset(total)));
+$("page-size").addEventListener("change", () => {
+  // Keep the first visible row on the new page.
+  offset = Math.floor(offset / pageSize()) * pageSize();
+  search();
+});
+$("value").addEventListener("input", updateDirty);
+$("save").addEventListener("click", save);
+$("revert").addEventListener("click", () => { $("value").value = current.value; updateDirty(); });
+document.addEventListener("keydown", (ev) => {
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === "s") { ev.preventDefault(); save(); }
+});
+window.addEventListener("beforeunload", (ev) => { if (isDirty()) ev.preventDefault(); });
+$("rescan").addEventListener("click", async () => {
+  setStatus("Scanning…");
+  const { resp, data } = await post("/api/rescan", {});
+  if (!resp.ok) { setStatus(data.error, "error"); return; }
+  setStatus(`Indexed: ${data.files} files, ${data.entries} strings`, "ok");
+});
+api("/api/stats").then(({ data }) =>
+  setStatus(`Index: ${data.files} files, ${data.entries} strings, ${data.scripts} scripts`));
+</script>
+</body>
+</html>
