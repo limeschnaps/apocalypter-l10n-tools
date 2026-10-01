@@ -1,0 +1,64 @@
+Apocalypter: installing a localization
+======================================
+
+What is in the archive
+----------------------
+
+Windows (apocalypter-l10n-tools-win-x64.zip):
+  patcher.bat   the installer script; this is what you run
+  patcher.exe   the program that writes the translation into the game
+  *.lang        localization packages, for example ru.lang
+
+Linux (apocalypter-l10n-tools-linux-x64.tar.gz):
+  patcher.sh    the installer script; this is what you run
+  patcher       the program that writes the translation into the game
+  *.lang        localization packages, for example ru.lang
+
+Where to put the files
+----------------------
+
+Unpack the archive into the game folder, the one with Apocalypter.exe and
+the Apocalypter_Data folder. The files can lie right next to
+Apocalypter.exe or in the archive's own folder inside the game folder.
+
+Steam opens the game folder: right-click Apocalypter in the library,
+Manage → Browse local files. On Linux it is usually
+  ~/.local/share/Steam/steamapps/common/Apocalypter
+
+How to run
+----------
+
+1. Close the game.
+2. Run the script:
+   - Windows: double-click patcher.bat.
+   - Linux: open a terminal in the script's folder and run ./patcher.sh
+3. The script lists the packages. Type the number of the one you want
+   and press Enter. Enter alone picks the first package.
+4. Wait until it finishes and start the game.
+
+Windows may warn about an unrecognized app ("Windows protected your
+PC"). Click "More info" → "Run anyway".
+
+You need about 1.5 GB of free space: on the first install patcher keeps
+the original game file as Apocalypter_Data/data.unity3d.orig.
+
+Switching language or reinstalling
+----------------------------------
+
+Run the script again and pick another package. Patcher always starts
+from the saved original, so translations do not pile up.
+
+After a game update
+-------------------
+
+When Steam updates the game or verifies its files, it writes a new
+data.unity3d without the translation. Patcher then fails with
+"backup does not match the game bundle". Delete
+Apocalypter_Data/data.unity3d.orig and run the script again.
+
+Restoring the original
+----------------------
+
+Delete Apocalypter_Data/data.unity3d and rename data.unity3d.orig to
+data.unity3d. Alternatively, verify the game files in Steam, then delete
+data.unity3d.orig.
