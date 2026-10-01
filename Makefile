@@ -11,8 +11,9 @@ SRC := ./src
 GO  := go -C $(SRC)
 
 # Static, path-independent binaries that run without the build machine's
-# libraries.
-GO_BUILD := CGO_ENABLED=0 GOARCH=amd64 $(GO) build -trimpath
+# libraries. -s -w drop the symbol table and DWARF debug info, which only
+# debuggers need; panics still print file and line numbers.
+GO_BUILD := CGO_ENABLED=0 GOARCH=amd64 $(GO) build -trimpath -ldflags="-s -w"
 
 all: .pre build-editor build-patcher
 
@@ -33,7 +34,7 @@ patcher-%:
 # Release archives. The main one,
 # build/apocalypter-l10n-tools-<platform>.{tar.gz,zip}, is what players
 # get: the patcher, every localization package, the player
-# instructions (INSTALL_RU.txt, INSTALL_EN.txt) and the launcher script
+# instructions (docs/INSTALL_RU.txt, docs/INSTALL_EN.txt) and the launcher script
 # that asks for a package and runs the patcher on the game. The editor
 # only helps to author packages and ships separately in
 # build/apocalypter-l10n-tools-editor-<platform>.{tar.gz,zip}. Each
@@ -66,7 +67,7 @@ endef
 dist: $(PLATFORMS:%=dist-%) $(PLATFORMS:%=dist-editor-%)
 
 dist-%: patcher-% pack
-	$(call archive,$(DIST_NAME)-$*,$*,./build/$*/patcher$(EXE_$*) $(LAUNCHER_$*) INSTALL_RU.txt INSTALL_EN.txt $(L10N:%=./build/%.lang))
+	$(call archive,$(DIST_NAME)-$*,$*,./build/$*/patcher$(EXE_$*) $(LAUNCHER_$*) ./docs/INSTALL_RU.txt ./docs/INSTALL_EN.txt $(L10N:%=./build/%.lang))
 
 dist-editor-%: editor-%
 	$(call archive,$(DIST_NAME)-editor-$*,$*,./build/$*/editor$(EXE_$*) README.md)

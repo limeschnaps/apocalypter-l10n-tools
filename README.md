@@ -30,8 +30,8 @@ src/cmd/editor/         editor: web UI for editing strings, dictionary generatio
 src/internal/           patcher core: bundle, font, package and dictionary formats, applying edits
 src/internal/editor/    code only editor needs: index, HTTP server, YAML and .NET assembly parsing
 scripts/                patcher.sh and patcher.bat: launchers that ship with patcher to players
-INSTALL_RU.txt          installation instructions for players in Russian, shipped in their archive
-INSTALL_EN.txt          the same instructions in English
+docs/INSTALL_RU.txt     installation instructions for players in Russian, shipped in their archive
+docs/INSTALL_EN.txt     the same instructions in English
 l10n/<language>/        package sources: patches.json, translation.po with translation.map, and fonts.json
 ```
 
@@ -311,7 +311,7 @@ make cover            # tests with -race and coverage of production code, fails 
 | `build/apocalypter-l10n-tools-<platform>.{tar.gz,zip}` | `patcher`, `patcher.sh` or `patcher.bat`, all `*.lang` packages, `INSTALL_RU.txt`, `INSTALL_EN.txt` | players |
 | `build/apocalypter-l10n-tools-editor-<platform>.{tar.gz,zip}` | `editor`, README | package authors |
 
-Binaries are built statically (`CGO_ENABLED=0`, `-trimpath`) for linux/amd64 and windows/amd64. A single platform is built by the `editor-<platform>` or `patcher-<platform>` target, for example `make patcher-win-x64`. Archives for one platform are built by `make dist-win-x64` and `make dist-editor-win-x64`; `L10N` sets the packages in the `patcher` archive. Archives are reproducible: with the same sources and the same Go version they are byte-identical. `make` without arguments first cleans the whole `build/`, including built `.lang` files.
+Binaries are built statically (`CGO_ENABLED=0`, `-trimpath`) and without the symbol table and debug info (`-ldflags="-s -w"`) for linux/amd64 and windows/amd64. A single platform is built by the `editor-<platform>` or `patcher-<platform>` target, for example `make patcher-win-x64`. Archives for one platform are built by `make dist-win-x64` and `make dist-editor-win-x64`; `L10N` sets the packages in the `patcher` archive. Archives are reproducible: with the same sources and the same Go version they are byte-identical. `make` without arguments first cleans the whole `build/`, including built `.lang` files.
 
 ## Development
 
