@@ -28,6 +28,7 @@ func gameDir(t *testing.T) string {
 		{PathID: 1, ClassID: serialized.ClassGameObject, Data: unitytest.GameObject("Title", 2)},
 		{PathID: 2, ClassID: serialized.ClassMonoBehaviour, Data: unitytest.MonoBehaviour(1, 1, 7, "", "NEW GAME", "LOAD GAME")},
 		{PathID: 3, ClassID: serialized.ClassFont, Data: unitytest.Font("Helveticrap", 16, latinTTF(), nil)},
+		{PathID: 4, ClassID: serialized.ClassAudioClip, Data: unitytest.AudioClip("enemy_human_single_1", "sharedassets1.resource", 0, 64)},
 	}, []string{"globalgamemanagers.assets"})
 	bundle := unitytest.Bundle([]unitytest.Node{
 		{Path: "globalgamemanagers.assets", Flags: 4, Data: scripts},
@@ -538,5 +539,62 @@ func TestRunLoadsScriptAssemblies(t *testing.T) {
 	}
 	if !strings.Contains(log.String(), "script_assemblies_unavailable") {
 		t.Errorf("missing warning:\n%s", log.String())
+	}
+}
+
+func TestRunPackageSounds(t *testing.T) {
+	src := filepath.Join(t.TempDir(), "ru")
+	if err := os.MkdirAll(filepath.Join(src, "sounds"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	ogg := unitytest.OggVorbis(unitytest.OggSpec{Channels: 1, Rate: 44100, Samples: 22050, Setup: []byte("s"), Packets: [][]byte{{0, 1}}})
+	if err := os.WriteFile(filepath.Join(src, "sounds", "shot.ogg"), ogg, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(src, "sounds.json"), []byte(`{"version":1,"sounds":[{"name":"enemy_human_single_1","file":"sounds/shot.ogg"}]}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	pkgPath := filepath.Join(t.TempDir(), "ru.lang")
+	var packLog bytes.Buffer
+	if err := run([]string{"pack", "-s", src, "-o", pkgPath}, io.Discard, &packLog); err != nil {
+		t.Fatalf("pack: %v", err)
+	}
+	if !strings.Contains(packLog.String(), `"msg":"sound_packed"`) {
+		t.Errorf("pack log = %s", packLog.String())
+	}
+
+	game := gameDir(t)
+	out := filepath.Join(t.TempDir(), "patched.unity3d")
+	var log bytes.Buffer
+	if err := run([]string{"-package", pkgPath, "-out", out, game}, io.Discard, &log); err != nil {
+		t.Fatalf("run: %v\n%s", err, log.String())
+	}
+	if !strings.Contains(log.String(), `"msg":"sound_replaced"`) {
+		t.Errorf("log = %s", log.String())
+	}
+	data, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, err := unityfs.Open(bytes.NewReader(data), int64(len(data)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := b.Node(gamepatch.SoundsNode); !ok {
+		t.Errorf("no %s node", gamepatch.SoundsNode)
+	}
+	n, _ := b.Node("level0")
+	level, _ := b.ReadNode(n)
+	f, err := serialized.Parse(level)
+	if err != nil {
+		t.Fatal(err)
+	}
+	o, _ := f.Object(4)
+	clip, err := serialized.ReadAudioClip(f.Data(o), f.ByteOrder())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if clip.Resource.Source != gamepatch.SoundsNode || clip.Frequency != 44100 || clip.Length != 0.5 {
+		t.Errorf("clip = %+v", clip)
 	}
 }

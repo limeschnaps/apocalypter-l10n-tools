@@ -116,13 +116,14 @@ func run(args []string, stdout, logOut io.Writer) error {
 		}
 	}
 	var patches []patch.Patch
+	var sounds []gamepatch.SoundReplacement
 	switch {
 	case *packagePath != "":
 		pkg, err := locpack.Read(*packagePath)
 		if err != nil {
 			return err
 		}
-		patches, fonts = pkg.Patches, pkg.Fonts
+		patches, fonts, sounds = pkg.Patches, pkg.Fonts, pkg.Sounds
 	case *patchesPath != "":
 		if patches, err = patch.Load(*patchesPath); err != nil {
 			return err
@@ -148,13 +149,13 @@ func run(args []string, stdout, logOut io.Writer) error {
 	if *listFonts {
 		return printFonts(stdout, b)
 	}
-	logger.Info("bundle_opened", "path", source, "nodes", len(b.Nodes), "patches", len(patches), "fonts", len(fonts))
+	logger.Info("bundle_opened", "path", source, "nodes", len(b.Nodes), "patches", len(patches), "fonts", len(fonts), "sounds", len(sounds))
 
 	var layouts *scriptlayout.Resolver
 	if len(patches) > 0 {
 		layouts = loadLayouts(logger, filepath.Join(filepath.Dir(target), gamepatch.ManagedDir))
 	}
-	rep, nodes, applyErr := gamepatch.Apply(b, patches, gamepatch.Options{Strict: *strict, Layouts: layouts, Fonts: fonts})
+	rep, nodes, applyErr := gamepatch.Apply(b, patches, gamepatch.Options{Strict: *strict, Layouts: layouts, Fonts: fonts, Sounds: sounds})
 	logReport(logger, rep)
 	if applyErr != nil {
 		return fmt.Errorf("nothing was written: %w", applyErr)
@@ -223,6 +224,9 @@ func logReport(logger *slog.Logger, rep gamepatch.Report) {
 		if len(r.Missing) > 0 {
 			logger.Warn("font_missing_characters", "name", r.Name, "family", r.Family, "missing", string(r.Missing))
 		}
+	}
+	for _, r := range rep.Sounds {
+		logger.Info("sound_replaced", "name", r.Name, "channels", r.Channels, "rate", r.Rate, "samples", r.Samples, "objects", objectList(r.Targets))
 	}
 }
 
@@ -312,15 +316,18 @@ func runPack(args []string, logOut io.Writer) error {
 			logger.Warn("font_missing_characters", "name", f.Name, "family", f.Family, "missing", string(f.Missing))
 		}
 	}
+	for _, s := range res.Sounds {
+		logger.Info("sound_packed", "name", s.Name, "entry", s.Entry, "channels", s.Channels, "rate", s.Rate, "samples", s.Samples)
+	}
 	if res.Fuzzy > 0 {
 		logger.Warn("dictionary_fuzzy_skipped", "messages", res.Fuzzy)
 	}
-	logger.Info("package_written", "path", *out, "patches", res.Patches, "dictionary_patches", res.DictionaryPatches, "fonts", len(res.Fonts), "bytes", buf.Len())
+	logger.Info("package_written", "path", *out, "patches", res.Patches, "dictionary_patches", res.DictionaryPatches, "fonts", len(res.Fonts), "sounds", len(res.Sounds), "bytes", buf.Len())
 	return nil
 }
 
-// sourceFiles returns the journal, the dictionary and fonts.json inside
-// dir; a file that does not exist is returned as an empty path.
+// sourceFiles returns the journal, the dictionary, fonts.json and
+// sounds.json inside dir; a file that does not exist is returned as an empty path.
 func sourceFiles(dir string) (locpack.Sources, error) {
 	var src locpack.Sources
 	info, err := os.Stat(dir)
@@ -351,6 +358,9 @@ func sourceFiles(dir string) (locpack.Sources, error) {
 		return src, err
 	}
 	if src.Fonts, err = found(locpack.FontsName); err != nil {
+		return src, err
+	}
+	if src.Sounds, err = found(locpack.SoundsName); err != nil {
 		return src, err
 	}
 	if src == (locpack.Sources{}) {

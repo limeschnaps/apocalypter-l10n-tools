@@ -1,6 +1,6 @@
 // Package locpack reads and writes localization packages: zip archives
-// that bundle the text patch journal, the font replacement list and the
-// font files the patcher needs.
+// that bundle the text patch journal, the font and sound replacement
+// lists and the files the patcher needs.
 //
 // Layout:
 //
@@ -8,8 +8,11 @@
 //	              the translated dictionary messages (optional)
 //	fonts.json    font replacements (optional)
 //	fonts/...     font files referenced by fonts.json
+//	sounds.json   sound replacements (optional)
+//	sounds/...    Ogg Vorbis files referenced by sounds.json
 //
-// At least one of patches.json and fonts.json must be present.
+// At least one of patches.json, fonts.json and sounds.json must be
+// present.
 package locpack
 
 import (
@@ -37,16 +40,19 @@ const (
 	PatchesName = "patches.json"
 	FontsName   = "fonts.json"
 	FontsDir    = "fonts/"
+	SoundsName  = "sounds.json"
+	SoundsDir   = "sounds/"
 )
 
 const (
-	fontsVersion = 1
+	fontsVersion  = 1
+	soundsVersion = 1
 	// maxEntrySize bounds every decompressed entry, so a crafted archive
 	// cannot exhaust memory.
 	maxEntrySize = 64 << 20
 )
 
-// ErrFormat reports an invalid package or fonts.json.
+// ErrFormat reports an invalid package, fonts.json or sounds.json.
 var ErrFormat = errors.New("locpack: invalid package")
 
 // FontSpec is one fonts.json entry: the Font object name in the game, the
@@ -63,10 +69,23 @@ type fontsFile struct {
 	Fonts   []FontSpec `json:"fonts"`
 }
 
+// SoundSpec is one sounds.json entry: the AudioClip name in the game and
+// the replacement Ogg Vorbis file.
+type SoundSpec struct {
+	Name string `json:"name"`
+	File string `json:"file"`
+}
+
+type soundsFile struct {
+	Version int         `json:"version"`
+	Sounds  []SoundSpec `json:"sounds"`
+}
+
 // Package is the content of a localization package.
 type Package struct {
 	Patches []patch.Patch
 	Fonts   []gamepatch.FontReplacement
+	Sounds  []gamepatch.SoundReplacement
 }
 
 // Read opens the package at path and loads everything it references.
@@ -112,15 +131,7 @@ func Read(path string) (*Package, error) {
 			return nil, err
 		}
 		for _, s := range specs {
-			name, err := cleanName(s.File)
-			if err != nil {
-				return nil, err
-			}
-			ff, ok := entries[name]
-			if !ok {
-				return nil, fmt.Errorf("%w: %s references missing %q", ErrFormat, FontsName, s.File)
-			}
-			data, err := readEntry(ff)
+			data, err := readReferenced(entries, FontsName, s.File)
 			if err != nil {
 				return nil, err
 			}
@@ -128,10 +139,41 @@ func Read(path string) (*Package, error) {
 			pkg.Fonts = append(pkg.Fonts, gamepatch.FontReplacement{Name: s.Name, Data: data, Metrics: metrics})
 		}
 	}
-	if len(pkg.Patches) == 0 && len(pkg.Fonts) == 0 {
-		return nil, fmt.Errorf("%w: neither %s nor %s has entries", ErrFormat, PatchesName, FontsName)
+	if f, ok := entries[SoundsName]; ok {
+		data, err := readEntry(f)
+		if err != nil {
+			return nil, err
+		}
+		specs, err := parseSounds(data)
+		if err != nil {
+			return nil, err
+		}
+		for _, s := range specs {
+			data, err := readReferenced(entries, SoundsName, s.File)
+			if err != nil {
+				return nil, err
+			}
+			pkg.Sounds = append(pkg.Sounds, gamepatch.SoundReplacement{Name: s.Name, Data: data})
+		}
+	}
+	if len(pkg.Patches) == 0 && len(pkg.Fonts) == 0 && len(pkg.Sounds) == 0 {
+		return nil, fmt.Errorf("%w: none of %s, %s and %s has entries", ErrFormat, PatchesName, FontsName, SoundsName)
 	}
 	return pkg, nil
+}
+
+// readReferenced returns the entry that list (fonts.json or sounds.json)
+// names as file.
+func readReferenced(entries map[string]*zip.File, list, file string) ([]byte, error) {
+	name, err := cleanName(file)
+	if err != nil {
+		return nil, err
+	}
+	f, ok := entries[name]
+	if !ok {
+		return nil, fmt.Errorf("%w: %s references missing %q", ErrFormat, list, file)
+	}
+	return readEntry(f)
 }
 
 // Sources names the files a package is built from; any may be empty.
@@ -145,6 +187,9 @@ type Sources struct {
 	// Fonts is a fonts.json; font paths in it are relative to its
 	// directory.
 	Fonts string
+	// Sounds is a sounds.json; sound paths in it are relative to its
+	// directory.
+	Sounds string
 }
 
 // PackResult summarizes a written package.
@@ -156,6 +201,7 @@ type PackResult struct {
 	DictionaryPatches int
 	Fuzzy             int
 	Fonts             []PackedFont
+	Sounds            []PackedSound
 }
 
 // PackedFont describes a font stored in the package.
@@ -169,13 +215,22 @@ type PackedFont struct {
 	LineHeight float64
 }
 
+// PackedSound describes a sound stored in the package.
+type PackedSound struct {
+	Name     string
+	Entry    string
+	Channels int
+	Rate     int
+	Samples  int64
+}
+
 // Pack writes a package to w from the files in src. The journal must not
-// be empty; a dictionary without translations adds nothing. Font files are
-// validated and stored under fonts/ by base name, and fonts.json is
-// rewritten to point at them.
+// be empty; a dictionary without translations adds nothing. Font and
+// sound files are validated and stored under fonts/ and sounds/ by base
+// name, and fonts.json and sounds.json are rewritten to point at them.
 func Pack(w io.Writer, src Sources) (PackResult, error) {
 	var res PackResult
-	if src.Patches == "" && src.Map == "" && src.PO == "" && src.Fonts == "" {
+	if src.Patches == "" && src.Map == "" && src.PO == "" && src.Fonts == "" && src.Sounds == "" {
 		return res, fmt.Errorf("%w: nothing to pack", ErrFormat)
 	}
 	if (src.Map == "") != (src.PO == "") {
@@ -216,8 +271,8 @@ func Pack(w io.Writer, src Sources) (PackResult, error) {
 		res.DictionaryPatches = len(fromDict)
 		patches = append(patches, fromDict...)
 	}
-	if len(patches) == 0 && src.Fonts == "" {
-		return res, fmt.Errorf("%w: no patches and no fonts", ErrFormat)
+	if len(patches) == 0 && src.Fonts == "" && src.Sounds == "" {
+		return res, fmt.Errorf("%w: no patches, fonts or sounds", ErrFormat)
 	}
 	zw := zip.NewWriter(w)
 	if len(patches) > 0 {
@@ -235,6 +290,13 @@ func Pack(w io.Writer, src Sources) (PackResult, error) {
 			return res, err
 		}
 		res.Fonts = fonts
+	}
+	if src.Sounds != "" {
+		sounds, err := packSounds(zw, src.Sounds)
+		if err != nil {
+			return res, err
+		}
+		res.Sounds = sounds
 	}
 	if err := zw.Close(); err != nil {
 		return res, fmt.Errorf("finish package: %w", err)
@@ -254,15 +316,11 @@ func packFonts(zw *zip.Writer, fontsPath string) ([]PackedFont, error) {
 	if len(specs) == 0 {
 		return nil, fmt.Errorf("%w: %s has no fonts", ErrFormat, fontsPath)
 	}
-	base := filepath.Dir(fontsPath)
-	stored := map[string][]byte{}
+	files := storedFiles{zw: zw, base: filepath.Dir(fontsPath), dir: FontsDir, kind: "font", stored: map[string][]byte{}}
 	var packed []PackedFont
 	out := fontsFile{Version: fontsVersion}
 	for _, s := range specs {
-		src := s.File
-		if !filepath.IsAbs(src) {
-			src = filepath.Join(base, filepath.FromSlash(src))
-		}
+		src := files.source(s.File)
 		font, err := os.ReadFile(src)
 		if err != nil {
 			return nil, fmt.Errorf("font %q: %w", s.Name, err)
@@ -271,14 +329,9 @@ func packFonts(zw *zip.Writer, fontsPath string) ([]PackedFont, error) {
 		if err != nil {
 			return nil, fmt.Errorf("font %q (%s): %w", s.Name, src, err)
 		}
-		entry := FontsDir + filepath.Base(src)
-		if prev, ok := stored[entry]; ok && !bytes.Equal(prev, font) {
-			return nil, fmt.Errorf("%w: two different font files named %q", ErrFormat, filepath.Base(src))
-		} else if !ok {
-			if err := writeEntry(zw, entry, font); err != nil {
-				return nil, err
-			}
-			stored[entry] = font
+		entry, err := files.store(src, font)
+		if err != nil {
+			return nil, err
 		}
 		out.Fonts = append(out.Fonts, FontSpec{Name: s.Name, File: entry, Metrics: s.Metrics})
 		metrics, _ := gamepatch.ParseMetrics(s.Metrics)
@@ -295,6 +348,108 @@ func packFonts(zw *zip.Writer, fontsPath string) ([]PackedFont, error) {
 		return nil, err
 	}
 	return packed, nil
+}
+
+func packSounds(zw *zip.Writer, soundsPath string) ([]PackedSound, error) {
+	data, err := os.ReadFile(soundsPath)
+	if err != nil {
+		return nil, fmt.Errorf("read sounds: %w", err)
+	}
+	specs, err := parseSounds(data)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", soundsPath, err)
+	}
+	if len(specs) == 0 {
+		return nil, fmt.Errorf("%w: %s has no sounds", ErrFormat, soundsPath)
+	}
+	files := storedFiles{zw: zw, base: filepath.Dir(soundsPath), dir: SoundsDir, kind: "sound", stored: map[string][]byte{}}
+	var packed []PackedSound
+	out := soundsFile{Version: soundsVersion}
+	for _, s := range specs {
+		src := files.source(s.File)
+		sound, err := os.ReadFile(src)
+		if err != nil {
+			return nil, fmt.Errorf("sound %q: %w", s.Name, err)
+		}
+		_, stream, err := gamepatch.SoundBank(sound)
+		if err != nil {
+			return nil, fmt.Errorf("sound %q (%s): %w", s.Name, src, err)
+		}
+		entry, err := files.store(src, sound)
+		if err != nil {
+			return nil, err
+		}
+		out.Sounds = append(out.Sounds, SoundSpec{Name: s.Name, File: entry})
+		packed = append(packed, PackedSound{
+			Name: s.Name, Entry: entry, Channels: stream.Channels, Rate: stream.Rate, Samples: stream.Samples,
+		})
+	}
+	encoded, err := json.MarshalIndent(out, "", "  ")
+	if err != nil {
+		return nil, fmt.Errorf("encode sounds: %w", err)
+	}
+	if err := writeEntry(zw, SoundsName, append(encoded, '\n')); err != nil {
+		return nil, err
+	}
+	return packed, nil
+}
+
+// storedFiles writes the files a replacement list references under dir
+// by base name, each once.
+type storedFiles struct {
+	zw     *zip.Writer
+	base   string
+	dir    string
+	kind   string
+	stored map[string][]byte
+}
+
+// source resolves a path from the list against the list's directory.
+func (s storedFiles) source(file string) string {
+	if filepath.IsAbs(file) {
+		return file
+	}
+	return filepath.Join(s.base, filepath.FromSlash(file))
+}
+
+// store writes data read from src unless an equal file with the same
+// base name is already stored, and returns its entry name.
+func (s storedFiles) store(src string, data []byte) (string, error) {
+	entry := s.dir + filepath.Base(src)
+	if prev, ok := s.stored[entry]; ok {
+		if !bytes.Equal(prev, data) {
+			return "", fmt.Errorf("%w: two different %s files named %q", ErrFormat, s.kind, filepath.Base(src))
+		}
+		return entry, nil
+	}
+	if err := writeEntry(s.zw, entry, data); err != nil {
+		return "", err
+	}
+	s.stored[entry] = data
+	return entry, nil
+}
+
+func parseSounds(data []byte) ([]SoundSpec, error) {
+	var f soundsFile
+	dec := json.NewDecoder(bytes.NewReader(data))
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&f); err != nil {
+		return nil, fmt.Errorf("%w: %s: %w", ErrFormat, SoundsName, err)
+	}
+	if f.Version != soundsVersion {
+		return nil, fmt.Errorf("%w: %s version %d", ErrFormat, SoundsName, f.Version)
+	}
+	var names []string
+	for i, s := range f.Sounds {
+		if s.Name == "" || s.File == "" {
+			return nil, fmt.Errorf("%w: %s entry %d needs name and file", ErrFormat, SoundsName, i+1)
+		}
+		if slices.Contains(names, s.Name) {
+			return nil, fmt.Errorf("%w: %s lists sound %q twice", ErrFormat, SoundsName, s.Name)
+		}
+		names = append(names, s.Name)
+	}
+	return f.Sounds, nil
 }
 
 func parseFonts(data []byte) ([]FontSpec, error) {

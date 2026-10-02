@@ -57,12 +57,15 @@ type Options struct {
 	Layouts *scriptlayout.Resolver
 	// Fonts replaces the TTF data of Font objects by name.
 	Fonts []FontReplacement
+	// Sounds replaces the audio of AudioClip objects by name.
+	Sounds []SoundReplacement
 }
 
 // Report collects the outcome of Apply.
 type Report struct {
 	Patches []Result
 	Fonts   []FontResult
+	Sounds  []SoundResult
 }
 
 // Component is a MonoBehaviour of the build.
@@ -89,6 +92,8 @@ type state struct {
 	replaced map[replacement]bool
 	// decoded caches the fields of decoded components until they change.
 	decoded map[objectKey]decoding
+	// sounds is the content of SoundsNode: the banks of replaced sounds.
+	sounds []byte
 }
 
 type objectKey struct {
@@ -117,10 +122,11 @@ type replacement struct {
 	old, new   string
 }
 
-// Apply replays patches in order, then applies the font replacements, and
-// returns a report and the new content of every changed bundle node. Any
-// failure makes the whole run fail with a joined error and no nodes; the
-// report still describes everything that was attempted.
+// Apply replays patches in order, then applies the font and sound
+// replacements, and returns a report and the new content of every changed
+// bundle node, including SoundsNode when sounds were replaced. Any failure
+// makes the whole run fail with a joined error and no nodes; the report
+// still describes everything that was attempted.
 func Apply(b *unityfs.Bundle, patches []patch.Patch, opts Options) (Report, map[string][]byte, error) {
 	var rep Report
 	st, err := load(b)
@@ -142,6 +148,13 @@ func Apply(b *unityfs.Bundle, patches []patch.Patch, opts Options) (Report, map[
 		}
 		rep.Fonts = append(rep.Fonts, res)
 	}
+	for _, r := range opts.Sounds {
+		res, err := st.replaceSound(r)
+		if err != nil {
+			errs = append(errs, err)
+		}
+		rep.Sounds = append(rep.Sounds, res)
+	}
 	if err := errors.Join(errs...); err != nil {
 		return rep, nil, err
 	}
@@ -153,6 +166,9 @@ func Apply(b *unityfs.Bundle, patches []patch.Patch, opts Options) (Report, map[
 			return rep, nil, fmt.Errorf("rewrite %s: %w", name, err)
 		}
 		nodes[name] = out
+	}
+	if len(st.sounds) > 0 {
+		nodes[SoundsNode] = st.sounds
 	}
 	return rep, nodes, nil
 }

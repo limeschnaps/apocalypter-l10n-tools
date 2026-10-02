@@ -103,8 +103,42 @@ func TestWriteToReplacesNodes(t *testing.T) {
 		t.Error("original blocks were not copied verbatim")
 	}
 
-	if _, err := b.WriteTo(io.Discard, map[string][]byte{"nope": nil}); !errors.Is(err, ErrFormat) {
-		t.Errorf("unknown node err = %v", err)
+	if _, err := b.WriteTo(io.Discard, map[string][]byte{"": nil}); !errors.Is(err, ErrFormat) {
+		t.Errorf("empty node path err = %v", err)
+	}
+}
+
+func TestWriteToAddsNodes(t *testing.T) {
+	b := open(t, unitytest.Bundle(testNodes, 16))
+	var out bytes.Buffer
+	if _, err := b.WriteTo(&out, map[string][]byte{"z.resource": []byte("zz"), "a.resource": []byte("aa")}); err != nil {
+		t.Fatalf("WriteTo: %v", err)
+	}
+	patched := open(t, out.Bytes())
+	if len(patched.Nodes) != len(testNodes)+2 {
+		t.Fatalf("got %d nodes", len(patched.Nodes))
+	}
+	for i, want := range []Node{{Path: "a.resource"}, {Path: "z.resource"}} {
+		n := patched.Nodes[len(testNodes)+i]
+		if n.Path != want.Path || n.Flags != 0 {
+			t.Errorf("new node %d = %+v, want %s without flags", i, n, want.Path)
+		}
+		got, err := patched.ReadNode(n)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if string(got) != want.Path[:1]+want.Path[:1] {
+			t.Errorf("%s = %q", n.Path, got)
+		}
+	}
+	for _, want := range testNodes {
+		node, _ := patched.Node(want.Path)
+		if got, _ := patched.ReadNode(node); !bytes.Equal(got, want.Data) {
+			t.Errorf("%s changed", want.Path)
+		}
+	}
+	if ok, err := patched.ExtendsBlocks(b); err != nil || !ok {
+		t.Errorf("ExtendsBlocks = %v, %v", ok, err)
 	}
 }
 

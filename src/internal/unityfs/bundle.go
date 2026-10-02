@@ -330,7 +330,9 @@ func (b *Bundle) ExtendsBlocks(orig *Bundle) (bool, error) {
 }
 
 // WriteTo writes a copy of the bundle in which the nodes named in
-// replace get new content.
+// replace get new content. A path the bundle lacks becomes a new node
+// without flags, the kind that holds raw resource data rather than a
+// serialized file; new nodes follow the existing ones in path order.
 //
 // Original blocks are copied verbatim. Replacement contents are appended
 // to the block stream as uncompressed blocks and the directory entries of
@@ -338,12 +340,20 @@ func (b *Bundle) ExtendsBlocks(orig *Bundle) (bool, error) {
 // stream unreferenced. This keeps the output byte-identical to the input
 // except for the directory and the appended data.
 func (b *Bundle) WriteTo(w io.Writer, replace map[string][]byte) (int64, error) {
+	nodes := slices.Clone(b.Nodes)
+	var added []string
 	for path := range replace {
 		if _, ok := b.Node(path); !ok {
-			return 0, fmt.Errorf("%w: no node %q", ErrFormat, path)
+			added = append(added, path)
 		}
 	}
-	nodes := slices.Clone(b.Nodes)
+	slices.Sort(added)
+	for _, path := range added {
+		if path == "" {
+			return 0, fmt.Errorf("%w: empty node path", ErrFormat)
+		}
+		nodes = append(nodes, Node{Path: path})
+	}
 	blocks := slices.Clone(b.blocks)
 	var appended [][]byte
 	next := b.streamSize
