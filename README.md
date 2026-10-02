@@ -21,6 +21,165 @@ Players get these steps in more detail, in `INSTALL_RU.txt` (Russian) and `INSTA
 
 The first run keeps the original bundle as `Apocalypter_Data/data.unity3d.orig`, so the script can be run again, and another language is installed by unpacking its archive and running its script. After a game update or a file integrity check in Steam, delete `data.unity3d.orig` and run the script again (see "Replacing fonts" for the `backup does not match the game bundle` error).
 
+## Making a new localization
+
+The Russian and Japanese localizations are built with the tools from this repository, and any other language can be added the same way. This section walks through the whole process, from an empty dictionary to a package other players can install. It needs no programming and no Go toolchain: a few commands in a terminal and a PO editor are enough.
+
+### How it works
+
+Apocalypter keeps all its text in one file, `Apocalypter_Data/data.unity3d`. Nobody unpacks or rebuilds it by hand:
+
+1. `editor dump` reads the game and collects every string the player sees into the `translation.po` dictionary. Each unique string appears there once, even if the game uses it in a hundred places.
+2. The translator translates the dictionary in any PO editor, for example [Poedit](https://poedit.net/).
+3. `patcher pack` packs the translation and the fonts into one `.lang` file.
+4. Players run the same `patcher` with this `.lang` file, and it writes the translation into their copy of the game.
+
+### What you need
+
+From the [releases page](https://github.com/limeschnaps/apocalypter-l10n-tools/releases) download two archives for your system:
+
+- the editor: `apocalypter-l10n-tools-editor-win-x64.zip` (Windows) or `apocalypter-l10n-tools-editor-linux-x64.tar.gz` (Linux);
+- any language archive, for example `apocalypter-l10n-tools-ru-win-x64.zip`. It provides `patcher` and the launcher script.
+
+Also install a PO editor. Poedit is free and works on Windows and Linux.
+
+### Step 1. Prepare a work folder
+
+Create an empty folder outside the game folder, for example `C:\apocalypter-l10n`. Unpack both archives into it, so that `editor.exe`, `patcher.exe` and `patcher.bat` lie together. Delete `ru.lang` from the language archive: it is not needed.
+
+Pick a language code. It becomes the name of the localization folder and of the package: `editor dump` writes it to the `Language` header of `translation.po`, and `pack -s` names the package after it. Use the standard code: `de` for German, `fr` for French, `pt-BR` for Brazilian Portuguese. The examples below use `de` and the Windows binaries; on Linux drop `.exe`, use `/` in paths and run `./patcher.sh` instead of `patcher.bat`.
+
+Commands run in a terminal opened in the work folder:
+
+- Windows: open the folder in Explorer, type `cmd` in the address bar and press Enter.
+- Linux: open a terminal and go to the folder with `cd`.
+
+The commands also need the path to the game's `Apocalypter_Data` folder. In the Steam library right-click Apocalypter and choose Manage → Browse local files. The usual paths are:
+
+- Windows: `C:\Program Files (x86)\Steam\steamapps\common\Apocalypter\Apocalypter_Data`
+- Linux: `~/.local/share/Steam/steamapps/common/Apocalypter/Apocalypter_Data`
+
+### Step 2. Create the dictionary
+
+`editor dump` reads the game and writes `translation.po` and `translation.map` into the folder given by `-o` (see "Dictionary"). The folder name becomes the language code, so pass `de`, not a name like `my-translation`.
+
+```sh
+editor.exe dump -game "C:\Program Files (x86)\Steam\steamapps\common\Apocalypter\Apocalypter_Data" -o de
+./editor dump -game ~/.local/share/Steam/steamapps/common/Apocalypter/Apocalypter_Data -o de
+```
+
+The command takes a few seconds and prints a JSON log. Then the `de` folder holds two files:
+
+| File | Purpose |
+| --- | --- |
+| `translation.po` | the strings; this is the file to translate |
+| `translation.map` | where each string lives in the game; never edit it by hand |
+
+An installed translation does not matter. If the editor finds the `data.unity3d.orig` backup, it reads the original English text from it.
+
+### Step 3. Translate
+
+Open `de/translation.po` in Poedit. On the first open Poedit may ask for the language: choose yours. Each entry shows the English original and an empty field for the translation. Above each entry Poedit shows notes like `level1 | percent | m_Text`: the game file, the object name and the field. The object name often hints at where the string appears.
+
+Rules that keep the game working:
+
+- Never change the original text (`msgid`). `translation.map` refers to messages by its hash, and `pack` fails if an original changes.
+- Leave a string empty if it needs no translation, such as numbers, units or symbols. Empty strings stay in English in the game.
+- Poedit marks uncertain translations as "Needs work" (`fuzzy`). The game skips them as if they were empty. Remove the mark when the translation is ready.
+- Keep leading and trailing spaces, line breaks and characters such as `%`, `:` and `/` where the original has them. The game often joins strings, for example a number and a unit.
+- Keep the length close to the original. Many labels sit in tight frames, and a long translation gets cut off or disappears (see "Replacing fonts" about `Vertical Overflow = Truncate`).
+
+The dictionary does not have to be translated at once. Translated strings go into the game, the rest stay in English. Save the file regularly and test the result in the game (see step 6).
+
+### Step 4. Fonts
+
+The game fonts are made for English and cover few other letters. If the language uses other letters, for example Cyrillic, Greek, Chinese or Japanese, or Latin letters with diacritics the fonts lack, the game takes missing letters from system fonts. The text then looks mixed or does not show at all. Replacing the game fonts with fonts that cover the alphabet fixes this (see "Replacing fonts").
+
+First list the fonts of the game:
+
+```sh
+patcher.exe -list-fonts "C:\Program Files (x86)\Steam\steamapps\common\Apocalypter\Apocalypter_Data"
+```
+
+The `NAME` column holds the names `fonts.json` needs: `Helveticrap`, `forcedSquare`, `OpenSans-Regular`, `OpenSans-Semibold` and `OpenSans-Bold`. The `RUSSIAN` column checks the Russian alphabet only. For other languages ignore it and check the letters in the game.
+
+Then pick fonts. [Google Fonts](https://fonts.google.com/) has many fonts under the free OFL license and a filter by language. Choose a font close in style to the original, download the `.ttf` or `.otf` file and put it into `de/fonts/` together with its license file (`OFL.txt`).
+
+Create `de/fonts.json`. Each entry links a Font object of the game (`name`) to a file (`file`, relative to `fonts.json`). The Japanese localization, `l10n/ja/fonts.json`, replaces all five:
+
+```json
+{
+  "version": 1,
+  "fonts": [
+    {"name": "Helveticrap", "file": "./fonts/Yomogi-Regular.ttf"},
+    {"name": "forcedSquare", "file": "./fonts/MPLUS1p-Medium.ttf"},
+    {"name": "OpenSans-Regular", "file": "./fonts/MPLUS1p-Regular.ttf"},
+    {"name": "OpenSans-Semibold", "file": "./fonts/MPLUS1p-Medium.ttf"},
+    {"name": "OpenSans-Bold", "file": "./fonts/MPLUS1p-Bold.ttf"}
+  ]
+}
+```
+
+List only the fonts to replace. If the original fonts already cover the language, skip this step and do not create `fonts.json`.
+
+By default the new font keeps the line height of the old one (`metrics: original`), so the game layout does not move. Glyphs of a taller font may slightly stick out of the line. This is usually fine, but check menus and settings in the game.
+
+### Step 5. Build the package
+
+```sh
+patcher.exe pack -s de
+```
+
+`patcher` checks the dictionary and the fonts and writes `de.lang` to the current directory (see "Localization package"). On an error it stops and writes nothing. The common errors:
+
+| Error | Cause and fix |
+| --- | --- |
+| `msgid ... is missing from translation.map` | an original string in `translation.po` was changed; undo the change or run step 2 again |
+| `translation of ... equals old value ... of another entry` | the translation matches another English string of the same owner and script, and `patcher` would overwrite one translation with the other; reword it slightly |
+| `font "...": open ...: no such file or directory` (on Windows, `The system cannot find the file specified`) | a font file is not found; check the paths in `fonts.json` |
+
+The `font_missing_characters` warning checks Russian letters and says nothing for a non-Cyrillic language.
+
+### Step 6. Test in the game
+
+Close the game and copy `patcher.exe`, `patcher.bat` and `de.lang` into the game folder, next to `Apocalypter.exe`. Run `patcher.bat`, as a player would (see "Installing a localization"). The script installs the package and keeps the original bundle as `data.unity3d.orig`.
+
+After the translation changes, build the package again (step 5), copy the new `de.lang` and run `patcher.bat` again. The game does not need restoring first: `patcher` always applies the package to the saved original.
+
+A dry run checks a package without touching the game. It reports which strings it found and changes nothing:
+
+```sh
+patcher.exe -package de.lang -dry-run "C:\Program Files (x86)\Steam\steamapps\common\Apocalypter\Apocalypter_Data"
+```
+
+### Step 7. Share the localization
+
+Players need three files: `patcher.exe`, `patcher.bat` and `de.lang` (`patcher`, `patcher.sh` and `de.lang` on Linux). They can go into an archive of their own with installation instructions. The launcher script picks up any `*.lang` file next to it, so nothing else needs changing.
+
+To get release archives for the language, add the `de` folder with `translation.po`, `translation.map`, `fonts.json` and `fonts/` to `l10n/` in this repository, through an issue or a pull request. `make dist` then builds the archives for every folder there (see "Building"), as for Russian and Japanese.
+
+Always ship the font licenses together with the fonts.
+
+### After a game update
+
+Updates add new strings and change old ones. Run step 2 again with the same `-o` folder. The editor keeps all translations, adds the new strings with an empty `msgstr` and turns translations of removed strings into obsolete `#~` messages at the end of the file. Poedit shows the new strings as untranslated.
+
+Steam must have installed the new version of the game before that. If the game folder still has `data.unity3d.orig` from an older version, delete it first, otherwise the tools stop with `backup does not match the game bundle`.
+
+### Strings outside the dictionary
+
+The dictionary holds only "on screen" strings, the ones the game is certain to show. Some text lives in the game's scripts, and the tools cannot tell whether the player sees it (the "maybe" kind, see "String kinds"). Such strings are translated in the editor's web UI with the journal in the localization folder:
+
+```sh
+editor.exe -game "C:\Program Files (x86)\Steam\steamapps\common\Apocalypter\Apocalypter_Data" -patches de\patches.json
+```
+
+Open `http://127.0.0.1:8080`, find the string, type the translation and press Save. The editor does not touch the game: it writes each edit to `de/patches.json` (see "Working with a build directly"), and `pack -s` adds this file to the package. The same works for a string that needs different translations in different places.
+
+Do not translate "service" strings. These are names of objects, events and tags, the game logic depends on them, and a translation can break items or quests. The fuel type on vehicle tanks (Gasoline / Diesel) is such a case: the game shows an object tag there, so it stays in English.
+
+After journal edits, run `editor dump` again so that the strings translated in the journal leave the dictionary.
+
 ## Layout
 
 ```
