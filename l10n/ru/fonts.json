@@ -1,7 +1,7 @@
 {
   "version": 1,
   "fonts": [
-    {"name": "Helveticrap", "file": "./fonts/Pangolin-Regular.ttf"},
+    {"name": "Helveticrap", "file": "./fonts/ScienceGothic_Condensed-Medium.ttf"},
     {"name": "forcedSquare", "file": "./fonts/ScienceGothic_ExtraCondensed-Regular.ttf"}
   ]
 }

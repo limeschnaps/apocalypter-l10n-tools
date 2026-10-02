@@ -167,7 +167,7 @@ msgstr "/ 9л"
 
 #. level1 | Text | m_Text
 msgid "0.6l engine"
-msgstr "[Двигатель] 0.6л"
+msgstr "Бензиновый двигатель 594 см³, I2 , 23 л. с., 39 Н·м"
 
 #. sharedassets1.assets | save 1 time | m_Text
 #. sharedassets1.assets | save 2 time | m_Text
@@ -287,19 +287,19 @@ msgstr "ПП \"Борз\" 9 мм"
 
 #. level1 | AmmoLable | m_Text
 msgid ":AMMO"
-msgstr ": Патроны"
+msgstr ":Патроны"
 
 #. level1 | ArmorLable | m_Text
 msgid ":ARMOR"
-msgstr ": Броня"
+msgstr ":Броня"
 
 #. level1 | NutsLable | m_Text
 msgid ":NUTS"
-msgstr ": Гайки"
+msgstr ":Гайки"
 
 #. level1 | time | m_Text
 msgid ":time"
-msgstr ": Время"
+msgstr ":Время"
 
 #. level1 | Text | m_Text
 #. sharedassets1.assets | Text | m_Text
@@ -317,7 +317,7 @@ msgstr "АКМ с барабанным магазином (7.62 мм)"
 
 #. sharedassets1.assets | akm_trash | fsm.variables.stringVariables[0].value
 msgid "AKM Trash (7.62mm)"
-msgstr "АКМ со свалки (7.62 мм)"
+msgstr "Убитый АКМ (7.62 мм)"
 
 #. sharedassets1.assets | akms | fsm.variables.stringVariables[0].value
 msgid "AKMS (7.62mm)"
@@ -1038,7 +1038,8 @@ msgid ""
 "Ironjaw"
 msgstr ""
 "Дюк\n"
-"Железная Челюсть"
+"Железная\n"
+"Челюсть"
 
 #. sharedassets1.assets | Duke_Ironjaw | fsm.states[1].actionData.fsmStringParams[14].value
 #. sharedassets1.assets | Duke_Ironjaw_Dead | fsm.states[1].actionData.fsmStringParams[0].value
@@ -1104,7 +1105,7 @@ msgstr ""
 
 #. level1 | FatigueLable | m_Text
 msgid "FATIGUE:"
-msgstr "Усталость :"
+msgstr "Усталость:"
 
 #. level1 | FPS | m_Text
 msgid "FPS"
@@ -1291,11 +1292,11 @@ msgstr ""
 
 #. level1 | HealthLable | m_Text
 msgid "HEALTH:"
-msgstr "Здоровье :"
+msgstr "Здоровье:"
 
 #. level1 | HungerLable | m_Text
 msgid "HUNGER:"
-msgstr "Голод :"
+msgstr "Голод:"
 
 #. sharedassets1.assets | handbrake | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | handbrake | fsm.states[4].actionData.fsmStringParams[0].value
@@ -1486,7 +1487,7 @@ msgstr "Покупаю эти предметы:"
 
 #. level1 | SanityLable | m_Text
 msgid "INSANITY:"
-msgstr "Шиза :"
+msgstr "Шиза:"
 
 #. level1 | TutorialText | m_Text
 msgid ""
@@ -1850,7 +1851,7 @@ msgstr ""
 
 #. level1 | RadiationLable | m_Text
 msgid "RADIATION:"
-msgstr "Радиация :"
+msgstr "Радиация:"
 
 #. sharedassets1.assets | gauge_rpm | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "RPM Gauge"
@@ -2162,7 +2163,7 @@ msgstr "Слить топливо: F"
 
 #. level1 | ThirstLable | m_Text
 msgid "THIRST:"
-msgstr "Жажда :"
+msgstr "Жажда:"
 
 #. level1 | Text | m_Text
 msgid "TUTORIAL"
@@ -2585,7 +2586,7 @@ msgstr "Всегда следите за потребностями персон
 
 #. level1 | ambient music | m_Text
 msgid "ambient music volume"
-msgstr "Громкость фоновой музыки"
+msgstr "Фоновая музыка"
 
 #. level1 | ambient occlusion | m_Text
 msgid "ambient occlusion"
@@ -2593,7 +2594,7 @@ msgstr "Фоновое затенение"
 
 #. level1 | ambient volume | m_Text
 msgid "ambient sfx volume"
-msgstr "Громкость фоновых звуков"
+msgstr "Фоновые звуки"
 
 #. level1 | ammo | m_Text
 msgid "ammo"
@@ -2705,7 +2706,7 @@ msgstr "ПП \"Борз\""
 
 #. level1 | boss music | m_Text
 msgid "boss fight music volume"
-msgstr "Громкость музыки боя с боссом"
+msgstr "Музыка боя с боссом"
 
 #. level1 | text | m_Text
 msgid "brickstop camp"
@@ -2792,7 +2793,7 @@ msgstr "\"Кентавр\""
 
 #. level1 | day | m_Text
 msgid "day:"
-msgstr "День :"
+msgstr "День:"
 
 #. level1 | Debug_text | m_Text
 #. level1 | Text | m_Text
@@ -2806,7 +2807,7 @@ msgstr "Демо"
 
 #. level1 | Dev | m_Text
 msgid "dev"
-msgstr ""
+msgstr "Dev"
 
 #. level1 | Text | m_Text
 msgid "diesel"
@@ -2819,23 +2820,21 @@ msgstr "Отключить управление камерой"
 #. level1 | disable fatigue | m_Text
 #. sharedassets1.assets | disable fatigue | m_Text
 msgid "disable fatigue"
-msgstr "Отключить усталость"
+msgstr "Выкл. усталость"
 
 #. level1 | disable insanity | m_Text
 #. sharedassets1.assets | disable insanity | m_Text
 msgid "disable insanity"
-msgstr "Отключить шизу"
+msgstr "Выкл. шизу"
 
 #. level1 | disable sandstorm | m_Text
 msgid "disable sandstorm"
-msgstr ""
-"Отключить \n"
-"песчанные бури"
+msgstr "Выкл. песчанные бури"
 
 #. level1 | disable thirst hunger | m_Text
 #. sharedassets1.assets | disable thirst hunger | m_Text
 msgid "disable thirst/hunger"
-msgstr "Отключить жажду/голод"
+msgstr "Выкл. жажду и голод"
 
 #. level1 | text | m_Text
 msgid "dog boat"
@@ -3120,7 +3119,7 @@ msgstr "Мачете"
 #. level1 | map cheat | m_Text
 #. sharedassets1.assets | map cheat | m_Text
 msgid "map cheat (press: M)"
-msgstr "Чит на карту (клавиша M)"
+msgstr "Вкл. карту (клавиша M)"
 
 #. level1 | text | m_Text
 msgid "mechanic"
@@ -3249,7 +3248,7 @@ msgstr "\"Трубокрыс\""
 
 #. level1 | Text | m_Text
 msgid "piperat car"
-msgstr "Машина трубокрысов"
+msgstr "\"Трубокрыс\""
 
 #. level1 | text | m_Text
 msgid "pistoleer"
