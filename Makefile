@@ -31,11 +31,16 @@ editor-%:
 patcher-%:
 	GOOS=$(GOOS_$*) $(GO_BUILD) -o $(CURDIR)/build/$*/patcher$(EXE_$*) ./cmd/patcher
 
-# Release archives. The main one,
-# build/apocalypter-l10n-tools-<platform>.{tar.gz,zip}, is what players
-# get: the patcher, every localization package, the player
-# instructions (docs/INSTALL_RU.txt, docs/INSTALL_EN.txt) and the launcher script
-# that asks for a package and runs the patcher on the game. The editor
+# Localizations to pack: every directory in ./l10n unless L10N is given,
+# e.g. make pack L10N=ru. Packages do not depend on the platform, so the
+# patcher runs for the build machine via go run.
+L10N ?= $(notdir $(patsubst %/,%,$(wildcard ./l10n/*/)))
+
+# Release archives. Players get one archive per language and platform,
+# build/apocalypter-l10n-tools-<language>-<platform>.{tar.gz,zip}: the
+# patcher, the localization package of that language, the player
+# instructions (docs/INSTALL_RU.txt, docs/INSTALL_EN.txt) and the launcher
+# script that runs the patcher on the game with the package. The editor
 # only helps to author packages and ships separately in
 # build/apocalypter-l10n-tools-editor-<platform>.{tar.gz,zip}. Each
 # archive has a top-level folder. tar.gz keeps the executable bit on
@@ -66,21 +71,25 @@ endef
 
 dist: $(PLATFORMS:%=dist-%) $(PLATFORMS:%=dist-editor-%)
 
-dist-%: patcher-% pack
-	$(call archive,$(DIST_NAME)-$*,$*,./build/$*/patcher$(EXE_$*) $(LAUNCHER_$*) ./docs/INSTALL_RU.txt ./docs/INSTALL_EN.txt $(L10N:%=./build/%.lang))
+# dist-<platform> builds the archives of every language in L10N for the
+# platform, dist-<language>-<platform> the archive of one language.
+define dist_rule
+dist-$(1)-$(2): patcher-$(2) pack-$(1)
+	$$(call archive,$(DIST_NAME)-$(1)-$(2),$(2),./build/$(2)/patcher$(EXE_$(2)) $(LAUNCHER_$(2)) ./docs/INSTALL_RU.txt ./docs/INSTALL_EN.txt ./build/$(1).lang)
+endef
+
+$(foreach platform,$(PLATFORMS),$(eval dist-$(platform): $(L10N:%=dist-%-$(platform))))
+$(foreach platform,$(PLATFORMS),$(foreach lang,$(L10N),$(eval $(call dist_rule,$(lang),$(platform)))))
 
 dist-editor-%: editor-%
 	$(call archive,$(DIST_NAME)-editor-$*,$*,./build/$*/editor$(EXE_$*) README.md)
 
-# Localizations to pack: every directory in ./l10n unless L10N is given,
-# e.g. make pack L10N=ru. Packages do not depend on the platform, so the
-# patcher runs for the build machine via go run.
-L10N ?= $(notdir $(patsubst %/,%,$(wildcard ./l10n/*/)))
-
-pack:
+pack: $(L10N:%=pack-%)
 	@test -n "$(L10N)" || { echo "no localization directories in ./l10n" >&2; exit 1; }
+
+pack-%:
 	mkdir -p ./build
-	set -e; for lang in $(L10N); do $(GO) run ./cmd/patcher pack -s $(CURDIR)/l10n/$$lang -o $(CURDIR)/build/$$lang.lang; done
+	$(GO) run ./cmd/patcher pack -s $(CURDIR)/l10n/$* -o $(CURDIR)/build/$*.lang
 
 # Dictionaries: editor dump rewrites translation.map and translation.po in
 # ./l10n/<lang> for every language in L10N and keeps the translations

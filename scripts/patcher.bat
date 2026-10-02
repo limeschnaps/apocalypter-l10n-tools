@@ -1,6 +1,7 @@
 @echo off
 rem Installs a localization package into Apocalypter. Lists the *.lang files
-rem next to this script, asks for one and runs patcher on the game. The game
+rem next to this script, asks for one and runs patcher on the game; a single
+rem package is installed without asking. The game
 rem folder (the one with Apocalypter_Data) is this script's folder or its
 rem parent, so the archive can be unpacked either way.
 setlocal EnableDelayedExpansion
@@ -17,16 +18,23 @@ if not defined data (
   goto end
 )
 
-echo Localization packages:
 set count=0
 for %%f in (*.lang) do (
   set /a count+=1
   set "pkg!count!=%%f"
-  echo   !count!^) %%~nf
 )
 if %count%==0 (
   echo No .lang files found next to this script.
   goto end
+)
+if %count%==1 (
+  set choice=1
+  goto run
+)
+
+echo Localization packages:
+for /l %%i in (1,1,%count%) do (
+  for %%f in ("!pkg%%i!") do echo   %%i^) %%~nf
 )
 
 :ask
@@ -41,6 +49,7 @@ goto ask
 
 :run
 set "pkg=!pkg%choice%!"
+for %%f in ("!pkg!") do echo Installing %%~nf
 patcher.exe -package "!pkg!" -in-place "!data!"
 
 :end

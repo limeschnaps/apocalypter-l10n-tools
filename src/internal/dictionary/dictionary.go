@@ -26,7 +26,7 @@ import (
 var ErrFormat = errors.New("dictionary: invalid dictionary")
 
 // Location is one place a string was found. The patcher matches a patch by
-// owner, script, occurrence and the old value only; File and Path tell a
+// owner, script, path, kind, occurrence and the old value; File tells a
 // translator where the string comes from.
 type Location struct {
 	File       string       `json:"file"`
@@ -34,6 +34,7 @@ type Location struct {
 	Owner      string       `json:"owner"`
 	Script     patch.Script `json:"script"`
 	Occurrence int          `json:"occurrence"`
+	Kind       string       `json:"kind,omitempty"`
 }
 
 // Entry is one distinct string. An empty New leaves the string as is.
@@ -55,12 +56,14 @@ type component struct {
 // target is what the patcher matches a patch by, apart from the old value.
 type target struct {
 	component
+	path       string
+	kind       string
 	occurrence int
 }
 
 func (l Location) component() component { return component{l.Owner, l.Script} }
 
-func (l Location) target() target { return target{l.component(), l.Occurrence} }
+func (l Location) target() target { return target{l.component(), l.Path, l.Kind, l.Occurrence} }
 
 // Build groups the strings found in a game into dictionary entries, one
 // per distinct old value, sorted by it. Each found patch describes one
@@ -73,7 +76,7 @@ func Build(found []patch.Patch) []Entry {
 			e = &Entry{Old: p.Old}
 			byOld[p.Old] = e
 		}
-		e.FoundIn = append(e.FoundIn, Location{File: p.File, Path: p.Path, Owner: p.Owner, Script: p.Script, Occurrence: p.Occurrence})
+		e.FoundIn = append(e.FoundIn, Location{File: p.File, Path: p.Path, Owner: p.Owner, Script: p.Script, Occurrence: p.Occurrence, Kind: p.Kind})
 	}
 	entries := make([]Entry, 0, len(byOld))
 	for _, e := range byOld {
@@ -92,6 +95,7 @@ func compareLocations(a, b Location) int {
 		cmp.Compare(a.Path, b.Path),
 		compareScripts(a.Script, b.Script),
 		cmp.Compare(a.Occurrence, b.Occurrence),
+		cmp.Compare(a.Kind, b.Kind),
 	)
 }
 
@@ -103,10 +107,14 @@ func compareScripts(a, b patch.Script) int {
 // order.
 //
 // The patcher applies a patch to every component of the owner and script
-// that holds the old value at the occurrence, in any file. Locations that
-// differ only by file or path therefore yield a single patch; a second
-// one would find nothing to replace. Within an entry, higher occurrences
-// go first: replacing an earlier one would renumber the rest.
+// that holds the old value in the field at the path, in any file, so
+// locations that differ only by file yield a single patch. Locations at
+// different paths yield one patch each: they are usually different
+// components of one GameObject, such as two FSMs. Without script layouts
+// the patcher matches by occurrence instead and skips a patch whose
+// component an equal patch with another path has already changed. Within
+// an entry, higher occurrences go first: replacing an earlier one would
+// renumber the rest.
 //
 // A translation that equals the old value of another translated entry at
 // the same owner and script is rejected: the second entry would also
@@ -141,6 +149,7 @@ func Patches(entries []Entry) ([]patch.Patch, error) {
 				compareScripts(a.Script, b.Script),
 				cmp.Compare(a.File, b.File),
 				cmp.Compare(a.Path, b.Path),
+				cmp.Compare(a.Kind, b.Kind),
 			)
 		})
 		seen := map[target]bool{}
@@ -151,7 +160,7 @@ func Patches(entries []Entry) ([]patch.Patch, error) {
 			seen[l.target()] = true
 			out = append(out, patch.Patch{
 				File: l.File, Path: l.Path, Owner: l.Owner, Script: l.Script,
-				Occurrence: l.Occurrence, Old: e.Old, New: e.New,
+				Occurrence: l.Occurrence, Kind: l.Kind, Old: e.Old, New: e.New,
 			})
 		}
 	}

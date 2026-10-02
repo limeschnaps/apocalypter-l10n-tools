@@ -18,10 +18,10 @@ import (
 	"strings"
 	"sync"
 
-	"apocalypter-l10n-tools/internal/editor/textkind"
 	"apocalypter-l10n-tools/internal/editor/unityyaml"
 	"apocalypter-l10n-tools/internal/gamepatch"
 	"apocalypter-l10n-tools/internal/patch"
+	"apocalypter-l10n-tools/internal/textkind"
 )
 
 // Errors returned by Index methods.
@@ -374,6 +374,10 @@ func (ix *Index) patchFor(rel string, data []byte, start int, value string) (*pa
 	case p.Old == value:
 		return nil, nil
 	}
+	entries := buildEntries(rel, data, asset, ix.scripts)
+	if i := slices.IndexFunc(entries, func(e Entry) bool { return e.Start == start }); i >= 0 {
+		p.Kind = entries[i].Kind.String()
+	}
 	p.New = value
 	return &p, nil
 }
@@ -430,6 +434,7 @@ func (ix *Index) Records(kind textkind.Kind) ([]patch.Patch, error) {
 			if !ok {
 				return nil, fmt.Errorf("no field at %s:%d", rel, e.Start)
 			}
+			p.Kind = kind.String()
 			out = append(out, p)
 		}
 	}

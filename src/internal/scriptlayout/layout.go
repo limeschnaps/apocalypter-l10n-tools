@@ -11,7 +11,7 @@ import (
 	"slices"
 	"strings"
 
-	"apocalypter-l10n-tools/internal/editor/clr"
+	"apocalypter-l10n-tools/internal/clr"
 )
 
 // ErrUnsupported reports a script whose layout the package cannot

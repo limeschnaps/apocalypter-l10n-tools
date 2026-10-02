@@ -6,7 +6,9 @@ import (
 	"errors"
 	"testing"
 
+	"apocalypter-l10n-tools/internal/clr"
 	"apocalypter-l10n-tools/internal/patch"
+	"apocalypter-l10n-tools/internal/scriptlayout"
 	"apocalypter-l10n-tools/internal/serialized"
 	"apocalypter-l10n-tools/internal/unityfs"
 	"apocalypter-l10n-tools/internal/unitytest"
@@ -202,5 +204,174 @@ func TestApplyRejectsBrokenFiles(t *testing.T) {
 	b = unitytest.Bundle([]unitytest.Node{{Path: "globalgamemanagers.assets", Flags: nodeFlagSerialized, Data: badScript}}, 64)
 	if _, _, err := Apply(openBundle(t, b), nil, Options{}); !errors.Is(err, serialized.ErrFormat) {
 		t.Errorf("bad MonoScript err = %v", err)
+	}
+}
+
+// fsmBundle holds two Game.Dialog components of one GameObject, like two
+// FSMs of an item: the first shows "left" as text and also names a pair
+// field "left", the second uses "left" only as a pair field.
+func fsmBundle() []byte {
+	const script = 7
+	scripts := unitytest.Serialized([]unitytest.Object{
+		{PathID: script, ClassID: serialized.ClassMonoScript, Data: unitytest.MonoScript("Dialog", "Game", "Assembly-CSharp.dll")},
+	}, nil)
+	dialog := func(text string) []byte {
+		return append(unitytest.MonoBehaviour(1, 1, script, ""), unitytest.DialogFields(text)...)
+	}
+	level := unitytest.Serialized([]unitytest.Object{
+		{PathID: 1, ClassID: serialized.ClassGameObject, Data: unitytest.GameObject("Lamp", 2)},
+		{PathID: 2, ClassID: serialized.ClassMonoBehaviour, Data: dialog("left")},
+		{PathID: 3, ClassID: serialized.ClassMonoBehaviour, Data: dialog("other")},
+	}, []string{"library/globalgamemanagers.assets"})
+	return unitytest.Bundle([]unitytest.Node{
+		{Path: "globalgamemanagers.assets", Flags: nodeFlagSerialized, Data: scripts},
+		{Path: "level0", Flags: nodeFlagSerialized, Data: level},
+	}, 64)
+}
+
+func scriptLayouts(t *testing.T) *scriptlayout.Resolver {
+	t.Helper()
+	var mods []*clr.Module
+	for _, data := range unitytest.ScriptAssemblies() {
+		m, err := clr.Parse(data)
+		if err != nil {
+			t.Fatal(err)
+		}
+		mods = append(mods, m)
+	}
+	return scriptlayout.New(mods)
+}
+
+// dialogStrings decodes the string fields of a Game.Dialog by path.
+func dialogStrings(t *testing.T, layouts *scriptlayout.Resolver, b *unityfs.Bundle, pathID int64) map[string]string {
+	t.Helper()
+	n, _ := b.Node("level0")
+	data, err := b.ReadNode(n)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f, err := serialized.Parse(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	o, _ := f.Object(pathID)
+	obj := f.Data(o)
+	h, err := serialized.ReadMonoBehaviourHeader(obj, f.ByteOrder())
+	if err != nil {
+		t.Fatal(err)
+	}
+	layout, err := layouts.Script("Assembly-CSharp.dll", "Game", "Dialog")
+	if err != nil {
+		t.Fatal(err)
+	}
+	strs, err := scriptlayout.Decode(layout, obj, h.FieldsOffset, f.ByteOrder())
+	if err != nil {
+		t.Fatal(err)
+	}
+	out := map[string]string{}
+	for _, s := range strs {
+		out[s.Path] = s.Value
+	}
+	return out
+}
+
+func TestApplyMatchesFieldPath(t *testing.T) {
+	layouts := scriptLayouts(t)
+	dialog := patch.Script{Assembly: "Assembly-CSharp.dll", FileID: ScriptFileID("Game", "Dialog")}
+	b := openBundle(t, fsmBundle())
+	patches := []patch.Patch{
+		{Owner: "Lamp", Script: dialog, Path: "text", Old: "left", New: "Свет"},
+		// Occurrence is ignored: the field at the path decides.
+		{Owner: "Lamp", Script: dialog, Path: "item.title", Occurrence: 5, Old: "Sword", New: "Меч"},
+	}
+	rep, nodes, err := Apply(b, patches, Options{Layouts: layouts})
+	if err != nil {
+		t.Fatalf("Apply: %v", err)
+	}
+	if got := rep.Patches[0].Targets; len(got) != 1 || got[0].PathID != 2 {
+		t.Errorf("text targets = %+v, want only the first component", got)
+	}
+	if got := rep.Patches[1].Targets; len(got) != 2 {
+		t.Errorf("item.title targets = %+v, want both components", got)
+	}
+	var out bytes.Buffer
+	if err := Write(&out, b, nodes); err != nil {
+		t.Fatal(err)
+	}
+	patched := openBundle(t, out.Bytes())
+	first, second := dialogStrings(t, layouts, patched, 2), dialogStrings(t, layouts, patched, 3)
+	if first["text"] != "Свет" || first["pair.a"] != "left" || first["item.title"] != "Меч" {
+		t.Errorf("first component = %q", first)
+	}
+	if second["text"] != "other" || second["pair.a"] != "left" || second["item.title"] != "Меч" {
+		t.Errorf("second component = %q", second)
+	}
+
+	missing := patch.Patch{Owner: "Lamp", Script: dialog, Path: "pair.b", Old: "left", New: "x"}
+	if _, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{missing}, Options{Layouts: layouts}); !errors.Is(err, ErrNoMatch) {
+		t.Errorf("value at another path: err = %v", err)
+	}
+}
+
+func TestApplyMatchesKind(t *testing.T) {
+	layouts := scriptLayouts(t)
+	dialog := patch.Script{Assembly: "Assembly-CSharp.dll", FileID: ScriptFileID("Game", "Dialog")}
+	// Fields of game scripts are "maybe" text.
+	p := patch.Patch{Owner: "Lamp", Script: dialog, Path: "text", Kind: "maybe", Old: "left", New: "Свет"}
+	if rep, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{p}, Options{Layouts: layouts}); err != nil || len(rep.Patches[0].Targets) != 1 {
+		t.Errorf("same kind: err = %v, results = %+v", err, rep.Patches)
+	}
+	p.Kind = "screen"
+	if _, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{p}, Options{Layouts: layouts}); !errors.Is(err, ErrNoMatch) {
+		t.Errorf("other kind: err = %v", err)
+	}
+	// Without layouts the kind cannot be checked.
+	if _, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{p}, Options{}); err != nil {
+		t.Errorf("no layouts: err = %v", err)
+	}
+}
+
+func TestApplyFallsBackToOccurrence(t *testing.T) {
+	layouts := scriptLayouts(t)
+	cases := map[string]struct {
+		patch patch.Patch
+		opts  Options
+	}{
+		"no layouts":      {patch.Patch{Owner: "Title", Script: tmp, Path: "m_text", Old: "Hello", New: "Привет"}, Options{}},
+		"unknown script":  {patch.Patch{Owner: "Title", Script: tmp, Path: "m_text", Old: "Hello", New: "Привет"}, Options{Layouts: layouts}},
+		"heuristic path":  {patch.Patch{Owner: "Title", Path: "str[0]", Old: "Hello", New: "Привет"}, Options{Layouts: layouts}},
+		"unresolved name": {patch.Patch{Owner: "Orphan", Path: "m_Name", Old: "Orphan", New: "Сирота"}, Options{Layouts: layouts}},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			rep, _, err := Apply(openBundle(t, gameBundle()), []patch.Patch{tc.patch}, tc.opts)
+			if err != nil || len(rep.Patches[0].Targets) == 0 {
+				t.Errorf("err = %v, results = %+v", err, rep.Patches)
+			}
+		})
+	}
+}
+
+func TestApplySkipsRepeatedOccurrence(t *testing.T) {
+	// Without layouts, patches that differ only by path select the same
+	// string; the second must not replace the next "OK".
+	b := openBundle(t, gameBundle())
+	patches := []patch.Patch{
+		{Owner: "Title", Script: tmp, Path: "a", Old: "OK", New: "Да"},
+		{Owner: "Title", Script: tmp, Path: "b", Old: "OK", New: "Да"},
+	}
+	rep, nodes, err := Apply(b, patches, Options{})
+	if err != nil {
+		t.Fatalf("Apply: %v", err)
+	}
+	if len(rep.Patches[1].Targets) != 0 {
+		t.Errorf("second patch targets = %+v", rep.Patches[1].Targets)
+	}
+	var out bytes.Buffer
+	if err := Write(&out, b, nodes); err != nil {
+		t.Fatal(err)
+	}
+	if got := fields(t, openBundle(t, out.Bytes()), "level0", 2); len(got) != 3 || got[1] != "Да" || got[2] != "OK" {
+		t.Errorf("fields = %q", got)
 	}
 }

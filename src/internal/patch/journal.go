@@ -9,6 +9,8 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+
+	"apocalypter-l10n-tools/internal/textkind"
 )
 
 const journalVersion = 1
@@ -30,16 +32,23 @@ type Script struct {
 // The game build has no stable link to the exported YAML, so the target is
 // found by content: a MonoBehaviour whose owner (GameObject name, or the
 // component's own m_Name when it has no GameObject) and script match, and
-// whose serialized strings contain Old. Occurrence selects among equal
-// strings inside one component, in serialization order.
+// whose serialized strings contain Old. When the patcher can decode the
+// component, the field at Path must hold Old and, if Kind is set, have
+// that kind; otherwise Occurrence selects among equal strings inside one
+// component, in serialization order.
 type Patch struct {
 	File       string `json:"file"`
 	Path       string `json:"path"`
 	Owner      string `json:"owner"`
 	Script     Script `json:"script"`
 	Occurrence int    `json:"occurrence"`
-	Old        string `json:"old"`
-	New        string `json:"new"`
+	// Kind is the textkind of Old where it was recorded: "screen", "maybe"
+	// or "service". It keeps a patch out of a component of the same owner
+	// that uses the string at the same path differently, such as another
+	// FSM that looks up a child object by that name. Empty skips the check.
+	Kind string `json:"kind,omitempty"`
+	Old  string `json:"old"`
+	New  string `json:"new"`
 }
 
 type journal struct {
@@ -68,7 +77,21 @@ func Parse(data []byte) ([]Patch, error) {
 	if j.Version != journalVersion {
 		return nil, fmt.Errorf("%w: version %d", ErrFormat, j.Version)
 	}
+	for i, p := range j.Patches {
+		if err := ValidKind(p.Kind); err != nil {
+			return nil, fmt.Errorf("%w: patch %d: %w", ErrFormat, i+1, err)
+		}
+	}
 	return j.Patches, nil
+}
+
+// ValidKind reports whether kind is empty or a textkind name.
+func ValidKind(kind string) error {
+	if kind == "" {
+		return nil
+	}
+	var k textkind.Kind
+	return k.UnmarshalText([]byte(kind))
 }
 
 // Append adds p to the journal at path, creating it when needed.

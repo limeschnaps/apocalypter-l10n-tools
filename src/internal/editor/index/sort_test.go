@@ -7,7 +7,7 @@ import (
 	"sync"
 	"testing"
 
-	"apocalypter-l10n-tools/internal/editor/textkind"
+	"apocalypter-l10n-tools/internal/textkind"
 )
 
 func TestNaturalCompare(t *testing.T) {

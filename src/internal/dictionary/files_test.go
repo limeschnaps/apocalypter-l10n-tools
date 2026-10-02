@@ -156,6 +156,7 @@ func TestDecodeErrors(t *testing.T) {
 		"no id":          {`[{"id": "", ` + loc + `}]`, ""},
 		"repeated id":    {`[{"id": "a", ` + loc + `}, {"id": "a", ` + loc + `}]`, ""},
 		"no locations":   {`[{"id": "a", "found_in": []}]`, ""},
+		"bad kind":       {`[{"id": "a", "found_in": [{"file": "level0", "path": "m_Text", "owner": "A", "script": {}, "kind": "label"}]}]`, ""},
 		"bad po":         {string(mapData), `msgid "a"`},
 		"unknown msgid":  {string(mapData), string(poData) + "\nmsgid \"Stranger\"\nmsgstr \"Чужак\"\n"},
 		"context":        {string(mapData), "msgctxt \"menu\"\nmsgid \"Duke Ironjaw\"\nmsgstr \"\"\n"},

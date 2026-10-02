@@ -1,6 +1,6 @@
 # apocalypter-l10n-tools
 
-Localization tools for Unity games. A player gets `patcher`, `*.lang` packages and a launcher script that asks for a package and runs `patcher` on the build's `data.unity3d` (see "Installing a localization", "Applying edits to the game" and "Localization package"). Packages are built from the `l10n/<language>/` folders.
+Localization tools for Unity games. A player gets an archive for their language with `patcher`, the `*.lang` package and a launcher script that runs `patcher` on the build's `data.unity3d` (see "Installing a localization", "Applying edits to the game" and "Localization package"). Packages are built from the `l10n/<language>/` folders.
 
 `editor` is for package authors. It is a local web tool that searches and edits MonoBehaviour string fields in Unity assets (`.prefab`, `.unity`, `.asset`) or directly in a game build. Every edit goes to the `patches.json` journal. Repeated strings are easier to translate through the dictionary: a `translation.po` file for a PO editor and a `translation.map` file with the places of the strings in the game (see "Dictionary"). `patcher pack` builds a package from the journal and the dictionary.
 
@@ -14,12 +14,12 @@ This is an unofficial fan project. It is not affiliated with, endorsed by or sup
 
 Players get these steps in more detail, in `INSTALL_RU.txt` (Russian) and `INSTALL_EN.txt` (English) inside the archive.
 
-1. Download `apocalypter-l10n-tools-linux-x64.tar.gz` (Linux) or `apocalypter-l10n-tools-win-x64.zip` (Windows).
+1. Download the archive for your language: `apocalypter-l10n-tools-<language>-linux-x64.tar.gz` (Linux) or `apocalypter-l10n-tools-<language>-win-x64.zip` (Windows), for example `apocalypter-l10n-tools-ru-win-x64.zip`.
 2. Unpack it into the game folder, the one with `Apocalypter.exe`. The files can lie next to `Apocalypter.exe` or in the archive's own subfolder there.
-3. Run `patcher.sh` (Linux) or `patcher.bat` (Windows). The script lists the `*.lang` packages next to it.
-4. Type the package number and press Enter; Enter alone picks the first one. The script runs `patcher -package <file> -in-place Apocalypter_Data`.
+3. Run `patcher.sh` (Linux) or `patcher.bat` (Windows). The script runs `patcher -package <file> -in-place Apocalypter_Data` with the `*.lang` package next to it.
+4. If several `*.lang` files lie next to the script, it lists them: type the package number and press Enter; Enter alone picks the first one. A single package is installed without asking.
 
-The first run keeps the original bundle as `Apocalypter_Data/data.unity3d.orig`, so the script can be run again with another package. After a game update or a file integrity check in Steam, delete `data.unity3d.orig` and run the script again (see "Replacing fonts" for the `backup does not match the game bundle` error).
+The first run keeps the original bundle as `Apocalypter_Data/data.unity3d.orig`, so the script can be run again, and another language is installed by unpacking its archive and running its script. After a game update or a file integrity check in Steam, delete `data.unity3d.orig` and run the script again (see "Replacing fonts" for the `backup does not match the game bundle` error).
 
 ## Layout
 
@@ -27,8 +27,8 @@ The first run keeps the original bundle as `Apocalypter_Data/data.unity3d.orig`,
 src/                    the Go module (go.mod)
 src/cmd/patcher/        patcher: applies edits and packages, builds *.lang
 src/cmd/editor/         editor: web UI for editing strings, dictionary generation
-src/internal/           patcher core: bundle, font, package and dictionary formats, applying edits
-src/internal/editor/    code only editor needs: index, HTTP server, YAML and .NET assembly parsing
+src/internal/           patcher core: bundle, font, package and dictionary formats, .NET assembly parsing and script layouts, string kinds, applying edits
+src/internal/editor/    code only editor needs: index, HTTP server, YAML parsing
 scripts/                patcher.sh and patcher.bat: launchers that ship with patcher to players
 docs/INSTALL_RU.txt     installation instructions for players in Russian, shipped in their archive
 docs/INSTALL_EN.txt     the same instructions in English
@@ -106,7 +106,7 @@ With the `-game` flag the editor reads `data.unity3d` itself, so no AssetRipper 
 
 - The editor reads the original `data.unity3d.orig` if it exists and applies the journal to it. So search shows the text the game will have after `patcher`. A journal edit that finds no target is logged as `journal_patch_failed`.
 - Saving changes the string only in memory and appends the edit to the journal. `data.unity3d` stays unchanged; `patcher` carries the edits into the game, as with a YAML export. If the journal cannot be written, the editor rereads the build so that memory matches the journal.
-- As in `patcher`, an edit reaches all components with the same owner and script, for example prefab copies in scenes.
+- As in `patcher`, an edit reaches all components with the same owner and script that hold the old value in the same field with the same kind, for example prefab copies in scenes.
 
 ### Field names
 
@@ -156,7 +156,11 @@ go -C src build -o ../patcher ./cmd/patcher
 | `-font-metrics` | `original` (default) or `font`: where `-font` takes vertical metrics from, see "Replacing fonts" |
 | `-list-fonts` | list the build's fonts and whether they cover the Russian alphabet |
 
-There is no link between a YAML export and the build's objects, so `patcher` finds the target by content. A MonoBehaviour matches if it has the same owner and script and its strings contain the old value. The owner is the GameObject name, or `m_Name` for a ScriptableObject. The script is given by DLL name and fileID or by class name. If a component has several identical strings, the occurrence number picks one. Patches apply in journal order.
+There is no link between a YAML export and the build's objects, so `patcher` finds the target by content. A MonoBehaviour matches if it has the same owner and script and holds the old value in the field at the patch's `path`. The owner is the GameObject name, or `m_Name` for a ScriptableObject. The script is given by DLL name and fileID or by class name. Patches apply in journal order.
+
+`patcher` reads the field layout from `Managed/` next to `data.unity3d`, as the editor does (see "Field names"). It also classifies the strings of the component and requires the kind the patch records in `kind`. One GameObject often carries several PlayMaker FSMs: in Apocalypter the car light has `ItemName`, which shows "Light", and `LightOn`/`LightOff`, which look up the child object named "Light" at the same path. The kind check keeps the translation in `ItemName` and leaves the object name alone. Patches without `kind`, such as those from a `translation.map` written by an older `editor dump`, skip the kind check; running `editor dump` again adds it.
+
+Without `Managed/` (`script_assemblies_unavailable` in the log), for components whose layout does not fit, and for patches with heuristic `str[N]` paths, the target is found the old way: the component's strings contain the old value, and the occurrence number picks one of several identical strings. A patch that differs from an earlier one only by `path` then skips the component the earlier one has changed. This mode can also change a string with the same text in another component of the owner.
 
 By default a patch changes all matching objects. This way a prefab edit also reaches its copies baked into scenes. The list of changed objects (`file:pathID`) goes to the log.
 
@@ -220,7 +224,7 @@ A `translation.map` entry is linked to its message by `id`: the first 16 hex dig
   {
     "id": "afb54131c7b775f3",
     "found_in": [
-      {"file": "level1", "path": "m_Text", "owner": "game made by (1)", "script": {"assembly": "UnityEngine.UI.dll", "fileId": 708705254}, "occurrence": 0}
+      {"file": "level1", "path": "m_Text", "owner": "game made by (1)", "script": {"assembly": "UnityEngine.UI.dll", "fileId": 708705254}, "occurrence": 0, "kind": "screen"}
     ]
   }
 ]
@@ -242,7 +246,7 @@ msgstr ""
 How `patcher` uses the dictionary:
 
 - Messages with a non-empty `msgstr` and without the `fuzzy` flag go into the game, as in gettext. `pack` logs the number of skipped `fuzzy` messages (`dictionary_fuzzy_skipped`). `msgctxt` and plural forms are not supported.
-- `pack` turns translated messages into patches and appends them to the package's `patches.json` after the journal. `patcher` finds the target by owner, script, occurrence number and old value, and ignores `file` and `path`. So places that differ only in file or path give one patch: it replaces the string in all files anyway.
+- `pack` turns translated messages into patches and appends them to the package's `patches.json` after the journal. `patcher` finds the target by owner, script, `path`, `kind` and old value, and ignores `file`. So places that differ only in file give one patch: it replaces the string in all files anyway. Places with different paths, usually different components of one GameObject, give a patch each.
 - Within one message, patches go from higher occurrence numbers to lower ones, otherwise replacing the first string would shift the numbers of the rest.
 - `pack` rejects a translation that equals the original of another message with the same owner and script: the second message would replace the already translated text.
 
@@ -300,7 +304,7 @@ make pack             # build/<language>.lang for every folder in l10n/
 make pack L10N=ru
 make dump GAME=/path/to/Game/Game_Data          # translation.map and translation.po for every folder in l10n/
 make dump GAME=/path/to/Game/Game_Data L10N=ru PATCHES=./patches.json
-make dist             # patcher and editor archives for all platforms
+make dist             # patcher archives for every language and platform, editor archives for every platform
 make cover            # tests with -race and coverage of production code, fails below 80%
 ```
 
@@ -308,10 +312,10 @@ make cover            # tests with -race and coverage of production code, fails 
 
 | Archive | Contents | For |
 | --- | --- | --- |
-| `build/apocalypter-l10n-tools-<platform>.{tar.gz,zip}` | `patcher`, `patcher.sh` or `patcher.bat`, all `*.lang` packages, `INSTALL_RU.txt`, `INSTALL_EN.txt` | players |
+| `build/apocalypter-l10n-tools-<language>-<platform>.{tar.gz,zip}` | `patcher`, `patcher.sh` or `patcher.bat`, the `<language>.lang` package, `INSTALL_RU.txt`, `INSTALL_EN.txt` | players |
 | `build/apocalypter-l10n-tools-editor-<platform>.{tar.gz,zip}` | `editor`, README | package authors |
 
-Binaries are built statically (`CGO_ENABLED=0`, `-trimpath`) and without the symbol table and debug info (`-ldflags="-s -w"`) for linux/amd64 and windows/amd64. A single platform is built by the `editor-<platform>` or `patcher-<platform>` target, for example `make patcher-win-x64`. Archives for one platform are built by `make dist-win-x64` and `make dist-editor-win-x64`; `L10N` sets the packages in the `patcher` archive. Archives are reproducible: with the same sources and the same Go version they are byte-identical. `make` without arguments first cleans the whole `build/`, including built `.lang` files.
+Binaries are built statically (`CGO_ENABLED=0`, `-trimpath`) and without the symbol table and debug info (`-ldflags="-s -w"`) for linux/amd64 and windows/amd64. A single platform is built by the `editor-<platform>` or `patcher-<platform>` target, for example `make patcher-win-x64`. Archives for one platform are built by `make dist-win-x64` and `make dist-editor-win-x64`; `L10N` sets the languages that get a `patcher` archive. A single archive is built by `make dist-<language>-<platform>`, for example `make dist-ru-win-x64`. Archives are reproducible: with the same sources and the same Go version they are byte-identical. `make` without arguments first cleans the whole `build/`, including built `.lang` files.
 
 ## Development
 

@@ -21,6 +21,7 @@ import (
 	"apocalypter-l10n-tools/internal/gamepatch"
 	"apocalypter-l10n-tools/internal/locpack"
 	"apocalypter-l10n-tools/internal/patch"
+	"apocalypter-l10n-tools/internal/scriptlayout"
 	"apocalypter-l10n-tools/internal/unityfs"
 )
 
@@ -149,7 +150,11 @@ func run(args []string, stdout, logOut io.Writer) error {
 	}
 	logger.Info("bundle_opened", "path", source, "nodes", len(b.Nodes), "patches", len(patches), "fonts", len(fonts))
 
-	rep, nodes, applyErr := gamepatch.Apply(b, patches, gamepatch.Options{Strict: *strict, Fonts: fonts})
+	var layouts *scriptlayout.Resolver
+	if len(patches) > 0 {
+		layouts = loadLayouts(logger, filepath.Join(filepath.Dir(target), gamepatch.ManagedDir))
+	}
+	rep, nodes, applyErr := gamepatch.Apply(b, patches, gamepatch.Options{Strict: *strict, Layouts: layouts, Fonts: fonts})
 	logReport(logger, rep)
 	if applyErr != nil {
 		return fmt.Errorf("nothing was written: %w", applyErr)
@@ -179,6 +184,23 @@ func run(args []string, stdout, logOut io.Writer) error {
 	}
 	logger.Info("bundle_written", "path", dest, "changed_files", len(nodes), "source", source)
 	return nil
+}
+
+// loadLayouts returns the layout resolver over the game's script
+// assemblies, which lets patches match by field path. Without them patches
+// match by occurrence, which may also change other components of the same
+// GameObject, so the failure is logged rather than fatal.
+func loadLayouts(logger *slog.Logger, dir string) *scriptlayout.Resolver {
+	resolver, skipped, err := scriptlayout.LoadDir(dir)
+	if err != nil {
+		logger.Warn("script_assemblies_unavailable", "dir", dir, "error", err.Error(),
+			"hint", "patches match by occurrence and may change other components of the same GameObject")
+		return nil
+	}
+	for _, e := range skipped {
+		logger.Debug("script_assembly_skipped", "error", e.Error())
+	}
+	return resolver
 }
 
 func logReport(logger *slog.Logger, rep gamepatch.Report) {

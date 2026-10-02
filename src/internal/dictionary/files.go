@@ -13,6 +13,7 @@ import (
 	"slices"
 	"strconv"
 
+	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/po"
 )
 
@@ -158,6 +159,11 @@ func Decode(mapData, poData []byte) (entries []Entry, fuzzy int, err error) {
 			return nil, 0, fmt.Errorf("%w: %s: id %s repeats", ErrFormat, MapName, r.ID)
 		case len(r.FoundIn) == 0:
 			return nil, 0, fmt.Errorf("%w: %s: id %s has no locations", ErrFormat, MapName, r.ID)
+		}
+		for _, l := range r.FoundIn {
+			if err := patch.ValidKind(l.Kind); err != nil {
+				return nil, 0, fmt.Errorf("%w: %s: id %s: %w", ErrFormat, MapName, r.ID, err)
+			}
 		}
 		index[r.ID] = i
 	}

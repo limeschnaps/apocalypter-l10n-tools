@@ -13,17 +13,13 @@ import (
 	"strings"
 	"sync"
 
-	"apocalypter-l10n-tools/internal/editor/scriptlayout"
-	"apocalypter-l10n-tools/internal/editor/textkind"
 	"apocalypter-l10n-tools/internal/gamepatch"
 	"apocalypter-l10n-tools/internal/patch"
+	"apocalypter-l10n-tools/internal/scriptlayout"
 	"apocalypter-l10n-tools/internal/serialized"
+	"apocalypter-l10n-tools/internal/textkind"
 	"apocalypter-l10n-tools/internal/unityfs"
 )
-
-// managedDir holds the script assemblies of a Mono player build, next to
-// data.unity3d.
-const managedDir = "Managed"
 
 // ErrBadValue reports a new value that the build index could not find
 // again after saving. Only strings found without a script layout are
@@ -60,7 +56,10 @@ type GameIndex struct {
 	// a journal replay.
 	mu    sync.RWMutex
 	build *gamepatch.Build
-	comps []gamepatch.Component
+	// resolver derives script layouts from the Managed assemblies; nil when
+	// they are unavailable.
+	resolver *scriptlayout.Resolver
+	comps    []gamepatch.Component
 	// layouts holds the script layout of each component, nil when its
 	// strings come from the heuristic scan.
 	layouts []*scriptlayout.Node
@@ -107,6 +106,7 @@ func (g *GameIndex) rebuildLocked(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	g.resolver = g.loadResolver()
 	var patches []patch.Patch
 	if g.journal != "" {
 		if patches, err = patch.Load(g.journal); err != nil {
@@ -118,7 +118,7 @@ func (g *GameIndex) rebuildLocked(ctx context.Context) error {
 		if err := ctx.Err(); err != nil {
 			return err
 		}
-		if res := build.Apply(p, gamepatch.Options{}); res.Err != nil {
+		if res := build.Apply(p, g.applyOptions()); res.Err != nil {
 			failed++
 			g.logger.Warn("journal_patch_failed", "index", i+1, "file", p.File, "path", p.Path, "owner", p.Owner, "error", res.Err.Error())
 		}
@@ -149,19 +149,34 @@ func (g *GameIndex) rebuildLocked(ctx context.Context) error {
 	return nil
 }
 
-// loadLayouts returns the script layout of every component, or nil entries
-// when the assemblies are missing or a script is not supported.
-func (g *GameIndex) loadLayouts(comps []gamepatch.Component) []*scriptlayout.Node {
-	out := make([]*scriptlayout.Node, len(comps))
-	dir := filepath.Join(g.Root(), managedDir)
+// loadResolver returns the layout resolver over the Managed assemblies,
+// or nil when they are unavailable.
+func (g *GameIndex) loadResolver() *scriptlayout.Resolver {
+	dir := filepath.Join(g.Root(), gamepatch.ManagedDir)
 	resolver, skipped, err := scriptlayout.LoadDir(dir)
 	if err != nil {
 		g.logger.Warn("script_assemblies_unavailable", "dir", dir, "error", err.Error(),
 			"hint", "strings are found heuristically and named str[N]")
-		return out
+		return nil
 	}
 	for _, e := range skipped {
 		g.logger.Warn("script_assembly_skipped", "error", e.Error())
+	}
+	return resolver
+}
+
+// applyOptions matches patches the way the patcher does, by field path
+// when the assemblies are available.
+func (g *GameIndex) applyOptions() gamepatch.Options {
+	return gamepatch.Options{Layouts: g.resolver}
+}
+
+// loadLayouts returns the script layout of every component, or nil entries
+// when the assemblies are missing or a script is not supported.
+func (g *GameIndex) loadLayouts(comps []gamepatch.Component) []*scriptlayout.Node {
+	out := make([]*scriptlayout.Node, len(comps))
+	if g.resolver == nil {
+		return out
 	}
 	failed := map[string]bool{}
 	for i, c := range comps {
@@ -169,7 +184,7 @@ func (g *GameIndex) loadLayouts(comps []gamepatch.Component) []*scriptlayout.Nod
 		if s.ClassName == "" {
 			continue
 		}
-		layout, err := resolver.Script(s.AssemblyName, s.Namespace, s.ClassName)
+		layout, err := g.resolver.Script(s.AssemblyName, s.Namespace, s.ClassName)
 		if err != nil {
 			if key := s.AssemblyName + " " + scriptLabel(s); !failed[key] {
 				failed[key] = true
@@ -422,7 +437,7 @@ func (g *GameIndex) Apply(e Edit) (Entry, error) {
 		return Entry{}, err
 	}
 	p.New = e.Value
-	res := g.build.Apply(p, gamepatch.Options{})
+	res := g.build.Apply(p, g.applyOptions())
 	if res.Err != nil {
 		// A failed patch may have changed some of the matched objects.
 		return Entry{}, errors.Join(fmt.Errorf("apply edit: %w", res.Err), g.rebuildLocked(context.Background()))
@@ -466,6 +481,7 @@ func (g *GameIndex) recordLocked(i int, e Entry) (patch.Patch, error) {
 		Owner:      c.Owner,
 		Script:     patchScriptFor(c),
 		Occurrence: occurrence,
+		Kind:       e.Kind.String(),
 		Old:        e.Value,
 	}, nil
 }

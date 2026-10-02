@@ -16,6 +16,9 @@ const (
 	// BackupSuffix marks the copy of the original bundle that
 	// "patcher -in-place" keeps next to the patched one.
 	BackupSuffix = ".orig"
+	// ManagedDir holds the script assemblies of a Mono player build, next
+	// to the bundle.
+	ManagedDir = "Managed"
 )
 
 // BundlePath accepts either the bundle itself or the *_Data directory and

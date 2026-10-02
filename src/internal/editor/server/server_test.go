@@ -14,8 +14,8 @@ import (
 	"testing"
 
 	"apocalypter-l10n-tools/internal/editor/index"
-	"apocalypter-l10n-tools/internal/editor/textkind"
 	"apocalypter-l10n-tools/internal/serialized"
+	"apocalypter-l10n-tools/internal/textkind"
 	"apocalypter-l10n-tools/internal/unitytest"
 )
 

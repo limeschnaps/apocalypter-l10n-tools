@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"apocalypter-l10n-tools/internal/editor/clr"
+	"apocalypter-l10n-tools/internal/clr"
 	"apocalypter-l10n-tools/internal/unitytest"
 )
 

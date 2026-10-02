@@ -504,3 +504,39 @@ func TestRunPackDictionary(t *testing.T) {
 		}
 	}
 }
+
+func TestRunLoadsScriptAssemblies(t *testing.T) {
+	dir := gameDir(t)
+	managed := filepath.Join(dir, gamepatch.ManagedDir)
+	if err := os.Mkdir(managed, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	files := unitytest.ScriptAssemblies()
+	files["native.dll"] = []byte("not managed")
+	for name, data := range files {
+		if err := os.WriteFile(filepath.Join(managed, name), data, 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	// Menu is missing from the assemblies, so its patch falls back to the
+	// occurrence.
+	path := journal(t, patch.Patch{Owner: "Title", Path: "title", Old: "NEW GAME", New: "НОВАЯ ИГРА"})
+	var log bytes.Buffer
+	if err := run([]string{"-patches", path, "-dry-run", dir}, io.Discard, &log); err != nil {
+		t.Fatalf("run: %v\n%s", err, log.String())
+	}
+	if strings.Contains(log.String(), "script_assemblies_unavailable") {
+		t.Errorf("assemblies not loaded:\n%s", log.String())
+	}
+
+	if err := os.RemoveAll(managed); err != nil {
+		t.Fatal(err)
+	}
+	log.Reset()
+	if err := run([]string{"-patches", path, "-dry-run", dir}, io.Discard, &log); err != nil {
+		t.Fatalf("run without assemblies: %v", err)
+	}
+	if !strings.Contains(log.String(), "script_assemblies_unavailable") {
+		t.Errorf("missing warning:\n%s", log.String())
+	}
+}

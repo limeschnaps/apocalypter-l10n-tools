@@ -12,8 +12,8 @@ import (
 	"strings"
 	"testing"
 
-	"apocalypter-l10n-tools/internal/editor/textkind"
 	"apocalypter-l10n-tools/internal/patch"
+	"apocalypter-l10n-tools/internal/textkind"
 )
 
 const (
@@ -308,12 +308,12 @@ func TestApplyRecordsJournal(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := []patch.Patch{
-		{File: "Assets/UI/Menu.prefab", Path: "m_text", Owner: "Title", Script: patch.Script{Class: "Label"}, Old: "Hello World", New: "Привет"},
-		{File: "Assets/UI/Menu.prefab", Path: "m_hint", Script: patch.Script{Assembly: "Vendor.dll", FileID: 987654}, Old: "hello from dll", New: "dll text"},
-		{File: "Assets/UI/Menu.prefab", Path: "m_note", Old: "orphan script", New: "orphan text"},
-		{File: "Packages/local/Settings.asset", Path: "greeting", Owner: "GameSettings", Script: patch.Script{Class: "Label"}, Old: "Welcome, player", New: "Добро пожаловать"},
-		{File: "Assets/UI/Menu.prefab", Path: "m_items[1].caption", Owner: "Title", Script: patch.Script{Class: "Label"}, Old: "Second item", New: "First item"},
-		{File: "Assets/UI/Menu.prefab", Path: "m_items[1].caption", Owner: "Title", Script: patch.Script{Class: "Label"}, Occurrence: 1, Old: "First item", New: "Third item"},
+		{File: "Assets/UI/Menu.prefab", Path: "m_text", Owner: "Title", Script: patch.Script{Class: "Label"}, Kind: "maybe", Old: "Hello World", New: "Привет"},
+		{File: "Assets/UI/Menu.prefab", Path: "m_hint", Script: patch.Script{Assembly: "Vendor.dll", FileID: 987654}, Kind: "service", Old: "hello from dll", New: "dll text"},
+		{File: "Assets/UI/Menu.prefab", Path: "m_note", Kind: "maybe", Old: "orphan script", New: "orphan text"},
+		{File: "Packages/local/Settings.asset", Path: "greeting", Owner: "GameSettings", Script: patch.Script{Class: "Label"}, Kind: "maybe", Old: "Welcome, player", New: "Добро пожаловать"},
+		{File: "Assets/UI/Menu.prefab", Path: "m_items[1].caption", Owner: "Title", Script: patch.Script{Class: "Label"}, Kind: "maybe", Old: "Second item", New: "First item"},
+		{File: "Assets/UI/Menu.prefab", Path: "m_items[1].caption", Owner: "Title", Script: patch.Script{Class: "Label"}, Occurrence: 1, Kind: "maybe", Old: "First item", New: "Third item"},
 	}
 	if len(got) != len(want) {
 		t.Fatalf("journal has %d patches, want %d: %+v", len(got), len(want), got)

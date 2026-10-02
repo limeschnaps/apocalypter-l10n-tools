@@ -34,7 +34,11 @@ func TestAppendAndLoad(t *testing.T) {
 
 func TestLoadErrors(t *testing.T) {
 	dir := t.TempDir()
-	cases := map[string]string{"garbage": "{", "version": `{"version": 2, "patches": []}`}
+	cases := map[string]string{
+		"garbage": "{",
+		"version": `{"version": 2, "patches": []}`,
+		"kind":    `{"version": 1, "patches": [{"kind": "label"}]}`,
+	}
 	for name, content := range cases {
 		path := filepath.Join(dir, name+".json")
 		if err := os.WriteFile(path, []byte(content), 0o644); err != nil {

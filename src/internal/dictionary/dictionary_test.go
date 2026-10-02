@@ -37,8 +37,10 @@ func TestPatches(t *testing.T) {
 	entries := []Entry{
 		{Old: "Nuts", New: "Гайки", FoundIn: []Location{
 			{File: "level0", Path: "m_Text", Owner: "Label", Script: uiText},
-			// The patcher ignores file and path: this one repeats the first.
+			// The patcher ignores the file: this one repeats the first.
 			{File: "level1", Path: "m_Text", Owner: "Label", Script: uiText},
+			// Another field, usually another component of the owner.
+			{File: "level0", Path: "fsm.states[1].value", Owner: "Label", Script: uiText},
 			{File: "level0", Path: "str[3]", Owner: "Label", Script: uiText, Occurrence: 1},
 			{File: "level0", Path: "m_Text", Owner: "Title", Script: uiText},
 		}},
@@ -51,11 +53,29 @@ func TestPatches(t *testing.T) {
 	}
 	want := []patch.Patch{
 		{File: "level0", Path: "str[3]", Owner: "Label", Script: uiText, Occurrence: 1, Old: "Nuts", New: "Гайки"},
+		{File: "level0", Path: "fsm.states[1].value", Owner: "Label", Script: uiText, Old: "Nuts", New: "Гайки"},
 		{File: "level0", Path: "m_Text", Owner: "Label", Script: uiText, Old: "Nuts", New: "Гайки"},
 		{File: "level0", Path: "m_Text", Owner: "Title", Script: uiText, Old: "Nuts", New: "Гайки"},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("patches = %+v\nwant %+v", got, want)
+	}
+}
+
+func TestPatchesKeepKind(t *testing.T) {
+	strs := []patch.Patch{found("level0", "m_Text", "Label", 0, "Nuts"), found("level0", "m_Text", "Label", 0, "Nuts")}
+	strs[0].Kind, strs[1].Kind = "screen", "maybe"
+	entries := Build(strs)
+	if len(entries) != 1 || len(entries[0].FoundIn) != 2 {
+		t.Fatalf("entries = %+v", entries)
+	}
+	entries[0].New = "Гайки"
+	got, err := Patches(entries)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(got) != 2 || got[0].Kind != "maybe" || got[1].Kind != "screen" {
+		t.Errorf("patches = %+v", got)
 	}
 }
 

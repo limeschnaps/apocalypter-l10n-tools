@@ -23,9 +23,9 @@ import (
 	"apocalypter-l10n-tools/internal/dictionary"
 	"apocalypter-l10n-tools/internal/editor/index"
 	"apocalypter-l10n-tools/internal/editor/server"
-	"apocalypter-l10n-tools/internal/editor/textkind"
 	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/po"
+	"apocalypter-l10n-tools/internal/textkind"
 )
 
 func main() {

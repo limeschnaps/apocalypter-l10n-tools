@@ -13,10 +13,10 @@ import (
 	"testing"
 
 	"apocalypter-l10n-tools/internal/dictionary"
-	"apocalypter-l10n-tools/internal/editor/textkind"
 	"apocalypter-l10n-tools/internal/gamepatch"
 	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/serialized"
+	"apocalypter-l10n-tools/internal/textkind"
 	"apocalypter-l10n-tools/internal/unityfs"
 	"apocalypter-l10n-tools/internal/unitytest"
 )
@@ -179,8 +179,8 @@ func TestGameIndexApply(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := []patch.Patch{
-		{File: "level0", Path: "str[0]", Owner: "Title", Script: tmpScript, Occurrence: 0, Old: "Hello", New: "Привет"},
-		{File: "level0", Path: "str[2]", Owner: "Title", Script: tmpScript, Occurrence: 1, Old: "OK", New: "Ладно"},
+		{File: "level0", Path: "str[0]", Owner: "Title", Script: tmpScript, Occurrence: 0, Kind: "maybe", Old: "Hello", New: "Привет"},
+		{File: "level0", Path: "str[2]", Owner: "Title", Script: tmpScript, Occurrence: 1, Kind: "maybe", Old: "OK", New: "Ладно"},
 	}
 	if len(patches) != len(want) {
 		t.Fatalf("journal = %+v", patches)
@@ -360,14 +360,14 @@ func scriptGameDir(t *testing.T) string {
 	}, 64)
 
 	dir := filepath.Join(t.TempDir(), "Game_Data")
-	if err := os.MkdirAll(filepath.Join(dir, managedDir), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(dir, gamepatch.ManagedDir), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	if err := os.WriteFile(filepath.Join(dir, gamepatch.BundleName), bundle, 0o644); err != nil {
 		t.Fatal(err)
 	}
 	for name, data := range unitytest.ScriptAssemblies() {
-		if err := os.WriteFile(filepath.Join(dir, managedDir, name), data, 0o644); err != nil {
+		if err := os.WriteFile(filepath.Join(dir, gamepatch.ManagedDir, name), data, 0o644); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -426,7 +426,7 @@ func TestGameIndexScriptLayouts(t *testing.T) {
 	want := patch.Patch{
 		File: "level0", Path: "text", Owner: "Menu",
 		Script: patch.Script{Assembly: "Assembly-CSharp.dll", FileID: gamepatch.ScriptFileID("Game", "Dialog")},
-		Old:    "Hello", New: "",
+		Kind:   "maybe", Old: "Hello", New: "",
 	}
 	if patches[0] != want {
 		t.Errorf("journal = %+v, want %+v", patches[0], want)
@@ -446,7 +446,7 @@ func TestGameIndexScriptLayouts(t *testing.T) {
 
 func TestGameIndexSkipsForeignAssemblies(t *testing.T) {
 	dir := scriptGameDir(t)
-	if err := os.WriteFile(filepath.Join(dir, managedDir, "native.dll"), []byte("not managed"), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, gamepatch.ManagedDir, "native.dll"), []byte("not managed"), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	var log bytes.Buffer
@@ -492,11 +492,11 @@ func TestGameIndexRecordsReplayAsDictionary(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := []patch.Patch{
-		{File: "level0", Path: "str[0]", Owner: "Title", Script: tmpScript, Old: "Hello"},
-		{File: "level0", Path: "str[1]", Owner: "Title", Script: tmpScript, Old: "OK"},
-		{File: "level0", Path: "str[2]", Owner: "Title", Script: tmpScript, Occurrence: 1, Old: "OK"},
-		{File: "level0", Path: "str[0]", Owner: "Settings", Script: patch.Script{Assembly: "Assembly-CSharp.dll", FileID: gamepatch.ScriptFileID("", "Settings")}, Old: "Welcome"},
-		{File: "sharedassets1.assets", Path: "str[0]", Owner: "Title", Script: tmpScript, Old: "Hello"},
+		{File: "level0", Path: "str[0]", Owner: "Title", Script: tmpScript, Kind: "maybe", Old: "Hello"},
+		{File: "level0", Path: "str[1]", Owner: "Title", Script: tmpScript, Kind: "maybe", Old: "OK"},
+		{File: "level0", Path: "str[2]", Owner: "Title", Script: tmpScript, Occurrence: 1, Kind: "maybe", Old: "OK"},
+		{File: "level0", Path: "str[0]", Owner: "Settings", Script: patch.Script{Assembly: "Assembly-CSharp.dll", FileID: gamepatch.ScriptFileID("", "Settings")}, Kind: "maybe", Old: "Welcome"},
+		{File: "sharedassets1.assets", Path: "str[0]", Owner: "Title", Script: tmpScript, Kind: "maybe", Old: "Hello"},
 	}
 	if !slices.Equal(records, want) {
 		t.Fatalf("records = %+v\nwant %+v", records, want)

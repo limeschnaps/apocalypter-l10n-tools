@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"apocalypter-l10n-tools/internal/editor/clr"
+	"apocalypter-l10n-tools/internal/clr"
 )
 
 // maxForwardDepth bounds chains of type forwarders and nested references.

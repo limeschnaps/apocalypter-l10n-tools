@@ -9,7 +9,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"apocalypter-l10n-tools/internal/editor/textkind"
+	"apocalypter-l10n-tools/internal/textkind"
 )
 
 // Sort names a result column to order by. The zero value keeps the index

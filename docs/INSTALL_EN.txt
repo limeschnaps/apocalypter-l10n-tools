@@ -17,15 +17,18 @@ by or supported by the developers or publishers of Apocalypter.
 What is in the archive
 ----------------------
 
-Windows (apocalypter-l10n-tools-win-x64.zip):
+Each language has its own archive; the language code is in its name,
+for example ru in apocalypter-l10n-tools-ru-win-x64.zip.
+
+Windows (apocalypter-l10n-tools-<language>-win-x64.zip):
   patcher.bat   the installer script; this is what you run
   patcher.exe   the program that writes the translation into the game
-  *.lang        localization packages, for example ru.lang
+  *.lang        the localization package, for example ru.lang
 
-Linux (apocalypter-l10n-tools-linux-x64.tar.gz):
+Linux (apocalypter-l10n-tools-<language>-linux-x64.tar.gz):
   patcher.sh    the installer script; this is what you run
   patcher       the program that writes the translation into the game
-  *.lang        localization packages, for example ru.lang
+  *.lang        the localization package, for example ru.lang
 
 Where to put the files
 ----------------------
@@ -45,8 +48,10 @@ How to run
 2. Run the script:
    - Windows: double-click patcher.bat.
    - Linux: open a terminal in the script's folder and run ./patcher.sh
-3. The script lists the packages. Type the number of the one you want
-   and press Enter. Enter alone picks the first package.
+3. With a single package the script installs it right away. If you put
+   several .lang files next to it, the script lists them: type the
+   number of the one you want and press Enter. Enter alone picks the
+   first package.
 4. Wait until it finishes and start the game.
 
 Windows may warn about an unrecognized app ("Windows protected your
@@ -58,8 +63,10 @@ the original game file as Apocalypter_Data/data.unity3d.orig.
 Switching language or reinstalling
 ----------------------------------
 
-Run the script again and pick another package. Patcher always starts
-from the saved original, so translations do not pile up.
+To reinstall, run the script again. To switch the language, unpack
+that language's archive into the game folder and run its script.
+Patcher always starts from the saved original, so translations do not
+pile up.
 
 After a game update
 -------------------
