@@ -1291,11 +1291,11 @@ msgstr ""
 
 #. level1 | HealthLable | m_Text
 msgid "HEALTH:"
-msgstr "Здоровье:"
+msgstr "Здоровье :"
 
 #. level1 | HungerLable | m_Text
 msgid "HUNGER:"
-msgstr "Голод:"
+msgstr "Голод :"
 
 #. sharedassets1.assets | handbrake | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | handbrake | fsm.states[4].actionData.fsmStringParams[0].value
@@ -1953,11 +1953,11 @@ msgstr "Убитое колесо / Сцепление: 0.7"
 
 #. sharedassets1.assets | rustallion_exhaust_1 | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "Rustallion Basic Exhaust"
-msgstr "Базовый выхлоп \"Ржавца\""
+msgstr "Базовый выхлоп от \"Ржеребца\""
 
 #. sharedassets1.assets | rustallion_radiator | fsm.variables.stringVariables[2].value
 msgid "Rustallion Radiator"
-msgstr "Радиатор от \"Ржавца\""
+msgstr "Радиатор от \"Ржеребца\""
 
 #. level1 | Text | m_Text
 msgid "SETTINGS"
@@ -3027,7 +3027,7 @@ msgstr "Громитель"
 
 #. level1 | text | m_Text
 msgid "junker"
-msgstr "\"Драндулет\""
+msgstr "\"Корыто\""
 
 #. level1 | km | m_Text
 msgid "km"
@@ -3225,7 +3225,7 @@ msgstr "Режим постоянной базы"
 
 #. level1 | text | m_Text
 msgid "pigpen"
-msgstr "\"Свинарня\""
+msgstr "\"Свиновоз\""
 
 #. level1 | text | m_Text
 msgid "pipe home"
@@ -3383,11 +3383,11 @@ msgstr "Руины"
 
 #. level1 | text | m_Text
 msgid "rustallion"
-msgstr "\"Ржавец\""
+msgstr "\"Ржеребец\""
 
 #. level1 | text | m_Text
 msgid "rustcargo"
-msgstr "\"Ломовой\""
+msgstr "\"Автолавка\""
 
 #. level1 | text | m_Text
 msgid "rustchief"
@@ -3471,7 +3471,7 @@ msgstr "Логово скорпионов"
 
 #. level1 | text | m_Text
 msgid "scorpion major"
-msgstr "Скорпионище"
+msgstr "Скорпион"
 
 #. level1 | text | m_Text
 msgid "scorpion minor"
