@@ -997,12 +997,9 @@ msgstr ""
 msgid "Dogfood"
 msgstr "Собачий корм"
 
-#. sharedassets1.assets | alcohol_canister | fsm.states[1].actionData.fsmStringParams[2].value
-msgid "Drink: Hold (F)"
-msgstr "Выпить: удерживать F"
-
 #. sharedassets1.assets | Water_Barrel | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | Water_Can_Plastic | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | alcohol_canister | fsm.states[1].actionData.fsmStringParams[2].value
 msgid "Drink: Hold F"
 msgstr "Выпить: удерживать F"
 
@@ -2190,9 +2187,18 @@ msgstr "Взять оружие в слот 3: F"
 #. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | ammo_box_3006 | fsm.states[1].actionData.fsmStringParams[5].value
-#. … +30
+#. … +21
 msgid "Take: F"
 msgstr "Взять: F"
+
+#. sharedassets1.assets | backpack_huge | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | backpack_large | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | backpack_medium | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | backpack_small | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | bodyarmor_type_0 | fsm.states[1].actionData.fsmStringParams[2].value
+#. … +4
+msgid "Take: Hold F"
+msgstr "Взять: удерживать F"
 
 #. sharedassets1.assets | Teacher_Dead | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "Teacher"
@@ -2436,7 +2442,7 @@ msgstr ""
 
 #. level0 | Version_text | m_Text
 #. level1 | Version_text | m_Text
-msgid "Version: 30/09/26"
+msgid "Version: 09/10/26"
 msgstr ""
 
 #. sharedassets1.assets | Volume | fsm.states[1].actionData.fsmStringParams[0].value
@@ -2496,24 +2502,24 @@ msgstr "Канистра воды / 13л, полная"
 
 #. sharedassets1.assets | weed_bag | fsm.variables.stringVariables[0].value
 msgid "Weed"
-msgstr "\"Муравушка\""
+msgstr "Успоколист"
 
 #. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "Weed - 8"
-msgstr "\"Муравушка\" - 8"
+msgstr "Успоколист - 8"
 
 #. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | plant_weed | fsm.variables.stringVariables[0].value
 msgid "Weed Plant"
-msgstr "Куст \"муравушки\""
+msgstr "Куст успоколиста"
 
 #. sharedassets1.assets | plant | fsm.variables.stringVariables[0].value
 msgid "Weed Plant Growing"
-msgstr "Куст \"муравушки\" (растет)"
+msgstr "Куст успоколиста (растет)"
 
 #. sharedassets1.assets | withered_plant | fsm.variables.stringVariables[0].value
 msgid "Weed Plant Withered"
-msgstr "Куст \"муравушки\" (засох)"
+msgstr "Куст успоколиста (засох)"
 
 #. sharedassets1.assets | Wild Hound_Dead | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "Wild Hound"
@@ -3776,3 +3782,6 @@ msgstr ""
 #. level1 | mapPlayerIcon | m_text
 msgid "↓"
 msgstr ""
+
+#~ msgid "Drink: Hold (F)"
+#~ msgstr "Выпить: удерживать F"
