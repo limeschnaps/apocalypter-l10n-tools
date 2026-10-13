@@ -23,6 +23,7 @@ import (
 	"apocalypter-l10n-tools/internal/dictionary"
 	"apocalypter-l10n-tools/internal/editor/index"
 	"apocalypter-l10n-tools/internal/editor/server"
+	"apocalypter-l10n-tools/internal/logging"
 	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/po"
 	"apocalypter-l10n-tools/internal/textkind"
@@ -74,7 +75,7 @@ func (f *sourceFlags) open(fs *flag.FlagSet, logOut io.Writer) (*slog.Logger, so
 	if err := lvl.UnmarshalText([]byte(f.level)); err != nil {
 		return nil, nil, "", fmt.Errorf("invalid -log-level: %w", err)
 	}
-	logger := slog.New(slog.NewJSONHandler(logOut, &slog.HandlerOptions{Level: lvl}))
+	logger := slog.New(logging.NewHandler(logOut, lvl))
 
 	ix, err := newSource(f.root, f.game, logger)
 	if err != nil {

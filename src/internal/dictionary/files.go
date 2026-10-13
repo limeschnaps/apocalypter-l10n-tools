@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"slices"
-	"strconv"
 
 	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/po"
@@ -22,10 +21,6 @@ const (
 	MapName = "translation.map"
 	POName  = "translation.po"
 )
-
-// maxLocationComments caps the locations listed for translators in a PO
-// message; a string can appear in hundreds of places.
-const maxLocationComments = 5
 
 var languageRe = regexp.MustCompile(`^[a-z]{2,3}([_-][A-Za-z]{2,4})?$`)
 
@@ -128,14 +123,11 @@ func (h Header) message() po.Message {
 	return po.Message{Str: s}
 }
 
-// locationComments lists where a string is used, for translators.
+// locationComments lists every place a string is used, for translators.
 func locationComments(locs []Location) []string {
-	var out []string
-	for _, l := range locs[:min(len(locs), maxLocationComments)] {
+	out := make([]string, 0, len(locs))
+	for _, l := range locs {
 		out = append(out, l.File+" | "+l.Owner+" | "+l.Path)
-	}
-	if n := len(locs) - maxLocationComments; n > 0 {
-		out = append(out, "… +"+strconv.Itoa(n))
 	}
 	return out
 }

@@ -46,14 +46,16 @@ type Result struct {
 type Options struct {
 	// Strict requires every patch to match exactly one object. Otherwise a
 	// patch applies to every matching object: a prefab's text usually also
-	// lives in baked copies inside scenes.
+	// lives in baked copies inside scenes, and a patch that matches nothing
+	// is skipped.
 	Strict bool
 	// Layouts decodes components by field path. A component whose layout
 	// it resolves and decodes matches a patch only when the field at
 	// Patch.Path holds Old and has the textkind Patch.Kind names: other
 	// FSMs of the same GameObject often hold the same string as an object,
-	// variable or event name. Without Layouts, and for components it
-	// cannot decode, Patch.Occurrence selects the string instead.
+	// variable or event name. Kinds take into account the text FSMs write
+	// into variables other FSMs show. Without Layouts, and for components
+	// it cannot decode, Patch.Occurrence selects the string instead.
 	Layouts *scriptlayout.Resolver
 	// Fonts replaces the TTF data of Font objects by name.
 	Fonts []FontReplacement
@@ -89,6 +91,9 @@ type state struct {
 	replaced map[replacement]bool
 	// decoded caches the fields of decoded components until they change.
 	decoded map[objectKey]decoding
+	// displayed holds the string variables FSMs show, found once on the
+	// first decode; nil until then.
+	displayed textkind.Variables
 }
 
 type objectKey struct {
@@ -118,7 +123,9 @@ type replacement struct {
 }
 
 // Apply replays patches in order, then applies the font replacements, and
-// returns a report and the new content of every changed bundle node. Any
+// returns a report and the new content of every changed bundle node. A
+// patch that matches nothing is skipped with ErrNoMatch in its Result, and
+// the other patches still apply; in strict mode it fails the run. Any other
 // failure makes the whole run fail with a joined error and no nodes; the
 // report still describes everything that was attempted.
 func Apply(b *unityfs.Bundle, patches []patch.Patch, opts Options) (Report, map[string][]byte, error) {
@@ -130,7 +137,7 @@ func Apply(b *unityfs.Bundle, patches []patch.Patch, opts Options) (Report, map[
 	var errs []error
 	for i, p := range patches {
 		res := st.apply(p, opts)
-		if res.Err != nil {
+		if res.Err != nil && (opts.Strict || !errors.Is(res.Err, ErrNoMatch)) {
 			errs = append(errs, fmt.Errorf("patch %d (%s %s): %w", i+1, p.File, p.Path, res.Err))
 		}
 		rep.Patches = append(rep.Patches, res)
@@ -374,25 +381,42 @@ func (st *state) decode(c *Component, layouts *scriptlayout.Resolver) decoding {
 }
 
 func (st *state) decodeFields(c *Component, layouts *scriptlayout.Resolver) decoding {
-	if c.Script.ClassName == "" {
+	comp, strs, ok := st.component(c, layouts)
+	if !ok {
 		return decoding{}
+	}
+	comp.Displayed = st.displayedVars(layouts)
+	kinds := textkind.Classify(comp)[1:]
+	fields := make([]field, len(strs))
+	for i, s := range strs {
+		fields[i] = field{s, kinds[i]}
+	}
+	return decoding{fields: fields, ok: true}
+}
+
+// component decodes c for textkind: m_Name followed by the string fields
+// the layout gives, which are returned as well. ok is false when the
+// layout is unknown or does not match the data.
+func (st *state) component(c *Component, layouts *scriptlayout.Resolver) (comp textkind.Component, strs []scriptlayout.String, ok bool) {
+	if c.Script.ClassName == "" {
+		return comp, nil, false
 	}
 	layout, err := layouts.Script(c.Script.AssemblyName, c.Script.Namespace, c.Script.ClassName)
 	if err != nil {
-		return decoding{}
+		return comp, nil, false
 	}
 	order := st.files[c.File].ByteOrder()
 	data := st.data(c)
 	h, err := serialized.ReadMonoBehaviourHeader(data, order)
 	if err != nil {
-		return decoding{}
+		return comp, nil, false
 	}
 	needed := func(path string) bool { ok, _ := textkind.NumberField(path); return ok }
 	strs, raw, err := scriptlayout.DecodeWith(layout, data, h.FieldsOffset, order, needed)
 	if err != nil {
-		return decoding{}
+		return comp, nil, false
 	}
-	comp := textkind.Component{
+	comp = textkind.Component{
 		Script:  textkind.Script{Assembly: c.Script.AssemblyName, Namespace: c.Script.Namespace, Class: c.Script.ClassName},
 		Strings: make([]textkind.Field, 0, len(strs)+1),
 	}
@@ -407,12 +431,30 @@ func (st *state) decodeFields(c *Component, layouts *scriptlayout.Resolver) deco
 			comp.Numbers[path] = textkind.ParseRawNumber(b, array, order)
 		}
 	}
-	kinds := textkind.Classify(comp)[1:]
-	fields := make([]field, len(strs))
-	for i, s := range strs {
-		fields[i] = field{s, kinds[i]}
+	return comp, strs, true
+}
+
+// displayedVars returns the string variables the FSMs of the build show.
+// They are found on the first call, before any patch of the run changes
+// the build, so that editor and patcher classify the same strings alike.
+func (st *state) displayedVars(layouts *scriptlayout.Resolver) textkind.Variables {
+	if st.displayed != nil {
+		return st.displayed
 	}
-	return decoding{fields: fields, ok: true}
+	var fsms []textkind.Component
+	for _, list := range st.byOwner {
+		for _, c := range list {
+			s := textkind.Script{Assembly: c.Script.AssemblyName, Namespace: c.Script.Namespace, Class: c.Script.ClassName}
+			if !textkind.IsFSM(s) {
+				continue
+			}
+			if comp, _, ok := st.component(c, layouts); ok {
+				fsms = append(fsms, comp)
+			}
+		}
+	}
+	st.displayed = textkind.Displayed(fsms)
+	return st.displayed
 }
 
 func (st *state) data(c *Component) []byte {

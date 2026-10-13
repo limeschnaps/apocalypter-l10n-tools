@@ -402,3 +402,126 @@ func TestClassifyFSMBrokenTables(t *testing.T) {
 		t.Errorf("heuristic = %v", got)
 	}
 }
+
+// named gives the FSM of c and its string variable other names.
+func named(c Component, fsm, variable string) Component {
+	c.Strings = append([]Field(nil), c.Strings...)
+	for i, f := range c.Strings {
+		switch f.Path {
+		case "fsm.name":
+			c.Strings[i].Value = fsm
+		case "fsm.variables.stringVariables[0].name":
+			c.Strings[i].Value = variable
+		}
+	}
+	return c
+}
+
+// setter is a state with one SetFsmString action writing value into the
+// variable of another FSM.
+func setter(fsm, variable, value string) fsmState {
+	return fsmState{
+		actions: []string{"HutongGames.PlayMaker.Actions.SetFsmString"},
+		names:   []string{"gameObject", "fsmName", "variableName", "setValue", "everyFrame"},
+		types:   []int32{20, 18, 18, 18, 17},
+		pos:     []int32{0, 0, 1, 2, 0},
+		starts:  []int32{0},
+		fsmStrs: []string{fsm, variable, value},
+	}
+}
+
+// The tobacco plant of Apocalypter: the Plant FSM of the pot writes the
+// label of each growth stage into the ItemName variable of the ItemName
+// FSM on the plant, which UiTextSetText shows.
+func TestClassifyFSMRemoteVariable(t *testing.T) {
+	const (
+		p     = "fsm.states[1].actionData."
+		value = p + "fsmStringParams[2].value"
+	)
+	label := fsmState{
+		actions:  []string{"HutongGames.PlayMaker.Actions.UiTextSetText"},
+		names:    []string{"gameObject", "text"},
+		types:    []int32{20, 18},
+		pos:      []int32{0, 0},
+		starts:   []int32{0},
+		useVar:   map[int]bool{0: true},
+		varNames: map[int]string{0: "ItemName"},
+		fsmStrs:  []string{""},
+	}
+	receiver := named(label.component("PlayMakerFSM"), "ItemName", "ItemName")
+	displayed := Displayed([]Component{receiver, {Script: Script{Class: "Shop"}, Strings: strs("title")}})
+	if want := (Variables{"ItemName": {"ItemName": true}}); !reflect.DeepEqual(displayed, want) {
+		t.Fatalf("Displayed = %v, want %v", displayed, want)
+	}
+
+	cases := []struct {
+		name string
+		s    fsmState
+		want Kind
+	}{
+		{"shown variable", setter("ItemName", "ItemName", "Tobacco Plant Ripe (Harvest - F)"), Screen},
+		{"any FSM", setter("", "ItemName", "Tobacco Plant Ripe (Harvest - F)"), Screen},
+		{"other FSM", setter("Inventory", "ItemName", "Tobacco Plant"), Maybe},
+		{"other variable", setter("ItemName", "itemId", "tobacco"), Maybe},
+	}
+	dynamic := setter("ItemName", "ItemName", "Tobacco Plant")
+	dynamic.useVar = map[int]bool{1: true}
+	dynamic.varNames = map[int]string{1: "target"}
+	cases = append(cases, struct {
+		name string
+		s    fsmState
+		want Kind
+	}{"variable name from a variable", dynamic, Maybe})
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			c := named(tc.s.component("PlayMakerFSM"), "Plant", "growth")
+			c.Displayed = displayed
+			if k := kinds(c)[value]; k != tc.want {
+				t.Errorf("setValue = %v, want %v", k, tc.want)
+			}
+			c.Displayed = nil
+			if k := kinds(c)[value]; k != Maybe {
+				t.Errorf("without Displayed: setValue = %v, want maybe", k)
+			}
+		})
+	}
+}
+
+// A chain of FSMs: Seed writes a literal into the stage variable of
+// Plant, and Plant passes that variable on to the shown ItemName.
+func TestDisplayedChain(t *testing.T) {
+	const p = "fsm.states[1].actionData."
+	label := fsmState{
+		actions:  []string{"HutongGames.PlayMaker.Actions.UiTextSetText"},
+		names:    []string{"gameObject", "text"},
+		types:    []int32{20, 18},
+		pos:      []int32{0, 0},
+		starts:   []int32{0},
+		useVar:   map[int]bool{0: true},
+		varNames: map[int]string{0: "ItemName"},
+		fsmStrs:  []string{""},
+	}
+	pass := setter("ItemName", "ItemName", "")
+	pass.useVar = map[int]bool{2: true}
+	pass.varNames = map[int]string{2: "stage"}
+	seed := named(setter("Plant", "stage", "Ripe").component("PlayMakerFSM"), "Seed", "unused")
+	plant := named(pass.component("PlayMakerFSM"), "Plant", "stage")
+	item := named(label.component("PlayMakerFSM"), "ItemName", "ItemName")
+
+	displayed := Displayed([]Component{seed, plant, item})
+	want := Variables{"ItemName": {"ItemName": true}, "stage": {"Plant": true}}
+	if !reflect.DeepEqual(displayed, want) {
+		t.Fatalf("Displayed = %v, want %v", displayed, want)
+	}
+	seed.Displayed, plant.Displayed = displayed, displayed
+	if k := kinds(seed)[p+"fsmStringParams[2].value"]; k != Screen {
+		t.Errorf("seed setValue = %v, want screen", k)
+	}
+	got := kinds(plant)
+	if k := got["fsm.variables.stringVariables[0].value"]; k != Screen {
+		t.Errorf("plant variable = %v, want screen", k)
+	}
+	if k := got[p+"fsmStringParams[2].value"]; k != Service {
+		t.Errorf("bound setValue = %v, want service", k)
+	}
+}

@@ -20,6 +20,7 @@ import (
 	"apocalypter-l10n-tools/internal/dictionary"
 	"apocalypter-l10n-tools/internal/gamepatch"
 	"apocalypter-l10n-tools/internal/locpack"
+	"apocalypter-l10n-tools/internal/logging"
 	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/scriptlayout"
 	"apocalypter-l10n-tools/internal/unityfs"
@@ -29,6 +30,10 @@ const (
 	bundleName   = gamepatch.BundleName
 	backupSuffix = gamepatch.BackupSuffix
 	packageExt   = ".lang"
+	// logFileName is the default log file for warnings and errors. The
+	// launcher scripts run patcher in their own folder, so players find it
+	// next to them.
+	logFileName = "patcher.log"
 )
 
 func main() {
@@ -38,7 +43,7 @@ func main() {
 	}
 }
 
-func run(args []string, stdout, logOut io.Writer) error {
+func run(args []string, stdout, logOut io.Writer) (err error) {
 	if len(args) > 0 && args[0] == "pack" {
 		return runPack(args[1:], logOut)
 	}
@@ -73,9 +78,12 @@ func run(args []string, stdout, logOut io.Writer) error {
 		return nil
 	})
 	fontMetrics := flags.String("font-metrics", string(gamepatch.MetricsOriginal), `vertical metrics for -font replacements: "original" keeps the replaced font's line layout, "font" takes them from the new file`)
+	logFile := registerLogFile(flags)
 	if err := flags.Parse(args); err != nil {
 		return err
 	}
+	logger, closeLog := openLog(logOut, *logFile)
+	defer closeLog(&err)
 	metrics, err := gamepatch.ParseMetrics(*fontMetrics)
 	if err != nil {
 		return err
@@ -87,8 +95,6 @@ func run(args []string, stdout, logOut io.Writer) error {
 		flags.Usage()
 		return errors.New("expected one game path")
 	}
-	logger := slog.New(slog.NewJSONHandler(logOut, nil))
-
 	target, err := gamepatch.BundlePath(flags.Arg(0))
 	if err != nil {
 		return err
@@ -204,13 +210,22 @@ func loadLayouts(logger *slog.Logger, dir string) *scriptlayout.Resolver {
 }
 
 func logReport(logger *slog.Logger, rep gamepatch.Report) {
+	notFound := 0
 	for i, r := range rep.Patches {
 		attrs := []any{"index", i + 1, "file", r.Patch.File, "path", r.Patch.Path, "owner", r.Patch.Owner, "targets", len(r.Targets)}
-		if r.Err != nil {
+		switch {
+		case errors.Is(r.Err, gamepatch.ErrNoMatch):
+			notFound++
+			logger.Warn("patch_not_found", append(attrs, "old", r.Patch.Old, "error", r.Err.Error())...)
+		case r.Err != nil:
 			logger.Error("patch_failed", append(attrs, "error", r.Err.Error())...)
-			continue
+		default:
+			logger.Info("patch_matched", append(attrs, "objects", objectList(r.Targets))...)
 		}
-		logger.Info("patch_matched", append(attrs, "objects", objectList(r.Targets))...)
+	}
+	if notFound > 0 {
+		logger.Warn("patches_skipped", "not_found", notFound, "total", len(rep.Patches),
+			"hint", "these strings are not in this game version; the other patches are applied")
 	}
 	for _, r := range rep.Fonts {
 		logger.Info("font_replaced", "name", r.Name, "family", r.Family, "metrics", string(r.Metrics),
@@ -222,6 +237,29 @@ func logReport(logger *slog.Logger, rep gamepatch.Report) {
 		}
 		if len(r.Missing) > 0 {
 			logger.Warn("font_missing_characters", "name", r.Name, "family", r.Family, "missing", string(r.Missing))
+		}
+	}
+}
+
+func registerLogFile(flags *flag.FlagSet) *string {
+	return flags.String("log-file", logFileName, `append warnings and errors to this file, created on the first one; "" disables it`)
+}
+
+// openLog returns the logger for logOut and the log file at path, and the
+// function that closes the file. The function takes the run's error and
+// appends a non-nil one to the file before closing it.
+func openLog(logOut io.Writer, path string) (*slog.Logger, func(*error)) {
+	if path == "" {
+		return logging.New(logOut, nil, nil), func(*error) {}
+	}
+	file := logging.NewFile(path)
+	fileLog := slog.New(logging.NewHandler(file, slog.LevelWarn))
+	return logging.New(logOut, nil, file), func(err *error) {
+		if *err != nil {
+			fileLog.Error("run_failed", "error", (*err).Error())
+		}
+		if cerr := file.Close(); cerr != nil {
+			fmt.Fprintln(logOut, "error: close log file:", cerr)
 		}
 	}
 }
@@ -259,7 +297,7 @@ func printFonts(w io.Writer, b *unityfs.Bundle) error {
 	return tw.Flush()
 }
 
-func runPack(args []string, logOut io.Writer) error {
+func runPack(args []string, logOut io.Writer) (err error) {
 	flags := flag.NewFlagSet("patcher pack", flag.ContinueOnError)
 	flags.SetOutput(logOut)
 	source := flags.String("s", "", "localization directory with any of "+locpack.PatchesName+", "+dictionary.MapName+" with "+dictionary.POName+", and "+locpack.FontsName+"; the package defaults to ./<dir name>"+packageExt)
@@ -269,9 +307,12 @@ func runPack(args []string, logOut io.Writer) error {
 	flags.StringVar(&src.Map, "map", "", "translation.map written by 'editor dump'; requires -po")
 	flags.StringVar(&src.PO, "po", "", "translation.po matching -map; translated messages are applied after the journal")
 	flags.StringVar(&src.Fonts, "fonts", "", "fonts.json; font paths in it are relative to its directory")
+	logFile := registerLogFile(flags)
 	if err := flags.Parse(args); err != nil {
 		return err
 	}
+	logger, closeLog := openLog(logOut, *logFile)
+	defer closeLog(&err)
 	if flags.NArg() != 0 {
 		flags.Usage()
 		return errors.New("unexpected positional arguments")
@@ -280,7 +321,6 @@ func runPack(args []string, logOut io.Writer) error {
 		if src != (locpack.Sources{}) {
 			return errors.New("-s cannot be combined with -patches, -map, -po or -fonts")
 		}
-		var err error
 		if src, err = sourceFiles(*source); err != nil {
 			return err
 		}
@@ -296,8 +336,6 @@ func runPack(args []string, logOut io.Writer) error {
 		flags.Usage()
 		return errors.New("expected -o or -s")
 	}
-	logger := slog.New(slog.NewJSONHandler(logOut, nil))
-
 	var buf bytes.Buffer
 	res, err := locpack.Pack(&buf, src)
 	if err != nil {

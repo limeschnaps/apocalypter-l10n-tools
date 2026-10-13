@@ -6,7 +6,9 @@ import (
 	"slices"
 
 	"apocalypter-l10n-tools/internal/patch"
+	"apocalypter-l10n-tools/internal/scriptlayout"
 	"apocalypter-l10n-tools/internal/serialized"
+	"apocalypter-l10n-tools/internal/textkind"
 	"apocalypter-l10n-tools/internal/unityfs"
 )
 
@@ -63,6 +65,17 @@ func (b *Build) ByteOrder(file string) serialized.ByteOrder {
 // bundle: every matching component changes unless opts.Strict is set.
 func (b *Build) Apply(p patch.Patch, opts Options) Result {
 	return b.st.apply(p, opts)
+}
+
+// Displayed returns the string variables the FSMs of the build show, for
+// textkind.Component.Displayed. Like Apply, it finds them once, on the
+// first call or the first patch matched by field path, whichever comes
+// first; nil layouts give none.
+func (b *Build) Displayed(layouts *scriptlayout.Resolver) textkind.Variables {
+	if layouts == nil {
+		return nil
+	}
+	return b.st.displayedVars(layouts)
 }
 
 // Occurrence returns the Patch.Occurrence that selects the string encoded

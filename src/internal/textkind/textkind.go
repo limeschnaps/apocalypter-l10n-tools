@@ -4,7 +4,9 @@
 // Classify sees one component at a time: its script and every string it
 // holds, keyed by the field path Unity YAML uses (for example
 // "fsm.states[1].actionData.fsmStringParams[4].value"). PlayMaker FSMs
-// need a few integer arrays as well; NumberField says which ones.
+// need a few integer arrays as well; NumberField says which ones. An FSM
+// may also write text into a variable another FSM shows; Displayed
+// collects those variables over all components for Classify.
 package textkind
 
 import (
@@ -91,6 +93,66 @@ type Component struct {
 	// Numbers holds the fields NumberField selects, keyed by path. Arrays
 	// hold one value per element; scalars one value.
 	Numbers map[string][]int32
+	// Displayed lists the string variables other FSMs show, as Displayed
+	// finds them. A SetFsmString action that writes one of them carries
+	// screen text.
+	Displayed Variables
+}
+
+// Variables is a set of FSM string variables: FSM names by variable
+// name.
+type Variables map[string]map[string]bool
+
+// add reports whether the variable is new to v.
+func (v Variables) add(fsm, name string) bool {
+	if v[name][fsm] {
+		return false
+	}
+	if v[name] == nil {
+		v[name] = map[string]bool{}
+	}
+	v[name][fsm] = true
+	return true
+}
+
+// has reports whether v holds the variable; an empty fsm matches the
+// variable of any FSM.
+func (v Variables) has(fsm, name string) bool {
+	if fsm == "" {
+		return len(v[name]) > 0
+	}
+	return v[name][fsm]
+}
+
+// Displayed returns the string variables that the FSMs among comps show
+// on screen. A variable a SetFsmString action fills from a variable of
+// its own FSM makes that one displayed too, so the search repeats until
+// it finds no new variables. Variables are matched by FSM and variable
+// name, without the GameObject, which SetFsmString picks at run time.
+func Displayed(comps []Component) Variables {
+	out := Variables{}
+	for grown := true; grown; {
+		grown = false
+		for _, c := range comps {
+			if !IsFSM(c.Script) {
+				continue
+			}
+			c.Displayed = out
+			_, shown := fsmParamKinds(c)
+			fsm := ""
+			for _, f := range c.Strings {
+				if f.Path == fsmNamePath {
+					fsm = f.Value
+				}
+			}
+			for _, f := range c.Strings {
+				if shown[f.Value] && strings.HasPrefix(f.Path, fsmStringVars) && strings.HasSuffix(f.Path, "].name") {
+					grown = out.add(fsm, f.Value) || grown
+				}
+			}
+		}
+	}
+	return out
 }
 
 // textComponent describes a UI component whose own fields hold its text.
@@ -131,6 +193,11 @@ func isEasySave(class string) bool { return strings.HasPrefix(class, "ES3") }
 // playMakerScripts hold an FSM in their "fsm" field.
 var playMakerScripts = map[string]bool{"PlayMakerFSM": true, "FsmTemplate": true}
 
+// IsFSM reports whether components of the script hold a PlayMaker FSM.
+func IsFSM(s Script) bool {
+	return playMakerScripts[s.Class] || strings.EqualFold(s.Assembly, "PlayMaker.dll")
+}
+
 // Action parameters that carry text, by action class name (without
 // namespace) and parameter name. Parameters of other actions are names of
 // FSMs, variables, events, tags, input axes and the like.
@@ -165,6 +232,15 @@ var (
 	}
 )
 
+// remote is one SetFsmString action: the FSM and the variable it writes,
+// and the path of its literal value or the variable that value is bound
+// to. dynamic marks a variable name taken from a variable.
+type remote struct {
+	fsm, variable string
+	dynamic       bool
+	value, bound  string
+}
+
 type builder struct {
 	target  string
 	sources []string
@@ -191,6 +267,18 @@ const actionDataSep = ".actionData."
 
 // fsmStringVars prefixes the paths of FSM string variables.
 const fsmStringVars = "fsm.variables.stringVariables["
+
+// fsmNamePath holds the name of an FSM.
+const fsmNamePath = "fsm.name"
+
+// SetFsmString writes setValue into the variable variableName of the FSM
+// fsmName on another GameObject.
+const (
+	setFsmString      = "SetFsmString"
+	setFsmStringFSM   = "fsmName"
+	setFsmStringVar   = "variableName"
+	setFsmStringValue = "setValue"
+)
 
 // Numeric fields of ActionData the parameter walk reads.
 var actionDataArrays = []string{"actionStartIndex", "paramDataType", "paramDataPos", "arrayParamSizes", "customTypeSizes"}
@@ -220,8 +308,8 @@ func Classify(c Component) []Kind {
 	full := c.Script.FullName()
 	tc, isText := TextComponents[full]
 	var fsm map[string]Kind
-	if playMakerScripts[c.Script.Class] || strings.EqualFold(c.Script.Assembly, "PlayMaker.dll") {
-		fsm = fsmParamKinds(c)
+	if IsFSM(c.Script) {
+		fsm, _ = fsmParamKinds(c)
 	}
 	for i, f := range c.Strings {
 		switch {
@@ -309,8 +397,11 @@ func fsmKind(params map[string]Kind, path string) Kind {
 // initial value of the FSM string variable with that name is Screen too.
 // So are the sources of a builder action writing a displayed variable,
 // such as the "L" StringAppend2 adds to a capacity label, and, through
-// their variables, the sources of the builders before it.
-func fsmParamKinds(c Component) map[string]Kind {
+// their variables, the sources of the builders before it. The value a
+// SetFsmString action writes into a variable of c.Displayed counts as a
+// text parameter as well. The second result holds the names of the
+// variables c shows.
+func fsmParamKinds(c Component) (map[string]Kind, map[string]bool) {
 	byPath := make(map[string]string, len(c.Strings))
 	prefixes := map[string]bool{}
 	for _, f := range c.Strings {
@@ -328,7 +419,7 @@ func fsmParamKinds(c Component) map[string]Kind {
 	screenVars := map[string]bool{}
 	var flows []flow
 	for prefix := range prefixes {
-		flows = append(flows, classifyActionData(prefix, byPath, c.Numbers, out, screenVars)...)
+		flows = append(flows, classifyActionData(prefix, byPath, c.Numbers, c.Displayed, out, screenVars)...)
 	}
 	for shown := true; shown; {
 		shown = false
@@ -352,7 +443,7 @@ func fsmParamKinds(c Component) map[string]Kind {
 			out[strings.TrimSuffix(p, ".name")+".value"] = Screen
 		}
 	}
-	return out
+	return out, screenVars
 }
 
 // classifyActionData walks the parameters of one FSM state. PlayMaker
@@ -363,9 +454,10 @@ func fsmParamKinds(c Component) map[string]Kind {
 // (40) entries are followed by their elements, counted in arrayParamSizes
 // and customTypeSizes. When the tables are inconsistent every string
 // parameter of the state is Maybe. The names of the variables that Screen
-// parameters are bound to go to screenVars. The result lists the builder
-// actions of the state.
-func classifyActionData(prefix string, byPath map[string]string, numbers map[string][]int32, out map[string]Kind, screenVars map[string]bool) []flow {
+// parameters are bound to go to screenVars, and so do the variables
+// SetFsmString writes into a displayed variable from. The result lists
+// the builder actions of the state.
+func classifyActionData(prefix string, byPath map[string]string, numbers map[string][]int32, displayed Variables, out map[string]Kind, screenVars map[string]bool) []flow {
 	list := func(name string) []string {
 		var vals []string
 		for i := 0; ; i++ {
@@ -464,6 +556,7 @@ func classifyActionData(prefix string, byPath map[string]string, numbers map[str
 	}
 
 	flows := map[int]*flow{}
+	remotes := map[int]*remote{}
 	for _, l := range leaves {
 		var path string
 		switch types[l.index] {
@@ -488,6 +581,27 @@ func classifyActionData(prefix string, byPath map[string]string, numbers map[str
 			}
 		}
 		_, indexed := byPath[path]
+		if action == setFsmString {
+			r := remotes[l.action]
+			if r == nil {
+				r = &remote{}
+				remotes[l.action] = r
+			}
+			switch l.name {
+			case setFsmStringFSM:
+				if !useVar {
+					r.fsm = byPath[path]
+				}
+			case setFsmStringVar:
+				r.variable, r.dynamic = byPath[path], useVar
+			case setFsmStringValue:
+				if useVar {
+					r.bound = bound
+				} else if indexed {
+					r.value = path
+				}
+			}
+		}
 		if b, ok := builders[action]; ok {
 			f := flows[l.action]
 			if f == nil {
@@ -517,6 +631,17 @@ func classifyActionData(prefix string, byPath map[string]string, numbers map[str
 			kind = Service
 		}
 		out[path] = kind
+	}
+	for _, r := range remotes {
+		if r.dynamic || r.variable == "" || !displayed.has(r.fsm, r.variable) {
+			continue
+		}
+		if r.value != "" {
+			out[r.value] = Screen
+		}
+		if r.bound != "" {
+			screenVars[r.bound] = true
+		}
 	}
 	result := make([]flow, 0, len(flows))
 	for _, f := range flows {

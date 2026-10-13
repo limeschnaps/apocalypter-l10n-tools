@@ -63,8 +63,10 @@ type GameIndex struct {
 	// layouts holds the script layout of each component, nil when its
 	// strings come from the heuristic scan.
 	layouts []*scriptlayout.Node
-	entries [][]Entry
-	byKey   map[objectKey]int
+	// displayed holds the string variables the FSMs of the build show.
+	displayed textkind.Variables
+	entries   [][]Entry
+	byKey     map[objectKey]int
 	// gen changes with every change of entries, under the write lock.
 	gen    uint64
 	sorted sortCache
@@ -126,7 +128,8 @@ func (g *GameIndex) rebuildLocked(ctx context.Context) error {
 
 	comps := build.Components()
 	layouts := g.loadLayouts(comps)
-	entries, err := g.scanAll(ctx, build, comps, layouts)
+	displayed := build.Displayed(g.resolver)
+	entries, err := g.scanAll(ctx, build, comps, layouts, displayed)
 	if err != nil {
 		return err
 	}
@@ -138,7 +141,7 @@ func (g *GameIndex) rebuildLocked(ctx context.Context) error {
 			decoded++
 		}
 	}
-	g.build, g.comps, g.layouts, g.entries, g.byKey = build, comps, layouts, entries, byKey
+	g.build, g.comps, g.layouts, g.displayed, g.entries, g.byKey = build, comps, layouts, displayed, entries, byKey
 	g.gen++
 
 	stats := g.statsLocked()
@@ -200,7 +203,7 @@ func (g *GameIndex) loadLayouts(comps []gamepatch.Component) []*scriptlayout.Nod
 // scanAll lists the indexed strings of every component in parallel. A
 // component whose data does not match its layout falls back to the
 // heuristic scan, and its layout is cleared.
-func (g *GameIndex) scanAll(ctx context.Context, build *gamepatch.Build, comps []gamepatch.Component, layouts []*scriptlayout.Node) ([][]Entry, error) {
+func (g *GameIndex) scanAll(ctx context.Context, build *gamepatch.Build, comps []gamepatch.Component, layouts []*scriptlayout.Node, displayed textkind.Variables) ([][]Entry, error) {
 	entries := make([][]Entry, len(comps))
 	errs := make([]error, len(comps))
 	next := make(chan int)
@@ -208,10 +211,10 @@ func (g *GameIndex) scanAll(ctx context.Context, build *gamepatch.Build, comps [
 	for range runtime.GOMAXPROCS(0) {
 		wg.Go(func() {
 			for i := range next {
-				all, err := componentStrings(build, comps[i], layouts[i])
+				all, err := componentStrings(build, comps[i], layouts[i], displayed)
 				if err != nil {
 					errs[i] = err
-					all, _ = componentStrings(build, comps[i], nil)
+					all, _ = componentStrings(build, comps[i], nil, displayed)
 				}
 				entries[i] = visible(all)
 			}
@@ -282,8 +285,8 @@ func loadBuild(path string) (*gamepatch.Build, error) {
 // componentStrings returns every string of a component, including empty
 // ones and numbers, each with its textkind. With a layout, strings are
 // decoded and named by field path; without one, they are found by
-// serialized.ScanStrings.
-func componentStrings(build *gamepatch.Build, c gamepatch.Component, layout *scriptlayout.Node) ([]Entry, error) {
+// serialized.ScanStrings. displayed are the string variables FSMs show.
+func componentStrings(build *gamepatch.Build, c gamepatch.Component, layout *scriptlayout.Node, displayed textkind.Variables) ([]Entry, error) {
 	data := build.Data(c)
 	order := build.ByteOrder(c.File)
 	h, err := serialized.ReadMonoBehaviourHeader(data, order)
@@ -323,15 +326,16 @@ func componentStrings(build *gamepatch.Build, c gamepatch.Component, layout *scr
 		}
 		raw = fields
 	}
-	classify(c, out, raw, order)
+	classify(c, out, raw, order, displayed)
 	return out, nil
 }
 
 // classify sets the textkind of every entry of a component.
-func classify(c gamepatch.Component, entries []Entry, raw map[string][]byte, order serialized.ByteOrder) {
+func classify(c gamepatch.Component, entries []Entry, raw map[string][]byte, order serialized.ByteOrder, displayed textkind.Variables) {
 	comp := textkind.Component{
-		Script:  textkind.Script{Assembly: c.Script.AssemblyName, Namespace: c.Script.Namespace, Class: c.Script.ClassName},
-		Strings: make([]textkind.Field, len(entries)),
+		Script:    textkind.Script{Assembly: c.Script.AssemblyName, Namespace: c.Script.Namespace, Class: c.Script.ClassName},
+		Strings:   make([]textkind.Field, len(entries)),
+		Displayed: displayed,
 	}
 	for i, e := range entries {
 		comp.Strings[i] = textkind.Field{Path: e.Path, Value: e.Value}
@@ -509,15 +513,16 @@ func (g *GameIndex) Records(kind textkind.Kind) ([]patch.Patch, error) {
 }
 
 // rescanLocked returns all strings of component j after a change. The
-// heuristic scan replaces a layout that no longer matches the data.
+// heuristic scan replaces a layout that no longer matches the data. The
+// displayed variables stay as Rebuild found them, as in the patcher.
 func (g *GameIndex) rescanLocked(j int) []Entry {
 	c := g.comps[j]
-	all, err := componentStrings(g.build, c, g.layouts[j])
+	all, err := componentStrings(g.build, c, g.layouts[j], g.displayed)
 	if err != nil {
 		g.logger.Warn("script_decode_failed", "script", c.Script.AssemblyName+" "+scriptLabel(c.Script), "components", 1,
 			"error", fmt.Sprintf("%s:%d: %v", c.File, c.PathID, err))
 		g.layouts[j] = nil
-		all, _ = componentStrings(g.build, c, nil)
+		all, _ = componentStrings(g.build, c, nil, g.displayed)
 	}
 	return all
 }

@@ -482,3 +482,111 @@ MonoBehaviour:
 		t.Error("records of a deleted asset succeeded")
 	}
 }
+
+// The tobacco plant of Apocalypter: the Plant FSM of the pot writes the
+// ripe label into the ItemName variable of the ItemName FSM on the plant,
+// which shows it with UiTextSetText. Both FSMs live in different assets.
+func TestSearchKindsRemoteVariable(t *testing.T) {
+	root, ix := newProject(t)
+	const playMakerGUID = "55555555555555555555555555555555"
+	writeFile(t, filepath.Join(root, "Assets", "Plugins", "PlayMaker.dll.meta"), "fileFormatVersion: 2\nguid: "+playMakerGUID+"\n")
+	script := `{fileID: 1384774831, guid: ` + playMakerGUID + `, type: 3}`
+	writeFile(t, filepath.Join(root, "Assets", "Pot.prefab"), `%YAML 1.1
+--- !u!1 &100
+GameObject:
+  m_Name: Pot
+--- !u!114 &200
+MonoBehaviour:
+  m_GameObject: {fileID: 100}
+  m_Script: `+script+`
+  fsm:
+    name: Plant
+    states:
+    - name: ripe
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SetFsmString
+        paramName:
+        - gameObject
+        - fsmName
+        - variableName
+        - setValue
+        - everyFrame
+        actionStartIndex: 00000000
+        paramDataType: 1400000012000000120000001200000011000000
+        paramDataPos: 0000000000000000010000000200000000000000
+        fsmStringParams:
+        - useVariable: 0
+          name:
+          value: ItemName
+        - useVariable: 0
+          name:
+          value: ItemName
+        - useVariable: 0
+          name:
+          value: Tobacco Plant Ripe
+`)
+	writeFile(t, filepath.Join(root, "Assets", "Plant.prefab"), `%YAML 1.1
+--- !u!1 &100
+GameObject:
+  m_Name: Plant
+--- !u!114 &200
+MonoBehaviour:
+  m_GameObject: {fileID: 100}
+  m_Script: `+script+`
+  fsm:
+    name: ItemName
+    states:
+    - name: over
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.UiTextSetText
+        paramName:
+        - gameObject
+        - text
+        actionStartIndex: 00000000
+        paramDataType: 1400000012000000
+        paramDataPos: 0000000000000000
+        fsmStringParams:
+        - useVariable: 1
+          name: ItemName
+          value: Cassette Player
+    variables:
+      stringVariables:
+      - useVariable: 0
+        name: ItemName
+        value: Tobacco Plant Growing
+`)
+	if err := ix.Rebuild(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	kinds := map[string]textkind.Kind{}
+	for _, e := range search(t, ix, Query{Text: "Tobacco Plant"}).Entries {
+		kinds[e.Value] = e.Kind
+	}
+	want := map[string]textkind.Kind{"Tobacco Plant Ripe": textkind.Screen, "Tobacco Plant Growing": textkind.Screen}
+	if !reflect.DeepEqual(kinds, want) {
+		t.Errorf("kinds = %v, want %v", kinds, want)
+	}
+
+	// Edits and records keep the kind the whole project gives.
+	ripe := search(t, ix, Query{Text: "Tobacco Plant Ripe"}).Entries[0]
+	updated, err := ix.Apply(editFor(ripe, "Куст табака созрел"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if updated.Kind != textkind.Screen {
+		t.Errorf("edited kind = %v", updated.Kind)
+	}
+	records, err := ix.Records(textkind.Screen)
+	if err != nil {
+		t.Fatal(err)
+	}
+	found := false
+	for _, r := range records {
+		found = found || r.Old == "Куст табака созрел" && r.Owner == "Pot"
+	}
+	if !found {
+		t.Errorf("records = %+v", records)
+	}
+}

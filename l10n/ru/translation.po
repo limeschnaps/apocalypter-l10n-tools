@@ -20,7 +20,47 @@ msgstr "SawyerK"
 #. sharedassets1.assets | 1.3L v2 55HP 94Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
 #. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
 #. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[6].value
-#. … +41
+#. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 2.8L V6 115HP 183Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 3.7L I6 145HP 292Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 3.8L V6 165HP 285Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 3L I5 87HP 172Nm Diesel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 5.2L V8 230HP 340Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 5.8L I6 120HP 356Nm Diesel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 594cc I2 23HP 39Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 7L I6 165HP 542Nm Diesel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline TEST | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | 8.2L V8 400HP 746Nm Gasoline | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | UTV_wheel_front_1 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | UTV_wheel_rear_1 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | motorcycle_wheel | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_medium | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_medium_race | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_motorcycle | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_small | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_truck | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_truck_big | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | radiator_truck_ultra | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | rustallion_radiator | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | small_wheel_1 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | small_wheel_2 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | small_wheel_3 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | truck_wheel_1 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | truck_wheel_1_armored | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | truck_wheel_2 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | truck_wheel_2_armored | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | truck_wheel_3 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | truck_wheel_3_armored | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_1 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_2 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_2_armored | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_3 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_3_armored | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_4 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_4_armored | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_5 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | wheel_5_armored | fsm.states[1].actionData.fsmStringParams[6].value
 msgid "%"
 msgstr ""
 
@@ -33,7 +73,14 @@ msgstr ""
 #. level0 | point3 | m_Text
 #. level1 | chambered_indicator | m_Text
 #. level1 | dot1 | m_Text
-#. … +8
+#. level1 | dot2 | m_Text
+#. level1 | dot3 | m_Text
+#. level1 | point1 | m_Text
+#. level1 | point2 | m_Text
+#. level1 | point3 | m_Text
+#. sharedassets1.assets | dot1 | m_Text
+#. sharedassets1.assets | dot2 | m_Text
+#. sharedassets1.assets | dot3 | m_Text
 msgid "."
 msgstr ""
 
@@ -539,7 +586,16 @@ msgstr "Бронированное колесо грузовика / Сцепл�
 #. sharedassets1.assets | Duke | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | Halfbreed | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | Junker | fsm.states[1].actionData.fsmStringParams[0].value
-#. … +10
+#. sharedassets1.assets | Outrider | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | PigPen | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | PipeRat | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Poloska | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Rustallion | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Rustcargo | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Rustchief | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Rustliner | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | TinyTyrant | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Vulture | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "Attach Trailer (H)"
 msgstr "Присоединить прицеп: H"
 
@@ -708,7 +764,130 @@ msgstr "Разделать: F"
 #. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
 #. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[8].value
 #. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
-#. … +124
+#. sharedassets1.assets | 2.8L V6 115HP 183Nm Gasoline | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | 22_pipe_pistol | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | 22_pipe_revolver | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 22_pipe_smg | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 3.7L I6 145HP 292Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 3.8L V6 165HP 285Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 3L I5 87HP 172Nm Diesel | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | 5.2L V8 230HP 340Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 5.8L I6 120HP 356Nm Diesel | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 594cc I2 23HP 39Nm Gasoline | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | 7L I6 165HP 542Nm Diesel | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline TEST | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 8.2L V8 400HP 746Nm Gasoline | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | 9mm_borz_smg | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Diesel_Barrel | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Diesel_Can | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Gasoline_Barrel | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Gasoline_Can | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | MotorOil_Can_Big | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | MotorOil_Can_Small | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Repairbox_Large | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Repairbox_Medium | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Toolbox | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Water_Barrel | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | Water_Can_Plastic | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | akm_drum | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | akm_trash | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | akms | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | alcohol_canister | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_arrow | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_12gauge | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_3006 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_556mm | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_762mm | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_9mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_12gauge | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_22 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_3006 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_big_556mm | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_big_762mm | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | armorplate | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | backpack_huge | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | backpack_large | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | backpack_medium | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | backpack_small | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | bandage_1 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | bedroll | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | binocular | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | blastlance_1 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | blastlance_2 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | bodyarmor_type_0 | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | bodyarmor_type_1 | fsm.states[1].actionData.fsmStringParams[6].value
+#. sharedassets1.assets | bodyarmor_type_2 | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | bodyarmor_type_3 | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | bodyarmor_type_4 | fsm.states[1].actionData.fsmStringParams[9].value
+#. sharedassets1.assets | box_cardboard | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | cassette_80ssynthwave | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | cassette_chill | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | cassette_industrialmetal | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | cassette_retrosynth | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | cassette_whitebat | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | cigar | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | cigarette_bactrian | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | crate_metal | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | crate_plastic | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | crossbow | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | dew_collector_portable | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | dogfood_can | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | first_aid_1 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | flashlight1 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | flashlight2 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | flashlight3 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | flashlight_batteries | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | folk_17 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | gasoline_stove | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | grenade | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | m16a1 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | machete | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | maggot_farm_portable | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | old_knife | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | pipe_wrench | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | plant_tobacco | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | radiator_medium | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radiator_medium_race | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radiator_motorcycle | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radiator_small | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radiator_truck | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radiator_truck_big | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radiator_truck_ultra | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | radio_car | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | redmark_m11 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | redmark_m11_scoped | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | rochester_m24 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | rochester_m24_chopped | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | rustallion_radiator | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | sanity_pills | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | shiv | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | slamberg_500 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | slamberg_500_chopped | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | slamfire_shotgun | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | supercharger_1 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_2 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_3 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_4 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_5 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_6 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_7 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | supercharger_8 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | suspension_lift_kit | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | tin_can_light | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | turbo_bigbrutus | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | turbo_doubletrouble | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | turbo_littlebee | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | turbo_triplethreat | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | turbo_warwhistle | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[5].value
 msgid "Buy: F"
 msgstr "Купить: F"
 
@@ -955,7 +1134,16 @@ msgstr "Мертвая зона"
 #. sharedassets1.assets | Duke | fsm.states[2].actionData.fsmStringParams[2].value
 #. sharedassets1.assets | Halfbreed | fsm.states[2].actionData.fsmStringParams[2].value
 #. sharedassets1.assets | Junker | fsm.states[2].actionData.fsmStringParams[2].value
-#. … +10
+#. sharedassets1.assets | Outrider | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | PigPen | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | PipeRat | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Poloska | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Rustallion | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Rustcargo | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Rustchief | fsm.states[2].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | Rustliner | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | TinyTyrant | fsm.states[2].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Vulture | fsm.states[2].actionData.fsmStringParams[2].value
 msgid "Detach Trailer (H)"
 msgstr "Отсоединить прицеп: H"
 
@@ -1056,7 +1244,19 @@ msgstr "Введите сид карты"
 #. sharedassets1.assets | Lizard_cooked | fsm.states[1].actionData.fsmStringParams[2].value
 #. sharedassets1.assets | Rat_Dead | fsm.states[1].actionData.fsmStringParams[2].value
 #. sharedassets1.assets | Rat_cooked | fsm.states[1].actionData.fsmStringParams[2].value
-#. … +13
+#. sharedassets1.assets | Scorpion_Small_Dead | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Scorpion_Small_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Spider_Small_Dead | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | Spider_Small_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | dogfood_can | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | maggots | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_dog_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_dog_raw | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_insect_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_insect_raw | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_mutant_cooked | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_mutant_raw | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | meat_rotten | fsm.states[1].actionData.fsmStringParams[2].value
 msgid "Eat: F"
 msgstr "Съесть: F"
 
@@ -1246,7 +1446,12 @@ msgstr "Канистра бензина / 20л, полная"
 #. sharedassets1.assets | gearlever_3 | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | gearlever_4 | fsm.states[1].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | gearlever_5 | fsm.states[1].actionData.fsmStringParams[0].value
-#. … +6
+#. sharedassets1.assets | gearlever_6 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gearlever_7 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | gearlever_knife | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | poloska_gearlever_1 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | poloska_gearlever_2 | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | rustallion_gearlever | fsm.states[1].actionData.fsmStringParams[0].value
 msgid "Gear Lever"
 msgstr "Рычаг КПП"
 
@@ -1665,7 +1870,131 @@ msgstr "Записка: \"Дороги разрушены недавними з�
 #. sharedassets1.assets | 11.5L V12 274HP 854Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
 #. sharedassets1.assets | 18L V8 335HP 1700Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
 #. sharedassets1.assets | 2.3L I4 89HP 165Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
-#. … +125
+#. sharedassets1.assets | 2.8L V6 115HP 183Nm Gasoline | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | 22_pipe_pistol | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | 22_pipe_revolver | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 22_pipe_smg | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 3.7L I6 145HP 292Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 3.8L V6 165HP 285Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 3L I5 87HP 172Nm Diesel | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | 5.2L V8 230HP 340Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 5.8L I6 120HP 356Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 594cc I2 23HP 39Nm Gasoline | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | 7L I6 165HP 542Nm Diesel | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 7L V8 355HP 569Nm Gasoline TEST | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 8.2L V8 400HP 746Nm Gasoline | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | 9mm_borz_smg | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Diesel_Barrel | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Diesel_Can | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Gasoline_Barrel | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Gasoline_Can | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | MotorOil_Can_Big | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | MotorOil_Can_Small | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Repairbox_Large | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Repairbox_Medium | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Toolbox | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Water_Barrel | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | Water_Can_Plastic | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | akm_drum | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | akm_trash | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | akms | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | alcohol_canister | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_arrow | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_12gauge | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_3006 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_556mm | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_762mm | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_9mm | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_big_12gauge | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_big_22 | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_big_3006 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_big_556mm | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_big_762mm | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | armorplate | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | backpack_huge | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | backpack_large | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | backpack_medium | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | backpack_small | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | bandage_1 | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | bedroll | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | binocular | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | blastlance_1 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | blastlance_2 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | bodyarmor_type_0 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | bodyarmor_type_1 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | bodyarmor_type_2 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | bodyarmor_type_3 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | bodyarmor_type_4 | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | box_cardboard | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | cassette_80ssynthwave | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | cassette_chill | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | cassette_industrialmetal | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | cassette_retrosynth | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | cassette_whitebat | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | cigar | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | cigarette_bactrian | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | crate_metal | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | crate_plastic | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | crossbow | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | dew_collector_portable | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | dogfood_can | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | first_aid_1 | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | flashlight1 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | flashlight2 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | flashlight3 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | flashlight_batteries | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | folk_17 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | gasoline_stove | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | grenade | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | m16a1 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | machete | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | maggot_farm_portable | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | old_knife | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | pipe_wrench | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | plant_tobacco | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | radiator_medium | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radiator_medium_race | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radiator_motorcycle | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radiator_small | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radiator_truck | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radiator_truck_big | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radiator_truck_ultra | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | radio_car | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | redmark_m11 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | redmark_m11_scoped | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | rochester_m24 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | rochester_m24_chopped | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | rustallion_radiator | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | sanity_pills | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | shiv | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | slamberg_500 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | slamberg_500_chopped | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | slamfire_shotgun | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | supercharger_1 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_2 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_3 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_4 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_5 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_6 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_7 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | supercharger_8 | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | suspension_lift_kit | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | tin_can_light | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | tin_can_nuts | fsm.states[1].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | turbo_bigbrutus | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | turbo_doubletrouble | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | turbo_littlebee | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | turbo_triplethreat | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | turbo_warwhistle | fsm.states[1].actionData.fsmStringParams[7].value
+#. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[4].value
 msgid "Nuts"
 msgstr "Гайки"
 
@@ -1698,7 +2027,7 @@ msgstr "Старый нож / Урон - 12"
 #. level1 | Label | m_Text
 #. sharedassets1.assets | AxisDropdown | m_Options.m_Options[0].m_Text
 #. sharedassets1.assets | Item Label | m_Text
-#. … +1
+#. sharedassets1.assets | Label | m_Text
 msgid "Option A"
 msgstr ""
 
@@ -2187,7 +2516,27 @@ msgstr "Взять оружие в слот 3: F"
 #. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | ammo_box_3006 | fsm.states[1].actionData.fsmStringParams[5].value
-#. … +21
+#. sharedassets1.assets | ammo_box_556mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_762mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_9mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_12gauge | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_22 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_3006 | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_556mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_762mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | armorplate | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | bandage_1 | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | binocular | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | first_aid_1 | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | flashlight1 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | flashlight2 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | flashlight3 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | flashlight_batteries | fsm.states[1].actionData.fsmStringParams[5].value
+#. sharedassets1.assets | grenade | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | tin_can_nuts | fsm.states[1].actionData.fsmStringParams[5].value
 msgid "Take: F"
 msgstr "Взять: F"
 
@@ -2196,7 +2545,10 @@ msgstr "Взять: F"
 #. sharedassets1.assets | backpack_medium | fsm.states[1].actionData.fsmStringParams[2].value
 #. sharedassets1.assets | backpack_small | fsm.states[1].actionData.fsmStringParams[2].value
 #. sharedassets1.assets | bodyarmor_type_0 | fsm.states[1].actionData.fsmStringParams[2].value
-#. … +4
+#. sharedassets1.assets | bodyarmor_type_1 | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | bodyarmor_type_2 | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | bodyarmor_type_3 | fsm.states[1].actionData.fsmStringParams[2].value
+#. sharedassets1.assets | bodyarmor_type_4 | fsm.states[1].actionData.fsmStringParams[2].value
 msgid "Take: Hold F"
 msgstr "Взять: удерживать F"
 
@@ -2291,8 +2643,15 @@ msgid "Tobacco Plant"
 msgstr "Куст табака"
 
 #. sharedassets1.assets | plant | fsm.variables.stringVariables[0].value
+#. sharedassets1.assets | plant_tobacco | fsm.states[0].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | plant_tobacco | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | plant_tobacco | fsm.states[2].actionData.fsmStringParams[4].value
 msgid "Tobacco Plant Growing"
 msgstr "Куст табака (растет)"
+
+#. sharedassets1.assets | plant_tobacco | fsm.states[3].actionData.fsmStringParams[4].value
+msgid "Tobacco Plant Ripe (Harvest - F)"
+msgstr "Куст табака (созрел) - Собрать: F"
 
 #. sharedassets1.assets | withered_plant | fsm.variables.stringVariables[0].value
 msgid "Tobacco Plant Withered"
@@ -2312,7 +2671,9 @@ msgstr "Набор инструментов"
 #. sharedassets1.assets | ammo_box_big_22 | fsm.states[3].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | ammo_box_big_3006 | fsm.states[3].actionData.fsmStringParams[0].value
 #. sharedassets1.assets | ammo_box_big_556mm | fsm.states[3].actionData.fsmStringParams[0].value
-#. … +3
+#. sharedassets1.assets | ammo_box_big_762mm | fsm.states[3].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.states[3].actionData.fsmStringParams[0].value
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.states[3].actionData.fsmStringParams[0].value
 msgid "Transfer Ammo: (F)"
 msgstr "Переложить патроны: F"
 
@@ -2405,7 +2766,16 @@ msgstr "Записка дяди: \"Убей всех главарей и заб�
 #. sharedassets1.assets | Repairbox_Large | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | Repairbox_Medium | fsm.states[1].actionData.fsmStringParams[5].value
 #. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[5].value
-#. … +10
+#. sharedassets1.assets | Toolbox | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | cigar | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | cigarette_bactrian | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | door | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | entrance | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | sanity_pills | fsm.states[1].actionData.fsmStringParams[8].value
+#. sharedassets1.assets | tin_can_light | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | toolset_1 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | toolset_2 | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[8].value
 msgid "Use: F"
 msgstr "Использовать: F"
 
@@ -2514,8 +2884,15 @@ msgid "Weed Plant"
 msgstr "Куст успоколиста"
 
 #. sharedassets1.assets | plant | fsm.variables.stringVariables[0].value
+#. sharedassets1.assets | plant_weed | fsm.states[0].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | plant_weed | fsm.states[1].actionData.fsmStringParams[4].value
+#. sharedassets1.assets | plant_weed | fsm.states[2].actionData.fsmStringParams[4].value
 msgid "Weed Plant Growing"
 msgstr "Куст успоколиста (растет)"
+
+#. sharedassets1.assets | plant_weed | fsm.states[3].actionData.fsmStringParams[4].value
+msgid "Weed Plant Ripe (Harvest - F)"
+msgstr "Куст успоколиста (растет) - Собрать: F"
 
 #. sharedassets1.assets | withered_plant | fsm.variables.stringVariables[0].value
 msgid "Weed Plant Withered"
@@ -3214,7 +3591,25 @@ msgstr "\"Разведчик\""
 #. sharedassets1.assets | Repairbox_Small | fsm.states[1].actionData.fsmStringParams[6].value
 #. sharedassets1.assets | ammo_box_12gauge | fsm.states[1].actionData.fsmStringParams[3].value
 #. sharedassets1.assets | ammo_box_20gauge | fsm.states[1].actionData.fsmStringParams[3].value
-#. … +19
+#. sharedassets1.assets | ammo_box_22 | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_3006 | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_556mm | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_762mm | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_9mm | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_12gauge | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_20gauge | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_22 | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_3006 | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_556mm | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_762mm | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_9mm | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | ammo_box_big_arrow | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | cigar | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | cigarette_bactrian | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | flashlight_batteries | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | sanity_pills | fsm.states[1].actionData.fsmStringParams[1].value
+#. sharedassets1.assets | tin_can_nuts | fsm.states[1].actionData.fsmStringParams[3].value
+#. sharedassets1.assets | weed_bag | fsm.states[1].actionData.fsmStringParams[1].value
 msgid "pcs"
 msgstr "шт."
 
@@ -3782,6 +4177,3 @@ msgstr ""
 #. level1 | mapPlayerIcon | m_text
 msgid "↓"
 msgstr ""
-
-#~ msgid "Drink: Hold (F)"
-#~ msgstr "Выпить: удерживать F"

@@ -14,3 +14,6 @@
 # Compiled catalogs PO editors write next to translation.po; pack reads
 # only the .po
 *.mo
+
+# Warnings and errors of patcher runs
+patcher.log

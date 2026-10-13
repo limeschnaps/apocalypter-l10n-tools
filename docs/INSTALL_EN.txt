@@ -76,6 +76,14 @@ data.unity3d without the translation. Patcher then fails with
 "backup does not match the game bundle". Delete
 Apocalypter_Data/data.unity3d.orig and run the script again.
 
+Warnings and errors
+-------------------
+
+Patcher writes warnings and errors to patcher.log next to the script.
+If a string is missing from your game version, patcher skips it with a
+patch_not_found warning and installs the rest of the translation. If
+something looks wrong, attach patcher.log to your bug report.
+
 Restoring the original
 ----------------------
 

@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
+	"reflect"
 	"testing"
 
 	"apocalypter-l10n-tools/internal/clr"
 	"apocalypter-l10n-tools/internal/patch"
 	"apocalypter-l10n-tools/internal/scriptlayout"
 	"apocalypter-l10n-tools/internal/serialized"
+	"apocalypter-l10n-tools/internal/textkind"
 	"apocalypter-l10n-tools/internal/unityfs"
 	"apocalypter-l10n-tools/internal/unitytest"
 )
@@ -153,6 +155,30 @@ func TestApply(t *testing.T) {
 	}
 }
 
+func TestApplySkipsUnmatched(t *testing.T) {
+	b := openBundle(t, gameBundle())
+	cases := map[string]patch.Patch{
+		"wrong owner":         {Owner: "Nobody", Old: "Hello", New: "x"},
+		"wrong script":        {Owner: "Title", Script: patch.Script{Class: "Dialog"}, Old: "Hello", New: "x"},
+		"wrong file id":       {Owner: "Title", Script: patch.Script{Assembly: tmp.Assembly, FileID: 1}, Old: "Hello", New: "x"},
+		"no occurrence":       {Owner: "Title", Script: tmp, Occurrence: 2, Old: "OK", New: "x"},
+		"negative occurrence": {Owner: "Title", Occurrence: -1, Old: "OK", New: "x"},
+	}
+	for name, missing := range cases {
+		t.Run(name, func(t *testing.T) {
+			ok := patch.Patch{Owner: "Button", Old: "OK", New: "fine"}
+			rep, nodes, err := Apply(b, []patch.Patch{missing, ok}, Options{})
+			if err != nil || len(nodes) == 0 {
+				t.Fatalf("err = %v, nodes = %v", err, nodes)
+			}
+			results := rep.Patches
+			if !errors.Is(results[0].Err, ErrNoMatch) || results[1].Err != nil || len(results[1].Targets) == 0 {
+				t.Errorf("results = %+v", results)
+			}
+		})
+	}
+}
+
 func TestApplyFailures(t *testing.T) {
 	b := openBundle(t, gameBundle())
 	cases := map[string]struct {
@@ -160,12 +186,8 @@ func TestApplyFailures(t *testing.T) {
 		opts  Options
 		want  error
 	}{
-		"wrong owner":         {patch.Patch{Owner: "Nobody", Old: "Hello", New: "x"}, Options{}, ErrNoMatch},
-		"wrong script":        {patch.Patch{Owner: "Title", Script: patch.Script{Class: "Dialog"}, Old: "Hello", New: "x"}, Options{}, ErrNoMatch},
-		"wrong file id":       {patch.Patch{Owner: "Title", Script: patch.Script{Assembly: tmp.Assembly, FileID: 1}, Old: "Hello", New: "x"}, Options{}, ErrNoMatch},
-		"no occurrence":       {patch.Patch{Owner: "Title", Script: tmp, Occurrence: 2, Old: "OK", New: "x"}, Options{}, ErrNoMatch},
-		"negative occurrence": {patch.Patch{Owner: "Title", Occurrence: -1, Old: "OK", New: "x"}, Options{}, ErrNoMatch},
-		"strict":              {patch.Patch{Owner: "Title", Script: tmp, Old: "Hello", New: "x"}, Options{Strict: true}, ErrAmbiguous},
+		"strict no match":  {patch.Patch{Owner: "Nobody", Old: "Hello", New: "x"}, Options{Strict: true}, ErrNoMatch},
+		"strict ambiguous": {patch.Patch{Owner: "Title", Script: tmp, Old: "Hello", New: "x"}, Options{Strict: true}, ErrAmbiguous},
 	}
 	for name, tc := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -308,8 +330,8 @@ func TestApplyMatchesFieldPath(t *testing.T) {
 	}
 
 	missing := patch.Patch{Owner: "Lamp", Script: dialog, Path: "pair.b", Old: "left", New: "x"}
-	if _, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{missing}, Options{Layouts: layouts}); !errors.Is(err, ErrNoMatch) {
-		t.Errorf("value at another path: err = %v", err)
+	if rep, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{missing}, Options{Layouts: layouts}); err != nil || !errors.Is(rep.Patches[0].Err, ErrNoMatch) {
+		t.Errorf("value at another path: err = %v, results = %+v", err, rep.Patches)
 	}
 }
 
@@ -322,8 +344,8 @@ func TestApplyMatchesKind(t *testing.T) {
 		t.Errorf("same kind: err = %v, results = %+v", err, rep.Patches)
 	}
 	p.Kind = "screen"
-	if _, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{p}, Options{Layouts: layouts}); !errors.Is(err, ErrNoMatch) {
-		t.Errorf("other kind: err = %v", err)
+	if rep, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{p}, Options{Layouts: layouts}); err != nil || !errors.Is(rep.Patches[0].Err, ErrNoMatch) {
+		t.Errorf("other kind: err = %v, results = %+v", err, rep.Patches)
 	}
 	// Without layouts the kind cannot be checked.
 	if _, _, err := Apply(openBundle(t, fsmBundle()), []patch.Patch{p}, Options{}); err != nil {
@@ -373,5 +395,34 @@ func TestApplySkipsRepeatedOccurrence(t *testing.T) {
 	}
 	if got := fields(t, openBundle(t, out.Bytes()), "level0", 2); len(got) != 3 || got[1] != "Да" || got[2] != "OK" {
 		t.Errorf("fields = %q", got)
+	}
+}
+
+// A patch of the ripe label the Plant FSM writes into the variable the
+// ItemName FSM of another GameObject shows carries the screen kind.
+func TestApplyMatchesRemoteVariable(t *testing.T) {
+	layouts := scriptLayouts(t)
+	fsm := patch.Script{Assembly: "PlayMaker.dll", FileID: ScriptFileID("", "PlayMakerFSM")}
+	p := patch.Patch{
+		Owner: "Pot", Script: fsm, Path: "fsm.states[0].actionData.fsmStringParams[2].value",
+		Kind: "screen", Old: unitytest.PlantRipe, New: "Куст табака созрел",
+	}
+	if rep, _, err := Apply(openBundle(t, unitytest.PlantBundle()), []patch.Patch{p}, Options{Layouts: layouts}); err != nil || len(rep.Patches[0].Targets) != 1 {
+		t.Errorf("screen: err = %v, results = %+v", err, rep.Patches)
+	}
+	p.Kind = "maybe"
+	if rep, _, err := Apply(openBundle(t, unitytest.PlantBundle()), []patch.Patch{p}, Options{Layouts: layouts}); err != nil || !errors.Is(rep.Patches[0].Err, ErrNoMatch) {
+		t.Errorf("maybe: err = %v, results = %+v", err, rep.Patches)
+	}
+
+	build, err := Load(openBundle(t, unitytest.PlantBundle()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := build.Displayed(nil); got != nil {
+		t.Errorf("Displayed without layouts = %v", got)
+	}
+	if got, want := build.Displayed(layouts), (textkind.Variables{"ItemName": {"ItemName": true}}); !reflect.DeepEqual(got, want) {
+		t.Errorf("Displayed = %v, want %v", got, want)
 	}
 }

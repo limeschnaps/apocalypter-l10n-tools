@@ -140,8 +140,11 @@ type Index struct {
 
 	mu      sync.RWMutex
 	scripts map[string]script
-	files   map[string][]Entry
-	order   []string
+	// displayed holds the string variables the FSMs of the project show,
+	// as Rebuild found them.
+	displayed textkind.Variables
+	files     map[string][]Entry
+	order     []string
 	// gen changes with every change of files, under the write lock.
 	gen    uint64
 	sorted sortCache
@@ -176,19 +179,22 @@ func (ix *Index) Rebuild(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	files, err := ix.parseAll(ctx, paths, scripts)
+	assets, err := ix.parseAll(ctx, paths)
 	if err != nil {
 		return err
 	}
+	displayed := displayedVars(assets, scripts)
 
-	order := make([]string, 0, len(files))
-	for rel := range files {
+	files := make(map[string][]Entry, len(assets))
+	order := make([]string, 0, len(assets))
+	for rel, a := range assets {
+		files[rel] = buildEntries(rel, a.data, a.asset, scripts, displayed)
 		order = append(order, rel)
 	}
 	slices.Sort(order)
 
 	ix.mu.Lock()
-	ix.scripts, ix.files, ix.order = scripts, files, order
+	ix.scripts, ix.displayed, ix.files, ix.order = scripts, displayed, files, order
 	ix.gen++
 	ix.mu.Unlock()
 
@@ -331,7 +337,7 @@ func (ix *Index) Apply(e Edit) (Entry, error) {
 	if err != nil {
 		return Entry{}, fmt.Errorf("edited asset does not parse: %w", err)
 	}
-	updated, ok := findField(e.File, out, asset, ix.scripts, e.Start)
+	updated, ok := findField(e.File, out, asset, ix.scripts, ix.displayed, e.Start)
 	if !ok || updated.Value != e.Value {
 		return Entry{}, fmt.Errorf("edited value does not round-trip at %s:%d", e.File, e.Start)
 	}
@@ -354,7 +360,7 @@ func (ix *Index) Apply(e Edit) (Entry, error) {
 			return Entry{}, err
 		}
 	}
-	ix.files[e.File] = buildEntries(e.File, out, asset, ix.scripts)
+	ix.files[e.File] = buildEntries(e.File, out, asset, ix.scripts, ix.displayed)
 	ix.gen++
 	ix.logger.Info("field_updated", "file", e.File, "path", updated.Path, "line", updated.Line)
 	return updated, nil
@@ -374,7 +380,7 @@ func (ix *Index) patchFor(rel string, data []byte, start int, value string) (*pa
 	case p.Old == value:
 		return nil, nil
 	}
-	entries := buildEntries(rel, data, asset, ix.scripts)
+	entries := buildEntries(rel, data, asset, ix.scripts, ix.displayed)
 	if i := slices.IndexFunc(entries, func(e Entry) bool { return e.Start == start }); i >= 0 {
 		p.Kind = entries[i].Kind.String()
 	}
@@ -426,7 +432,7 @@ func (ix *Index) Records(kind textkind.Kind) ([]patch.Patch, error) {
 		if err != nil {
 			return nil, fmt.Errorf("parse %s: %w", rel, err)
 		}
-		for _, e := range buildEntries(rel, data, asset, ix.scripts) {
+		for _, e := range buildEntries(rel, data, asset, ix.scripts, ix.displayed) {
 			if e.Kind != kind {
 				continue
 			}
@@ -461,7 +467,7 @@ func (ix *Index) reindexLocked(rel string, data []byte) {
 		ix.gen++
 		return
 	}
-	ix.files[rel] = buildEntries(rel, data, asset, ix.scripts)
+	ix.files[rel] = buildEntries(rel, data, asset, ix.scripts, ix.displayed)
 	ix.gen++
 }
 
@@ -535,10 +541,16 @@ func (ix *Index) walk(ctx context.Context, dirs []string, visit func(string) err
 	return nil
 }
 
-func (ix *Index) parseAll(ctx context.Context, paths []string, scripts map[string]script) (map[string][]Entry, error) {
+// parsedAsset is a text asset with MonoBehaviours.
+type parsedAsset struct {
+	data  []byte
+	asset *unityyaml.Asset
+}
+
+func (ix *Index) parseAll(ctx context.Context, paths []string) (map[string]parsedAsset, error) {
 	type parsed struct {
-		rel     string
-		entries []Entry
+		rel string
+		parsedAsset
 	}
 	jobs := make(chan string)
 	results := make(chan parsed)
@@ -546,9 +558,9 @@ func (ix *Index) parseAll(ctx context.Context, paths []string, scripts map[strin
 	for range runtime.GOMAXPROCS(0) {
 		wg.Go(func() {
 			for path := range jobs {
-				rel, entries, ok := ix.parseFile(path, scripts)
+				rel, a, ok := ix.parseFile(path)
 				if ok {
-					results <- parsed{rel, entries}
+					results <- parsed{rel, a}
 				}
 			}
 		})
@@ -568,47 +580,60 @@ func (ix *Index) parseAll(ctx context.Context, paths []string, scripts map[strin
 		close(results)
 	}()
 
-	files := map[string][]Entry{}
+	assets := map[string]parsedAsset{}
 	for r := range results {
-		files[r.rel] = r.entries
+		assets[r.rel] = r.parsedAsset
 	}
 	if err := ctx.Err(); err != nil {
 		return nil, err
 	}
-	return files, nil
+	return assets, nil
 }
 
 // parseFile returns ok=false for files that are binary, have no
 // MonoBehaviours or cannot be parsed.
-func (ix *Index) parseFile(path string, scripts map[string]script) (string, []Entry, bool) {
+func (ix *Index) parseFile(path string) (string, parsedAsset, bool) {
 	rel, err := filepath.Rel(ix.root, path)
 	if err != nil {
-		return "", nil, false
+		return "", parsedAsset{}, false
 	}
 	rel = filepath.ToSlash(rel)
 	data, err := os.ReadFile(path)
 	if err != nil {
 		ix.logger.Warn("asset_read_failed", "file", rel, "error", err.Error())
-		return "", nil, false
+		return "", parsedAsset{}, false
 	}
 	if !bytes.Contains(data, []byte("--- !u!114 ")) {
-		return "", nil, false
+		return "", parsedAsset{}, false
 	}
 	asset, err := unityyaml.Parse(data)
 	if errors.Is(err, unityyaml.ErrNotText) {
-		return "", nil, false
+		return "", parsedAsset{}, false
 	}
 	if err != nil {
 		ix.logger.Warn("asset_parse_failed", "file", rel, "error", err.Error())
-		return "", nil, false
+		return "", parsedAsset{}, false
 	}
-	return rel, buildEntries(rel, data, asset, scripts), true
+	return rel, parsedAsset{data, asset}, true
 }
 
-func buildEntries(rel string, data []byte, asset *unityyaml.Asset, scripts map[string]script) []Entry {
+// displayedVars returns the string variables the FSMs of assets show.
+func displayedVars(assets map[string]parsedAsset, scripts map[string]script) textkind.Variables {
+	var fsms []textkind.Component
+	for _, a := range assets {
+		for _, mb := range a.asset.MonoBehaviours {
+			if c := fieldsComponent(mb, scripts); textkind.IsFSM(c.Script) {
+				fsms = append(fsms, c)
+			}
+		}
+	}
+	return textkind.Displayed(fsms)
+}
+
+func buildEntries(rel string, data []byte, asset *unityyaml.Asset, scripts map[string]script, displayed textkind.Variables) []Entry {
 	var entries []Entry
 	for _, mb := range asset.MonoBehaviours {
-		kinds := classifyFields(mb, scripts)
+		kinds := classifyFields(mb, scripts, displayed)
 		for i, f := range mb.Fields {
 			if f.Value == "" || ignoredFields[f.Path] || numberRe.MatchString(f.Value) {
 				continue
@@ -619,11 +644,11 @@ func buildEntries(rel string, data []byte, asset *unityyaml.Asset, scripts map[s
 	return entries
 }
 
-func findField(rel string, data []byte, asset *unityyaml.Asset, scripts map[string]script, start int) (Entry, bool) {
+func findField(rel string, data []byte, asset *unityyaml.Asset, scripts map[string]script, displayed textkind.Variables, start int) (Entry, bool) {
 	for _, mb := range asset.MonoBehaviours {
 		for i, f := range mb.Fields {
 			if f.Start == start {
-				return newEntry(rel, data, asset, mb, f, scripts, classifyFields(mb, scripts)[i]), true
+				return newEntry(rel, data, asset, mb, f, scripts, classifyFields(mb, scripts, displayed)[i]), true
 			}
 		}
 	}
@@ -631,7 +656,14 @@ func findField(rel string, data []byte, asset *unityyaml.Asset, scripts map[stri
 }
 
 // classifyFields returns the textkind of every field of mb, in order.
-func classifyFields(mb unityyaml.MonoBehaviour, scripts map[string]script) []textkind.Kind {
+func classifyFields(mb unityyaml.MonoBehaviour, scripts map[string]script, displayed textkind.Variables) []textkind.Kind {
+	c := fieldsComponent(mb, scripts)
+	c.Displayed = displayed
+	return textkind.Classify(c)
+}
+
+// fieldsComponent describes mb for textkind.
+func fieldsComponent(mb unityyaml.MonoBehaviour, scripts map[string]script) textkind.Component {
 	c := textkind.Component{Script: componentScript(mb, scripts), Strings: make([]textkind.Field, len(mb.Fields))}
 	for i, f := range mb.Fields {
 		c.Strings[i] = textkind.Field{Path: f.Path, Value: f.Value}
@@ -642,7 +674,7 @@ func classifyFields(mb unityyaml.MonoBehaviour, scripts map[string]script) []tex
 			c.Numbers[f.Path] = textkind.ParseYAMLNumber(f.Value, array)
 		}
 	}
-	return textkind.Classify(c)
+	return c
 }
 
 // knownByFileID maps the fileID Unity gives a script in a DLL to its

@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -136,12 +137,14 @@ func TestEncodeKeepsTranslations(t *testing.T) {
 
 func TestLocationComments(t *testing.T) {
 	var locs []Location
-	for range maxLocationComments + 3 {
-		locs = append(locs, Location{File: "level0", Owner: "A", Path: "m_Text"})
+	var want []string
+	for i := range 8 {
+		owner := "A" + strconv.Itoa(i)
+		locs = append(locs, Location{File: "level0", Owner: owner, Path: "m_Text"})
+		want = append(want, "level0 | "+owner+" | m_Text")
 	}
-	got := locationComments(locs)
-	if len(got) != maxLocationComments+1 || got[len(got)-1] != "… +3" {
-		t.Errorf("comments = %q", got)
+	if got := locationComments(locs); !reflect.DeepEqual(got, want) {
+		t.Errorf("comments = %q, want every location", got)
 	}
 }
 

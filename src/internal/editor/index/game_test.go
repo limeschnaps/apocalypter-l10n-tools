@@ -529,3 +529,54 @@ func TestGameIndexRecordsReplayAsDictionary(t *testing.T) {
 		}
 	}
 }
+
+// The label the Plant FSM writes into the variable of the ItemName FSM
+// is screen text, and its record replays through the patcher.
+func TestGameIndexRemoteVariable(t *testing.T) {
+	dir := filepath.Join(t.TempDir(), "Game_Data")
+	if err := os.MkdirAll(filepath.Join(dir, gamepatch.ManagedDir), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, gamepatch.BundleName), unitytest.PlantBundle(), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	for name, data := range unitytest.ScriptAssemblies() {
+		if err := os.WriteFile(filepath.Join(dir, gamepatch.ManagedDir, name), data, 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	journal := filepath.Join(dir, "patches.json")
+	g := newGame(t, dir, journal, io.Discard)
+
+	records, err := g.Records(textkind.Screen)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var olds []string
+	for _, r := range records {
+		olds = append(olds, r.Old)
+	}
+	slices.Sort(olds)
+	if want := []string{unitytest.PlantGrowing, unitytest.PlantRipe}; !slices.Equal(olds, want) {
+		t.Fatalf("screen records = %q, want %q", olds, want)
+	}
+
+	// The edit keeps the kind after the rescan, and the journal replays.
+	ripe := find(t, g, Query{Text: unitytest.PlantRipe})
+	if len(ripe) != 1 {
+		t.Fatalf("ripe = %+v", ripe)
+	}
+	updated, err := g.Apply(editOf(ripe[0], "Куст табака созрел"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if updated.Kind != textkind.Screen {
+		t.Errorf("edited kind = %v", updated.Kind)
+	}
+	if err := g.Rebuild(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	if got := find(t, g, Query{Text: "Куст табака созрел"}); len(got) != 1 || got[0].Kind != textkind.Screen {
+		t.Errorf("after replay = %+v", got)
+	}
+}

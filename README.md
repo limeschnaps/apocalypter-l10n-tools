@@ -68,7 +68,7 @@ editor.exe dump -game "C:\Program Files (x86)\Steam\steamapps\common\Apocalypter
 ./editor dump -game ~/.local/share/Steam/steamapps/common/Apocalypter/Apocalypter_Data -o de
 ```
 
-The command takes a few seconds and prints a JSON log. Then the `de` folder holds two files:
+The command takes a few seconds and prints a log. Then the `de` folder holds two files:
 
 | File | Purpose |
 | --- | --- |
@@ -213,7 +213,7 @@ Then open `http://127.0.0.1:8080`.
 | `-log-level` | `info` | `debug`, `info`, `warn` or `error` |
 | `-patches` | `<root>/patches.json` | edit journal for `patcher`; with `-game` defaults to `patches.json` in the `*_Data` folder |
 
-Logs go to stderr as JSON.
+Logs go to stderr, one line per event: time, level, event name and `key=value` fields.
 
 ## Project requirements
 
@@ -240,13 +240,15 @@ Most strings in assets are not player text but names of objects, variables, even
 
 | Kind | What it covers |
 | --- | --- |
-| on screen | `UI.Text.m_Text`, TextMeshPro `m_text`, `Dropdown` options, literals of PlayMaker actions that display text (`UiTextSetText.text`, `setTextmeshProText.textString`, `GUILabel.text` and others), the initial value of the FSM string variable such a parameter is bound to, and the literals `StringAppend`, `StringAppend2`, `BuildString` or `SetStringValue` build such a variable from, for example `L` in the `/ 60L` label on a fuel tank |
-| maybe | strings the game logic may display: fields of the game's own scripts (`Assembly-CSharp`), `InputField` text, initial values of the other FSM string variables, parameters of actions that build text (`SetFsmString.setValue`, `StringAppend`, `BuildString` and others) |
+| on screen | `UI.Text.m_Text`, TextMeshPro `m_text`, `Dropdown` options, literals of PlayMaker actions that display text (`UiTextSetText.text`, `setTextmeshProText.textString`, `GUILabel.text` and others), the initial value of the FSM string variable such a parameter is bound to, and the literals `StringAppend`, `StringAppend2`, `BuildString` or `SetStringValue` build such a variable from, for example `L` in the `/ 60L` label on a fuel tank, and the value `SetFsmString.setValue` writes into such a variable of another FSM |
+| maybe | strings the game logic may display: fields of the game's own scripts (`Assembly-CSharp`), `InputField` text, initial values of the other FSM string variables, parameters of actions that build text (`SetFsmString.setValue` for other variables, `StringAppend`, `BuildString` and others) |
 | service | `m_Name`, strings of Unity and third-party libraries, internal parameters of FSM actions (FSM and variable names, tags, events, input buttons, number formats), FSM parameters bound to a variable (the game does not use their literal), Easy Save 3, PlayMaker ArrayMaker proxy names |
 
 Service strings appear in search when the "service" checkbox is on. The "hide maybe" checkbox leaves only strings that are certainly displayed. The status line shows how many strings of each kind are hidden. In the API these are the `service=1` and `hideMaybe=1` search parameters and the `hidden` and `hiddenMaybe` response fields. The editor shows a warning on a service string: translating a name or key can break the game logic.
 
 PlayMaker action parameters live in shared per-state arrays. The editor links each string to its action and parameter through `actionStartIndex`, `paramDataType`, `paramDataPos` and `paramName`, taking parameter arrays (`arrayParamSizes`) and nested classes (`customTypeSizes`) into account. In Apocalypter this matches in all 25 thousand FSM states. If a state's tables contradict each other, all its string parameters get the "maybe" kind. Classification is the same for a YAML export and for `-game`.
+
+One FSM often sets the text another FSM shows. In Apocalypter the `Plant` FSM of a pot writes "Tobacco Plant Ripe (Harvest - F)" into the `ItemName` variable of the `ItemName` FSM on the plant, and that FSM shows the variable with `UiTextSetText`. Before classifying, the editor collects the displayed variables of all FSMs, by FSM and variable name. A `SetFsmString` with a literal FSM and variable name that matches one of them gets "on screen"; an empty FSM name matches a variable of that name in any FSM. If `setValue` is bound to a variable of the writing FSM, that variable counts as displayed too, and the search repeats until it finds no new variables. The set is found once per index build; with `-game`, from the original bundle before the journal is replayed. An edit of a variable or FSM name takes effect after "rescan". `patcher` also finds the set in the original bundle before the first patch, so it checks the same kinds that the journal and `translation.map` record.
 
 ## How saving works
 
@@ -310,10 +312,13 @@ go -C src build -o ../patcher ./cmd/patcher
 | `-dry-run` | find the targets and print a report without writing |
 | `-out FILE` | write the patched bundle to a separate file |
 | `-in-place` | replace `data.unity3d`; the original is kept as `data.unity3d.orig` |
-| `-strict` | treat a patch that matches more than one object as an error |
+| `-strict` | treat a patch that matches no object or more than one object as an error |
 | `-font NAME=FILE.ttf` | replace the TTF in the Font object named `NAME`; the flag can be repeated |
 | `-font-metrics` | `original` (default) or `font`: where `-font` takes vertical metrics from, see "Replacing fonts" |
 | `-list-fonts` | list the build's fonts and whether they cover the Russian alphabet |
+| `-log-file FILE` | where warnings and errors are appended, `patcher.log` in the current folder by default; the file appears on the first warning; `-log-file ""` turns it off. `patcher pack` takes the flag too |
+
+`patcher` logs to stderr in the same format as the editor. Warnings and errors also go to the log file, so a player can send it after a run. The launcher scripts run `patcher` in their own folder, so `patcher.log` appears next to them.
 
 There is no link between a YAML export and the build's objects, so `patcher` finds the target by content. A MonoBehaviour matches if it has the same owner and script and holds the old value in the field at the patch's `path`. The owner is the GameObject name, or `m_Name` for a ScriptableObject. The script is given by DLL name and fileID or by class name. Patches apply in journal order.
 
@@ -323,7 +328,7 @@ Without `Managed/` (`script_assemblies_unavailable` in the log), for components 
 
 By default a patch changes all matching objects. This way a prefab edit also reaches its copies baked into scenes. The list of changed objects (`file:pathID`) goes to the log.
 
-If `data.unity3d.orig` exists, `-in-place` always reads the original from it. So the journal can be extended and applied again. If any patch finds no target, nothing is written.
+If `data.unity3d.orig` exists, `-in-place` always reads the original from it. So the journal can be extended and applied again. A patch that finds no target, for example a string missing from another game version, is skipped with a `patch_not_found` warning, and the other patches still apply; `patches_skipped` at the end gives the count. Any other patch error writes nothing; with `-strict` a patch without a target is such an error too.
 
 ### Localization package
 
@@ -389,7 +394,7 @@ A `translation.map` entry is linked to its message by `id`: the first 16 hex dig
 ]
 ```
 
-Above each message in `translation.po`, `editor dump` writes up to five places of the string as `file | owner | field`. PO editors show them as notes for the translator:
+Above each message in `translation.po`, `editor dump` writes every place of the string as `file | owner | field`. PO editors show them as notes for the translator:
 
 ```po
 #. level0 | point1 | m_Text
@@ -397,7 +402,7 @@ Above each message in `translation.po`, `editor dump` writes up to five places o
 #. level0 | point3 | m_Text
 #. level1 | chambered_indicator | m_Text
 #. level1 | dot1 | m_Text
-#. … +8
+#. level1 | dot2 | m_Text
 msgid "."
 msgstr ""
 ```

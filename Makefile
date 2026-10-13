@@ -48,7 +48,7 @@ L10N ?= $(notdir $(patsubst %/,%,$(wildcard ./l10n/*/)))
 # and no owner data make the archives reproducible.
 DIST_NAME             := apocalypter-l10n-tools
 DIST_TIME             := 1980-01-01T00:00:00Z
-DIST_FORMAT_linux-x64 := tar.gz
+DIST_FORMAT_linux-x64 := zip
 DIST_FORMAT_win-x64   := zip
 LAUNCHER_linux-x64    := ./scripts/patcher.sh
 LAUNCHER_win-x64      := ./scripts/patcher.bat

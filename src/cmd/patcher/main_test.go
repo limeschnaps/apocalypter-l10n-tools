@@ -105,6 +105,80 @@ func listFonts(t *testing.T, path string) string {
 	return out.String()
 }
 
+// TestMain runs the tests in a temporary directory, which receives the
+// default log file of runs with warnings.
+func TestMain(m *testing.M) {
+	dir, err := os.MkdirTemp("", "patcher-test-*")
+	if err != nil {
+		panic(err)
+	}
+	if err := os.Chdir(dir); err != nil {
+		panic(err)
+	}
+	code := m.Run()
+	_ = os.RemoveAll(dir)
+	os.Exit(code)
+}
+
+func TestRunSkipsMissingPatches(t *testing.T) {
+	dir := gameDir(t)
+	out := filepath.Join(t.TempDir(), "patched.unity3d")
+	logFile := filepath.Join(t.TempDir(), "patcher.log")
+	missing := patch.Patch{Owner: "Nobody", Old: "Gone", New: "y"}
+	var log bytes.Buffer
+	if err := run([]string{"-log-file", logFile, "-patches", journal(t, missing, newGame), "-out", out, dir}, io.Discard, &log); err != nil {
+		t.Fatalf("run: %v\n%s", err, log.String())
+	}
+	if got := levelStrings(t, out); !strings.Contains(got, newGame.New) {
+		t.Errorf("other patches not applied: %q", got)
+	}
+	if !strings.Contains(log.String(), "WARN  patch_not_found index=1") || !strings.Contains(log.String(), "patches_skipped not_found=1 total=2") {
+		t.Errorf("log = %s", log.String())
+	}
+	data, err := os.ReadFile(logFile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for line := range strings.Lines(string(data)) {
+		if !strings.Contains(line, " WARN  ") && !strings.Contains(line, " ERROR ") {
+			t.Errorf("log file line below warning: %q", line)
+		}
+	}
+	if !strings.Contains(string(data), `old=Gone`) {
+		t.Errorf("log file = %s", data)
+	}
+}
+
+func TestRunLogFile(t *testing.T) {
+	dir := gameDir(t)
+	logFile := filepath.Join(t.TempDir(), "patcher.log")
+	if err := run([]string{"-log-file", logFile, "-patches", journal(t, newGame), "-dry-run", filepath.Join(dir, "nope")}, io.Discard, io.Discard); err == nil {
+		t.Fatal("expected error")
+	}
+	data, err := os.ReadFile(logFile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(data), "ERROR run_failed error=") {
+		t.Errorf("log file = %s", data)
+	}
+
+	quiet := filepath.Join(t.TempDir(), "quiet.log")
+	if err := run([]string{"-log-file", quiet, "-list-fonts", dir}, io.Discard, io.Discard); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(quiet); !errors.Is(err, os.ErrNotExist) {
+		t.Errorf("run without warnings created the log file: %v", err)
+	}
+
+	if err := run([]string{"-log-file", "", "-patches", journal(t, newGame), "-dry-run", filepath.Join(dir, "nope")}, io.Discard, io.Discard); err == nil {
+		t.Fatal("expected error")
+	}
+	if _, err := os.Stat(logFileName); !errors.Is(err, os.ErrNotExist) {
+		t.Errorf("disabled log file was written: %v", err)
+	}
+}
+
 var newGame = patch.Patch{Owner: "Title", Script: patch.Script{Class: "Menu"}, Old: "NEW GAME", New: "НОВАЯ ИГРА"}
 
 func TestRunOut(t *testing.T) {
@@ -159,7 +233,7 @@ func TestRunDryRunAndFailures(t *testing.T) {
 	if err := run([]string{"-patches", journal(t, newGame), "-dry-run", dir}, io.Discard, &log); err != nil {
 		t.Fatalf("dry run: %v", err)
 	}
-	if !strings.Contains(log.String(), `"objects":["level0:2"]`) {
+	if !strings.Contains(log.String(), `objects=[level0:2]`) {
 		t.Errorf("log does not list targets: %s", log.String())
 	}
 
@@ -180,7 +254,7 @@ func TestRunDryRunAndFailures(t *testing.T) {
 		"no bundle":       {"-patches", journal(t, newGame), "-dry-run", notGame},
 		"empty journal":   {"-patches", empty, "-dry-run", dir},
 		"broken bundle":   {"-patches", journal(t, newGame), "-dry-run", broken},
-		"failing patch":   {"-patches", journal(t, newGame, missing), "-in-place", dir},
+		"strict missing":  {"-strict", "-patches", journal(t, newGame, missing), "-in-place", dir},
 		"out dir missing": {"-patches", journal(t, newGame), "-out", filepath.Join(dir, "no", "out"), dir},
 	}
 	for name, args := range cases {
@@ -210,7 +284,7 @@ func TestRunFonts(t *testing.T) {
 	if list := listFonts(t, out); !strings.Contains(list, "Cyr Sans") || !strings.Contains(list, " ok") {
 		t.Errorf("patched list = %s", list)
 	}
-	if !strings.Contains(log.String(), `"msg":"font_replaced"`) || strings.Contains(log.String(), "font_missing_characters") {
+	if !strings.Contains(log.String(), `INFO  font_replaced `) || strings.Contains(log.String(), "font_missing_characters") {
 		t.Errorf("log = %s", log.String())
 	}
 
@@ -267,7 +341,7 @@ func TestRunPackage(t *testing.T) {
 	if err := run([]string{"pack", "-o", zipPath, "-patches", journalPath, "-fonts", fontsJSON}, io.Discard, &log); err != nil {
 		t.Fatalf("pack: %v", err)
 	}
-	if !strings.Contains(log.String(), `"msg":"package_written"`) || !strings.Contains(log.String(), `"patches":1`) {
+	if !strings.Contains(log.String(), `INFO  package_written `) || !strings.Contains(log.String(), ` patches=1 `) {
 		t.Errorf("pack log = %s", log.String())
 	}
 
@@ -399,7 +473,7 @@ func TestRunFontMetrics(t *testing.T) {
 			t.Errorf("%s: list = %s", metrics, list)
 		}
 		grows := strings.Contains(log.String(), "font_line_height_grows")
-		if grows != (metrics == "font") || !strings.Contains(log.String(), `"font_line_em":1.25`) {
+		if grows != (metrics == "font") || !strings.Contains(log.String(), `font_line_em=1.25`) {
 			t.Errorf("%s: log = %s", metrics, log.String())
 		}
 	}
@@ -458,7 +532,7 @@ func TestRunPackDictionary(t *testing.T) {
 	if err := run([]string{"pack", "-s", src, "-o", pkgPath}, io.Discard, &log); err != nil {
 		t.Fatalf("pack: %v\n%s", err, log.String())
 	}
-	if !strings.Contains(log.String(), `"patches":1,"dictionary_patches":1`) {
+	if !strings.Contains(log.String(), `patches=1 dictionary_patches=1`) {
 		t.Errorf("log = %s", log.String())
 	}
 
@@ -489,7 +563,7 @@ func TestRunPackDictionary(t *testing.T) {
 	if err := run([]string{"pack", "-o", dictOnly, "-patches", filepath.Join(src, locpack.PatchesName), "-map", mapPath, "-po", fuzzyPO}, io.Discard, &log); err != nil {
 		t.Fatalf("fuzzy: %v", err)
 	}
-	if !strings.Contains(log.String(), "dictionary_fuzzy_skipped") || !strings.Contains(log.String(), `"dictionary_patches":0`) {
+	if !strings.Contains(log.String(), "dictionary_fuzzy_skipped") || !strings.Contains(log.String(), `dictionary_patches=0`) {
 		t.Errorf("fuzzy log = %s", log.String())
 	}
 

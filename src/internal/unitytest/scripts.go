@@ -34,6 +34,9 @@ func public(name string, t Sig) FieldDef { return FieldDef{Name: name, Flags: fi
 //     type of UnityEngine.CoreModule and an array of enums.
 //   - Game.Refs: a MonoBehaviour with a [SerializeReference] field.
 //   - Game.Broken: a MonoBehaviour whose field type cannot be resolved.
+//
+// PlayMaker holds PlayMakerFSM with the part of a PlayMaker FSM textkind
+// reads; FSMFields encodes it.
 func ScriptAssemblies() map[string][]byte {
 	const obj, valueType = "[mscorlib]System.Object", "[mscorlib]System.ValueType"
 	mscorlib := Assembly{Name: "mscorlib", Types: []TypeDef{
@@ -137,7 +140,38 @@ func ScriptAssemblies() map[string][]byte {
 		}},
 		{Name: "Game.Broken", Extends: extends(mono), Fields: []FieldDef{public("missing", Class("[Missing]Nowhere.Type"))}},
 	}}
+	ints := list(Prim(ElemI4))
+	fsmString := Class("HutongGames.PlayMaker.FsmString")
+	playMaker := Assembly{Name: "PlayMaker", Types: []TypeDef{
+		{Name: "PlayMakerFSM", Extends: extends(mono), Fields: []FieldDef{public("fsm", Class("HutongGames.PlayMaker.Fsm"))}},
+		{Name: "HutongGames.PlayMaker.Fsm", Flags: flagSerializable, Extends: extends(obj), Fields: []FieldDef{
+			public("name", str),
+			public("states", ArrayOf(Class("HutongGames.PlayMaker.FsmState"))),
+			public("variables", Class("HutongGames.PlayMaker.FsmVariables")),
+		}},
+		{Name: "HutongGames.PlayMaker.FsmState", Flags: flagSerializable, Extends: extends(obj), Fields: []FieldDef{
+			public("name", str), public("actionData", Class("HutongGames.PlayMaker.ActionData")),
+		}},
+		{Name: "HutongGames.PlayMaker.ActionData", Flags: flagSerializable, Extends: extends(obj), Fields: []FieldDef{
+			public("actionNames", list(str)),
+			public("paramName", list(str)),
+			public("actionStartIndex", ints),
+			public("paramDataType", ints),
+			public("paramDataPos", ints),
+			public("arrayParamSizes", ints),
+			public("customTypeSizes", ints),
+			public("fsmStringParams", list(fsmString)),
+			public("stringParams", list(str)),
+		}},
+		{Name: "HutongGames.PlayMaker.FsmString", Flags: flagSerializable, Extends: extends(obj), Fields: []FieldDef{
+			public("useVariable", Prim(ElemBool)), public("name", str), public("value", str),
+		}},
+		{Name: "HutongGames.PlayMaker.FsmVariables", Flags: flagSerializable, Extends: extends(obj), Fields: []FieldDef{
+			public("stringVariables", ArrayOf(fsmString)),
+		}},
+	}}
 	return map[string][]byte{
+		"PlayMaker.dll":              playMaker.Build(),
 		"mscorlib.dll":               mscorlib.Build(),
 		"UnityEngine.CoreModule.dll": core.Build(),
 		"UnityEngine.dll":            facade.Build(),
@@ -178,4 +212,132 @@ func DialogFields(text string) []byte {
 	b = le.AppendUint32(b, 1)                     // node.children
 	b = append(b, String("leaf")...)              // node.children[0].name
 	return le.AppendUint32(b, 0)                  // node.children[0].children
+}
+
+// FsmString is a string parameter or variable of a PlayMaker FSM.
+type FsmString struct {
+	UseVariable bool
+	Name, Value string
+}
+
+// FsmState is one state of a PlayMaker FSM with its parameter tables.
+type FsmState struct {
+	Name                          string
+	ActionNames, ParamNames       []string
+	StartIndex, DataType, DataPos []int32
+	FsmStrings                    []FsmString
+}
+
+// FSM is the fsm field of a PlayMakerFSM.
+type FSM struct {
+	Name            string
+	States          []FsmState
+	StringVariables []FsmString
+}
+
+// FSMFields encodes the script fields of a PlayMakerFSM from
+// ScriptAssemblies, starting after m_Name.
+func FSMFields(f FSM) []byte {
+	strs := func(b []byte, list []string) []byte {
+		b = le.AppendUint32(b, uint32(len(list)))
+		for _, s := range list {
+			b = append(b, String(s)...)
+		}
+		return b
+	}
+	ints := func(b []byte, list []int32) []byte {
+		b = le.AppendUint32(b, uint32(len(list)))
+		for _, n := range list {
+			b = le.AppendUint32(b, uint32(n))
+		}
+		return b
+	}
+	fsmStrings := func(b []byte, list []FsmString) []byte {
+		b = le.AppendUint32(b, uint32(len(list)))
+		for _, s := range list {
+			use := byte(0)
+			if s.UseVariable {
+				use = 1
+			}
+			b = append(b, use, 0, 0, 0)
+			b = append(b, String(s.Name)...)
+			b = append(b, String(s.Value)...)
+		}
+		return b
+	}
+	b := String(f.Name)
+	b = le.AppendUint32(b, uint32(len(f.States)))
+	for _, s := range f.States {
+		b = append(b, String(s.Name)...)
+		b = strs(b, s.ActionNames)
+		b = strs(b, s.ParamNames)
+		b = ints(b, s.StartIndex)
+		b = ints(b, s.DataType)
+		b = ints(b, s.DataPos)
+		b = ints(b, nil)
+		b = ints(b, nil)
+		b = fsmStrings(b, s.FsmStrings)
+		b = strs(b, nil)
+	}
+	return fsmStrings(b, f.StringVariables)
+}
+
+// Class IDs and the bundle node flag PlantBundle uses; serialized and
+// gamepatch export the same values.
+const (
+	classGameObject    = 1
+	classMonoBehaviour = 114
+	classMonoScript    = 115
+	nodeFlagSerialized = 4
+)
+
+// Labels of the plant in PlantBundle.
+const (
+	PlantGrowing = "Tobacco Plant Growing"
+	PlantRipe    = "Tobacco Plant Ripe (Harvest - F)"
+)
+
+// PlantBundle builds a bundle with the tobacco plant of Apocalypter. The
+// Plant FSM of the "Pot" GameObject writes PlantRipe into the ItemName
+// variable of the ItemName FSM on the "Plant" GameObject, which shows
+// the variable with UiTextSetText; PlantGrowing is its initial value.
+// In level0, PlayMakerFSM components 2 (Plant) and 4 (ItemName) hold the
+// string parameters fsm.states[0].actionData.fsmStringParams[0..2].
+func PlantBundle() []byte {
+	const script = 7
+	scripts := Serialized([]Object{
+		{PathID: script, ClassID: classMonoScript, Data: MonoScript("PlayMakerFSM", "", "PlayMaker.dll")},
+	}, nil)
+	pot := FSM{Name: "Plant", States: []FsmState{{
+		Name:        "ripe",
+		ActionNames: []string{"HutongGames.PlayMaker.Actions.SetFsmString"},
+		ParamNames:  []string{"gameObject", "fsmName", "variableName", "setValue", "everyFrame"},
+		StartIndex:  []int32{0},
+		DataType:    []int32{20, 18, 18, 18, 17},
+		DataPos:     []int32{0, 0, 1, 2, 0},
+		FsmStrings:  []FsmString{{Value: "ItemName"}, {Value: "ItemName"}, {Value: PlantRipe}},
+	}}}
+	label := FSM{
+		Name: "ItemName",
+		States: []FsmState{{
+			Name:        "over",
+			ActionNames: []string{"HutongGames.PlayMaker.Actions.UiTextSetText"},
+			ParamNames:  []string{"gameObject", "text"},
+			StartIndex:  []int32{0},
+			DataType:    []int32{20, 18},
+			DataPos:     []int32{0, 0},
+			FsmStrings:  []FsmString{{UseVariable: true, Name: "ItemName", Value: "Cassette Player"}},
+		}},
+		StringVariables: []FsmString{{Name: "ItemName", Value: PlantGrowing}},
+	}
+	level := Serialized([]Object{
+		{PathID: 1, ClassID: classGameObject, Data: GameObject("Pot", 2)},
+		{PathID: 2, ClassID: classMonoBehaviour, Data: append(MonoBehaviour(1, 1, script, ""), FSMFields(pot)...)},
+		{PathID: 3, ClassID: classGameObject, Data: GameObject("Plant", 4)},
+		{PathID: 4, ClassID: classMonoBehaviour, Data: append(MonoBehaviour(3, 1, script, ""), FSMFields(label)...)},
+	}, []string{"library/globalgamemanagers.assets"})
+	return Bundle([]Node{
+		{Path: "globalgamemanagers.assets", Flags: nodeFlagSerialized, Data: scripts},
+		{Path: "level0", Flags: nodeFlagSerialized, Data: level},
+	}, 64)
 }

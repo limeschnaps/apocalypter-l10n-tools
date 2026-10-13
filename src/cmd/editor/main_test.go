@@ -142,7 +142,7 @@ func TestRunDump(t *testing.T) {
 	if len(f.Messages) != 3 || f.Messages[0].Str != "Гайки" || f.Messages[1].Str != "" || !f.Messages[2].Obsolete {
 		t.Errorf("po after rerun = %+v", f.Messages)
 	}
-	if !strings.Contains(log.String(), "translation_obsolete") || !strings.Contains(log.String(), `"translated":1`) {
+	if !strings.Contains(log.String(), "translation_obsolete") || !strings.Contains(log.String(), `translated=1`) {
 		t.Errorf("log = %s", log.String())
 	}
 
